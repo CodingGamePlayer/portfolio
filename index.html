@@ -1,0 +1,1447 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>개발자 포트폴리오 · 김종식</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #0a0e0a;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(57,255,20,0.35); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #1f3520; border-radius: 0; }
+  ::-webkit-scrollbar-thumb:hover { background: #2f5530; }
+  button:focus-visible, a:focus-visible { outline: 1px dashed currentColor; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React + Babel from CDN (https — not blocked by file://) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<!--
+  NOTE: all app sources are inlined below so this file works when opened
+  directly with file://. The src/*.js and src/components/*.jsx files are
+  kept alongside for authoring; Portfolio.html is the self-contained build.
+-->
+
+<!-- ============================================================ -->
+<!-- src/themes.js                                                 -->
+<!-- ============================================================ -->
+<script>
+window.THEMES = {
+  classic: {
+    id: 'classic',
+    label: 'Classic Phosphor',
+    bg: '#0a0e0a', panel: '#0f1410', panelSoft: '#0c1109',
+    border: '#1f3520', grid: '#102012',
+    text: '#9ef29e', textBright: '#d4ffd4', textDim: '#4a7a4c', muted: '#365938',
+    accent: '#39ff14', accentSoft: '#2ccc10',
+    warn: '#ffd166', danger: '#ff5d5d',
+    selection: 'rgba(57,255,20,0.25)', scanlines: true,
+    glow: '0 0 6px rgba(57,255,20,0.35)',
+    fontMono: "'JetBrains Mono', 'Fira Code', ui-monospace, monospace",
+    fontSans: "'JetBrains Mono', ui-monospace, monospace",
+  },
+  amber: {
+    id: 'amber',
+    label: 'Amber CRT',
+    bg: '#120a04', panel: '#1a0f06', panelSoft: '#150c05',
+    border: '#3b260f', grid: '#1f1307',
+    text: '#ffb347', textBright: '#ffe0a8', textDim: '#8a5a25', muted: '#5e3e18',
+    accent: '#ffb000', accentSoft: '#d68a00',
+    warn: '#ff9f43', danger: '#ff6b3d',
+    selection: 'rgba(255,176,0,0.25)', scanlines: true,
+    glow: '0 0 6px rgba(255,176,0,0.35)',
+    fontMono: "'JetBrains Mono', 'Fira Code', ui-monospace, monospace",
+    fontSans: "'JetBrains Mono', ui-monospace, monospace",
+  },
+  modern: {
+    id: 'modern',
+    label: 'Modern Mono',
+    bg: '#0d1117', panel: '#131922', panelSoft: '#0f151d',
+    border: '#22303d', grid: '#161c24',
+    text: '#c9d1d9', textBright: '#f0f6fc', textDim: '#6e7781', muted: '#414a54',
+    accent: '#58a6ff', accentSoft: '#388bfd',
+    warn: '#d29922', danger: '#f85149',
+    selection: 'rgba(88,166,255,0.22)', scanlines: false,
+    glow: 'none',
+    fontMono: "'JetBrains Mono', 'Fira Code', ui-monospace, monospace",
+    fontSans: "'Inter', system-ui, sans-serif",
+  },
+};
+
+</script>
+
+<!-- ============================================================ -->
+<!-- src/i18n.js                                                   -->
+<!-- ============================================================ -->
+<script>
+window.STRINGS = {
+  ko: {
+    bootLines: [
+      'booting portfolio.sh ...',
+      'loading identity (kim jongsik) ... [ok]',
+      'loading 8 projects ... [ok]',
+      'ready. scroll or press `?` for help.',
+    ],
+    heroName: '김종식',
+    heroRole: 'TPM 지원자 · 웹 파트 리드 · 3년차',
+    heroBio: '위성 전문 기업 루미르(KOSDAQ)에서 Web 파트 리드로 11명 팀을 이끌고 있습니다. 기획→디자인→개발 사이 해석 loss가 쌓이는 구조를 (planning)/(current) 2단 repo 구조와 Cursor AI 룰로 재설계해 리드타임을 3개월에서 1개월로 단축(67%)했습니다. 도메인 경계 재설계, 레거시 통합, 0→1 시스템 설계에서 실적이 있고, 엔지니어 백그라운드로 문제를 다시 정의해 실행까지 가져가는 TPM 역할을 지향합니다.',
+    heroMeta: [
+      { k: 'location', v: '용인, 대한민국' },
+      { k: 'role',     v: '웹 파트 리드 (11명)' },
+      { k: 'company',  v: '루미르 · 위성 제조 (KOSDAQ)' },
+      { k: 'stack',    v: 'Next.js · NestJS · TS · PG · Mongo' },
+      { k: 'target',   v: '토스페이먼츠 TPM' },
+      { k: 'email',    v: 'otw1917@naver.com' },
+    ],
+    timelineTitle: 'projects',
+    timelineSub: '→ 좌측에서 프로젝트를 고르면 문제 → 기획 → 설계 → 개발 흐름이 우측에 펼쳐집니다',
+    detailTabs: ['문제', '기획', '설계', '개발'],
+    contactCTA: '저에 대해 더 알고 싶으신가요?',
+    githubButton: '→ github.com/CodingGamePlayer',
+  },
+  en: {
+    bootLines: [
+      'booting portfolio.sh ...',
+      'loading identity (kim jongsik) ... [ok]',
+      'loading 8 projects ... [ok]',
+      'ready. scroll or press `?` for help.',
+    ],
+    heroName: 'Kim Jongsik',
+    heroRole: 'TPM candidate · Web team lead · 3 yrs',
+    heroBio: 'Web team lead at LUMIR (KOSDAQ, satellite manufacturer), running an 11-person team. Redesigned the planning → design → engineering hand-off using a two-stage repo structure — `(planning)` for specs/design/policy, `(current)` for implementation — plus Cursor AI rules, cutting lead time from 3 months to 1 (67%). Track record in domain-boundary redesign, legacy consolidation, and 0→1 system design. Aiming for a TPM role where I can redefine the problem itself and carry it to shipped execution.',
+    heroMeta: [
+      { k: 'location', v: 'Yongin, KR' },
+      { k: 'role',     v: 'Web team lead (11)' },
+      { k: 'company',  v: 'LUMIR · satellites (KOSDAQ)' },
+      { k: 'stack',    v: 'Next.js · NestJS · TS · PG · Mongo' },
+      { k: 'target',   v: 'Toss Payments · TPM' },
+      { k: 'email',    v: 'otw1917@naver.com' },
+    ],
+    timelineTitle: 'projects',
+    timelineSub: '→ pick one on the left; problem → plan → design → build unfolds on the right',
+    detailTabs: ['problem', 'plan', 'design', 'build'],
+    contactCTA: 'want to know more about me?',
+    githubButton: '→ github.com/CodingGamePlayer',
+  },
+};
+</script>
+
+<!-- ============================================================ -->
+<!-- src/data.js — 8 real projects                                 -->
+<!-- ============================================================ -->
+<script>
+window.PROJECTS = [
+  {
+    id: 'MCE',
+    year: '2026', month: '10', date: '2026 하반기 예정',
+    tag: 'WORK', name: 'MCE', role: 'PM + tech lead (예정)', status: 'planned',
+    oneliner: '복합위성을 하나의 시스템으로 — 운영 요청 → 명령 분석 → 시나리오 계획 → 명령 실행 4단 흐름으로 N기를 1명이 관제',
+    stack: ['Next.js', 'NestJS', 'TypeScript', 'SGP4 (궤도 예측 알고리즘)'],
+    metrics: [
+      { k: 'phase',  v: 'discovery · 설계 중' },
+      { k: 'target', v: '복합위성 → N' },
+      { k: 'start',  v: '2026 하반기 예정' },
+    ],
+    problem: [
+      '복합위성 각각에 대한 운영 요청(촬영·궤도 조정·상태 확인)이 들어올 때, 어떤 위성이 가용한지·가시권이 언제인지·명령 시퀀스는 무엇인지를 엔지니어가 수동으로 계산해야 한다 — 위성 수가 늘수록 이 수동 계산 비용이 선형 증가해 운영 불가 구조가 된다.',
+      '요청이 접수된 뒤 명령을 발신하기까지 "어떤 시나리오가 최선인가"를 결정하는 단계가 없다 — 지상국 가시권·위성 상태·우선순위를 종합한 시나리오를 시스템이 제안하지 못하면 운영자가 경험에 의존해 판단해야 하고, 놓친 패스마다 미션 가치가 손실된다.',
+      '지상국 네트워크(자사/외부) 간 capability 차이가 커 명령 라우팅 우선순위와 fallback을 운영자가 매번 직접 결정해야 한다 — 이 결정을 시스템이 흡수하지 못하면 외부 지상국 장애 시 대응이 사람 판단에 달린다.',
+    ],
+    plan: [
+      '시스템 운영 흐름 정책: 요청 → 명령 분석 → 시나리오 계획 → 명령 실행 4단계를 MCE의 핵심 서비스 흐름으로 확정 — 각 단계를 시스템이 지원하고 운영자는 시나리오 승인만 담당하는 것을 목표로 설정.',
+      '운영 정책: 복합위성 수가 늘어도 운영 인력은 선형 증가하지 않는 것을 핵심 정책으로 확정 — "1명이 하루 운영" 가능 여부를 MVP 합격 기준으로 설정.',
+      'discovery 단계에서 관제팀·미션팀·외부 지상국 운영사 인터뷰로 실제 운영 workflow 파악 후 스펙 확정 — 수동 계산이 반복되는 구간(명령 분석·시나리오 계획·지상국 라우팅)을 자동화 범위로 설정.',
+      '재사용 정책: 현행 TM/TC 콘솔(SOS)·SDPE·lsms의 도메인 모델을 프레임워크 자산으로 승계해 0→1 비용 최소화.',
+    ],
+    design: [
+      '4단 흐름(요청→명령 분석→시나리오 계획→명령 실행)을 Bounded Context 4개로 분리한 근거: 각 단계의 변경 주기와 책임이 다르다 — 요청은 미션팀 정책, 명령 분석은 위성 상태·궤도 데이터, 시나리오 계획은 지상국 가시권·우선순위, 명령 실행은 TC 프로토콜. 하나로 뭉치면 미션 정책 변경이 TC 프로토콜 코드를 건드리는 결합이 생긴다.',
+      '시나리오 계획 단계에 capability × 우선순위 × 가시권 매트릭스를 선택한 근거: 복합위성 N기와 지상국 M개의 조합은 if-else 규칙으로 유지 불가능 — 매트릭스 계산으로 최적 시나리오를 시스템이 1차 생성하고 운영자가 승인하는 2단 구조로, 판단 책임은 사람에게 유지하면서 계산 부담을 시스템이 흡수.',
+      '이벤트 소싱을 선택한 근거: 4단 흐름의 각 단계 전환 — 요청 접수, 분석 완료, 시나리오 승인, 명령 발신 — 이 모두 감사 대상이다. CRUD 모델은 "왜 이 시나리오가 선택됐는지"의 맥락을 잃는다. 이벤트 소싱으로 단계별 결정 근거와 실행 결과를 항상 복원 가능하도록 유지.',
+      '갠트형 운영자 뷰(시간 축 1개 × 위성 축 N개)를 선택한 근거: 시나리오 계획 단계에서 운영자가 N기의 패스 윈도우와 명령 스케줄을 동시에 비교해 승인해야 한다 — 위성별 개별 화면은 N번 전환이 필요해 인지 부하가 선형 증가. 갠트 뷰가 한 화면에서 전체 시나리오를 조감하는 유일한 레이아웃.',
+    ],
+    build: [
+      '[프레임워크] (예정) Next.js + NestJS + TypeScript 기반으로 요청·명령 분석·시나리오 계획·명령 실행을 Bounded Context 4개로 분리 — 이벤트 소싱으로 4단 흐름의 각 단계 전환을 이벤트 로그로 기록해 "어떤 시나리오가 왜 선택됐는지" 항상 복원 가능한 구조 설계.',
+      '[성능] (목표) 복합위성 → N기 확장에서도 운영자 수를 선형 증가시키지 않는 것이 성능 지표 — 명령 분석(SGP4 궤도 예측) → 시나리오 계획(패스 플래너·지상국 매트릭스) → 명령 실행(TC 스케줄러) 3단 파이프라인으로 수동 계산을 제거해 "1명이 하루 운영" 가능 여부가 MVP 합격 기준.',
+      '[이벤트 드리븐] (예정) 요청 접수 이벤트 → 명령 분석 → 시나리오 계획 → 명령 실행 각 단계를 이벤트 기반으로 연결 — 각 단계가 읽기전용 view로 다음 단계에 제공되는 파이프라인 구조로, 지상국 라우팅 이벤트는 capability×우선순위×가시권 매트릭스로 자동 생성.',
+      '[실패 전략] (예정) 시나리오 계획 단계에서 fallback 경로를 시스템이 1차 생성하고 운영자가 승인하는 2단 구조로 설계 — 놓친 패스 = 미션 가치 손실이므로 지상국 장애 시 대체 시나리오를 자동 탐색. 이벤트 소싱으로 4단 흐름 전체의 결정 근거를 감사 가능하게 유지.',
+    ],
+    links: [],
+  },
+  {
+    id: 'data-pipe',
+    year: '2026', month: '02', date: '2026.02 — 진행 중',
+    tag: 'WORK', name: 'SDPE', role: 'PM + tech lead', status: 'active',
+    oneliner: 'SAR 위성 raw 500GB/회 → Level-3 제품 배포까지 무인 자동 파이프라인 — ECSS-E-ST-40C',
+    stack: ['NestJS', 'TypeScript', 'Python · C/C++ (pybind11)', 'PostgreSQL + PostGIS', 'pgmq', 'Kubernetes', 'Electron'],
+    metrics: [
+      { k: 'throughput',    v: '500GB/4h (목표)' },
+      { k: 'availability',  v: '99.5% (목표)' },
+      { k: 'CSC · reqs',    v: '9 · 44' },
+    ],
+    problem: [
+      '위성이 촬영한 원시 데이터(회당 최대 500GB)를 수작업 파이프라인으로 처리하면 결과물 생성까지 수일이 걸려 미션 활용 타이밍을 놓친다 — 4시간 이내 자동 처리가 가능한 무인 파이프라인이 없으면 위성 운용 가치 자체가 반감된다.',
+      '위성 종류(X·C·L-Band)가 늘어날 때마다 처리 코드를 새로 작성해야 했다 — 알고리즘팀과 서버팀의 의존 구조가 뒤엉켜 새 위성 추가에 수 개월이 소요되고, Level-3 응용 제품(침수·산사태·선박·유류) 추가도 파이프라인 전체 수정이 필요했다.',
+      '이해관계자 5개 그룹(위성 운용·데이터 처리·영상 분석·User Service·시스템 엔지니어)이 각각 다른 인터페이스를 요구하는데, 단일 시스템이 없어 데이터 요청·전달·확인이 팀마다 별도 채널로 분산되었다.',
+    ],
+    plan: [
+      '표준 준수 정책: ECSS-E-ST-40C(우주공학 소프트웨어 표준)를 서비스 정책 기준으로 확정, 44개 요구사항을 5개 카테고리(REQ-FUNC 29 · PERF 3 · AVAIL 3 · SEC 5 · SCALE 3)로 분류 — 각 요구사항이 CSC에 매핑되는지 RTM으로 추적하는 것을 개발 완료의 정의로 설정.',
+      '가용성·처리 SLA 정책: 위성 1회 촬영 500GB를 4시간 이내 처리, 연 99.5%(허용 다운타임 44h) 무중단 자동 운영 — 수동 개입은 장애 복구·재처리로만 한정.',
+      '확장 정책: 새 위성(X/C/L-Band) 추가 시 코드 수정 없이 설정만으로 확장, Level-3 응용 제품(침수·산사태·선박·유류)도 플러그인 방식으로 추가 — 이해관계자 5개 그룹 요구사항을 단일 표준으로 충족.',
+      '5단계 마일스톤: M1 설계 기준선 → M2 알고리즘 프로토타입 → M3 상세 설계 → M4 통합 시험 → M5 운용 개시. 현재 M1.',
+    ],
+    diagram: `architecture · 4-layer × 5 subsystems
+
+  ① 수신 DCS  ─▶  ② 처리 SPS         ─▶  ③ 관리 PPS        ─▶  ④ 서비스 DSS
+    복수 관제소     L-0 raw · L-1            L-2/3 분석 제품        REST · OGC
+    raw 수신        (RDA/BPA/SLC/GRD)        카탈로그·생명주기      STAC · Electron
+                         ▲
+                         │ DAG · pgmq · 재시도 3회 · 장애 감지
+                        PWS  (pipeline workflow)
+
+9 CSC · 44 reqs · ECSS-E-ST-40C
+
+  CSC-01 Common Function        CSC-06 L-3 Processor   (TBD)
+  CSC-02 Raw Data Collector     CSC-07 Pipeline Orchestrator
+  CSC-03 Level-0 Processor      CSC-08 Product & Catalog
+  CSC-04 Level-1 Processor      CSC-09 Data API Provider
+  CSC-05 Level-2 Processor
+  RTM trace: 35/44 설계 반영 · 누락 0
+
+team · 4-layer role split  (server ⇄ algorithm 병렬)
+
+  infra      k8s · NAS · DB · pgmq               [server]
+  interface  API · schema · error codes          [server + algo review]
+  use case   pipeline control · orchestration    [server]
+  algorithm  SAR signal processing (pure fn)     [algorithm]
+             python proto ─▶ c/c++ (pybind11)`,
+    design: [
+      '4-Layer 분리를 선택한 근거: 수신(DCS)·처리(SPS)·관리(PPS)·서비스(DSS)가 각각 다른 이해관계자(관제팀·알고리즘팀·운영팀·사용자)와 계약한다 — 레이어 경계가 ICD 단위로 대응되므로, 하나로 통합하면 알고리즘 변경이 API 서비스를 깨뜨리는 결합이 생긴다.',
+      'PWS(Pipeline Workflow Subsystem)를 별도 레이어로 분리한 근거: 500GB 처리 파이프라인과 REST API가 같은 장애 도메인에 있으면 처리 지연이 API 응답 지연으로 전파된다 — DAG 오케스트레이션을 PWS로 격리해 파이프라인 장애가 서비스 레이어를 내리지 않도록 설계.',
+      'pgmq를 메시지 큐로 선택한 근거: Kafka·RabbitMQ는 별도 운영 인프라가 필요하지만 이 시스템은 on-premise k8s에서 PostgreSQL을 이미 사용한다 — pgmq로 DB 트랜잭션과 큐 메시지를 동일 커넥션에서 원자적으로 처리해 운영 복잡도를 줄이면서 메시지 유실 리스크를 제거.',
+      'Function Interface(FI)를 먼저 고정한 근거: 서버팀과 알고리즘팀이 병렬 개발하므로 FI가 팀 간 계약이 된다 — FI 없이 시작하면 알고리즘 구현 완료 전까지 서버팀이 대기하거나 인터페이스를 추정으로 구현해 통합 시 불일치가 발생한다. RTM 매트릭스로 요구사항 ↔ CSC ↔ IF 추적성을 강제해 누락 0건 유지.',
+      'Level-3 응용 제품을 플러그인 포인트로 설계한 근거: 침수·산사태·선박·유류 분석 알고리즘은 위성 미션마다 추가·변경이 예상된다 — 플러그인 구조 없이 core에 포함하면 신규 제품 추가 시 파이프라인 전체를 재배포해야 한다.',
+    ],
+    build: [
+      '[프레임워크] NestJS + Python/C++(pybind11) 4-Layer(Infra·Interface·UseCase·Algorithm) 구조로 서버팀과 알고리즘팀을 완전 병렬화 — Function Interface를 먼저 고정해 Mock 기반 UseCase와 실제 SAR 알고리즘이 독립 커밋되도록 배선.',
+      '[성능] 500GB raw → Level-3 제품 4h 이내 처리 · 가용성 99.5%: 알고리즘을 Python 프로토타입 → C/C++(pybind11) 포팅으로 핫패스 병목 제거, 병렬 DAG 스케줄링으로 처리량 확보.',
+      '[이벤트 드리븐] PWS(Pipeline Workflow Subsystem)의 DAG 오케스트레이션 + pgmq 큐 기반 이벤트 팬아웃으로 DCS→SPS→PPS→DSS 4단계를 비동기 연결 — API 서비스와 처리 파이프라인을 완전 장애 독립.',
+      '[실패 전략] 자동 재시도 3회 + 장애 감지 + 수동 개입은 복구/재처리로만 한정, JWT+RBAC+TLS 1.3+AES-256+감사 로그 5층 표준과 RTM 추적성(35/44 설계 반영·누락 0)으로 연 허용 다운타임 44h를 지키는 무인 운영 체계 구축.',
+    ],
+    links: [],
+  },
+  {
+    id: 'portal-kms',
+    year: '2025', month: '09', date: '2025.07 — 진행 중',
+    tag: 'WORK', name: '백오피스 통합 플랫폼', role: 'PM + tech lead · 11명', status: 'active',
+    oneliner: '6개 레거시 백오피스를 하나로 — (planning)/(current) 2단 구조 + Cursor AI 룰',
+    stack: ['Next.js 14', 'NestJS 11', 'TypeScript', 'PostgreSQL', 'Supabase', 'Cursor AI'],
+    metrics: [
+      { k: 'lead time', v: '3m → 1m' },
+      { k: 'modules',   v: '6 + SSO' },
+      { k: 'team',      v: '11' },
+    ],
+    problem: [
+      '전사 업무가 6개 레거시(KMS · PMS · AMS · CMS · IAS · SMS)에 파편화되어 있었다 — 로그인 6번, 데이터 중복, 권한/감사 일관성 확보 불가.',
+      '기획 → 디자인 → 개발 인터페이스가 느슨해 스펙 해석 loss가 쌓였고, 한 기능 한 번 도는 데 평균 3개월이 걸렸다.',
+      '11명 프론트/백 혼합 팀의 속도를 AI 도구로 동시에 끌어올려야 했고, 동시에 구조 일관성은 강제되어야 했다.',
+    ],
+    plan: [
+      '통합 정책: 6개 레거시(KMS·PMS·AMS·CMS·IAS·SMS)의 인증·권한·감사를 단일 플랫폼으로 통합 — 로그인 6번·데이터 중복·권한 불일관성을 0으로 수렴하는 것이 완료 기준.',
+      '이관 우선순위 정책: 6개 모듈을 (사용 빈도 × 장애 비용) 매트릭스로 순위화해 순차 이관 로드맵 수립 — 이관 완료 기준은 레거시 동시 접속 0.',
+      '개발 리드타임 정책: 기획 artifact(스펙·정책·디자인)를 구현 코드와 같은 PR에서 리뷰 — 스펙 변경 → 구현 반영 리드타임 1개월 이하를 팀 SLA로 설정.',
+      'AI 도구 정책: Cursor AI `.mdc` 룰로 naming·layering 위반을 1차 자동 검수 — 11명 팀이 속도와 구조 일관성을 동시에 유지하는 것이 운영 목표.',
+    ],
+    design: [
+      'SSO + JWT Combined Guard + resource×action 매트릭스를 선택한 근거: 6개 레거시가 각자 다른 인증 방식을 가지고 있어 통합 시 auth 계층을 하나로 수렴시키는 것이 최우선이다 — 모듈별 권한 규칙을 if-else로 구현하면 모듈 추가마다 auth 코드가 변경된다. resource×action 매트릭스로 정규화해 새 모듈은 매트릭스 행 추가만으로 권한 확장.',
+      'PostgreSQL을 마스터로 선택하고 Mongo를 legacy 참조로 남긴 근거: 6개 모듈의 데이터가 프로젝트·직원·권한 등 관계형 구조로 연결되는데, Mongo는 cross-collection join이 비효율적이다 — 점진 마이그레이션을 위해 기존 Mongo 자산을 moduleId 네임스페이스로 격리해 롤백 경로를 유지하면서 트래픽을 점진 전환.',
+      '모듈별 route group 단위 배포를 선택한 근거: 11명 팀이 6개 모듈을 동시에 개발하므로 단일 배포 단위로 묶으면 모듈 A의 장애나 배포 실패가 전체 서비스를 내린다 — route group별 독립 배포로 장애를 모듈 단위로 격리하고, 이관 중인 모듈과 완료된 모듈이 다른 배포 주기를 가질 수 있도록 설계.',
+      'Next.js App Router + `(planning)/(current)` 2단 구조를 선택한 근거: 기획 artifact(스펙·정책·디자인)와 구현 코드가 다른 저장소에 있으면 스펙 변경이 코드에 반영됐는지 추적이 불가능하다 — 같은 repo·같은 PR에서 plan 페이지와 current 페이지의 diff가 곧 변경 이력이 되도록 설계.',
+    ],
+    build: [
+      '[프레임워크] Next.js Route Group `(planning)/(current)` 2단 구조 + Cursor AI `.mdc` 룰로 기획 artifact와 구현 코드가 같은 PR에서 diff로 검증되도록 설계 — 해석 loss가 0에 수렴.',
+      '[성능] 스펙 변경 → 구현 반영 리드타임 3개월 → 1개월 (−67%): AI 룰이 naming·layering 위반을 1차 검수해 리뷰 왕복을 2~3회에서 1회로 축소.',
+      '[이벤트 드리븐] 6개 레거시(KMS·PMS·AMS·CMS·IAS·SMS)를 (사용 빈도 × 장애 비용) 매트릭스로 순위화 후 단계적 이벤트 기반 마이그레이션 — 3개 완료, 3개 진행 중이며 모듈별 이벤트로 결합도를 끊음.',
+      '[실패 전략] 모듈별 route group 단위 배포 + SSO/JWT Combined Guard로 한 모듈 사고가 전체를 내리지 않는 격리 구조, 이관 중 legacy Mongo 자산은 `moduleId` 네임스페이스 참조로 남겨 롤백 경로 확보 후 트래픽 점진 스위치.',
+    ],
+    links: [],
+  },
+  {
+    id: 'kpi-system',
+    year: '2025', month: '09', date: '2025 하반기',
+    tag: 'WORK', name: '평가 관리 시스템', role: 'PM + tech lead', status: 'shipped',
+    oneliner: 'WBS 기반 4종 평가(자기 · 동료 · 하향 1차/2차 · 최종)를 하나의 생명주기로 — 5-Layer + CQRS + DDD',
+    stack: ['NestJS 11', 'TypeScript 5', 'PostgreSQL', 'TypeORM 0.3', 'Testcontainers'],
+    metrics: [
+      { k: 'domains', v: 'common 4 · core 12 · sub 4' },
+      { k: 'evals',   v: '4종 × 평가자 라인' },
+      { k: 'phases',  v: '6단계 생명주기' },
+    ],
+    problem: [
+      '평가 프로세스가 HR 스프레드시트 + 개인 피드백 문서로 분산 — 평가 기간 phase 전환을 사람이 수동으로 체크해야 했고 누락이 발생.',
+      '평가 기준이 팀/직군마다 자유 양식이어서 동일 직군 간 비교가 불가 — 등급 산정이 운영자 해석에 의존.',
+      '1차/2차 하향 평가 승인에 "부분 승인" 같은 복잡 케이스가 있지만 기존 시스템에 반영이 어려웠고, "누가 언제 왜 평가를 바꿨나"의 이력 추적도 부재.',
+      '평가 도메인 언어와 코드 언어가 달라 HR · 감사팀과 개발자가 같은 용어로 대화하지 못했다.',
+    ],
+    plan: [
+      '평가 표준화 정책: 팀/직군마다 자유 양식이던 평가 기준을 "WBS 기반 표준 템플릿 + WBS별 개별 기준" 2단 구조로 통일 — 동일 직군 간 비교 가능성 확보를 완료 기준으로 설정.',
+      '평가 생명주기 정책: 6단계(inactive → criteria-setting → active → performance-input → final-evaluation → completed)를 시스템이 강제 — 운영자 수동 체크 누락 0건, 등급 산정의 운영자 해석 의존도 제거.',
+      '평가 범위 정책: 4종(자기·동료·하향 1차/2차·최종)을 단일 생명주기 엔진 위에서 처리, "부분 승인" 등 복잡 케이스도 정책으로 정의해 시스템에 반영 — 이력 추적("누가 언제 왜 바꿨나")을 감사 의무로 규정.',
+      '언어 통일 정책: HR·감사팀·개발자가 같은 도메인 언어로 대화하도록 서비스 메서드명을 "평가기간을_생성한다"처럼 한글 "~한다" 형식으로 컨벤션화.',
+    ],
+    design: [
+      '5-Layer(Interface→Business→Context→Domain→Infrastructure)를 선택한 근거: HR·감사팀·개발자가 각자 다른 추상화 수준으로 시스템에 접근한다 — 레이어 없이 서비스를 구현하면 HR 정책 변경이 API 계층을 직접 수정하게 된다. Interface는 API 계약, Context는 도메인 언어, Domain은 불변식 보호로 역할을 분리해 정책 변경의 파급 범위를 한 레이어로 한정.',
+      'CQRS를 선택한 근거: 평가 대시보드는 4종 평가×평가자 라인×직군 조건의 복잡 조인이 필요하지만, 평가 상태 변경은 단순 Command 1개다 — 읽기/쓰기의 복잡도가 달라서 동일 모델로 처리하면 쓰기 트랜잭션에 조인이 섞여 경계가 흐려진다. Query Handler로 복잡 조인을 격리해 쓰기 경로를 가볍게 유지.',
+      'DDD 의존 규칙(Core→Common 허용, Common→Core 금지)을 선택한 근거: 평가 핵심 도메인(Core)이 외부 연동(Common)을 역으로 참조하면 외부 시스템 변경이 평가 로직을 깨뜨린다 — 의존 방향을 단방향으로 강제해 Common이 변경되어도 Core는 영향을 받지 않도록 설계.',
+      '3중 이력(Soft Delete + Audit Log + Evaluation Activity Log + Revision Request)을 선택한 근거: 평가 결과는 인사 결정의 근거가 되는 민감한 데이터라 "누가 언제 왜 바꿨나"를 항상 복원할 수 있어야 한다 — Soft Delete만으로는 변경 맥락이 없고, Audit Log만으로는 "왜"가 없다. 3중 이력으로 삭제·변경·재검토 요청 시나리오를 각각 커버.',
+    ],
+    build: [
+      '[프레임워크] NestJS 11 기반 5-Layer(Interface→Business→Context→Domain→Infrastructure) + CQRS + DDD로 Common/Core/Sub 도메인 의존 규칙을 패키지 단위로 강제 — Context 서비스 메서드명을 "평가기간을_생성한다"처럼 한글 `~한다`로 통일해 HR·감사팀·개발자가 같은 용어로 대화.',
+      '[성능] 복잡 조인을 Query Handler로 격리해 쓰기 경로를 가볍게 유지, E2E 테스트는 Testcontainers PostgreSQL 격리 실행 + workers 5 fast 설정으로 주간 릴리스 사이클 정착 — 대시보드/조회 응답 안정화와 회귀 검증 시간 단축을 동시에 달성.',
+      '[이벤트 드리븐] 평가 기간 6단계(State Machine: inactive → criteria-setting → active → performance-input → final-evaluation → completed) 자동 전환으로 phase 이벤트를 트리거 — 운영자 수동 체크 누락을 제거하고 4종 평가×평가자 라인×1/2차 하향 매트릭스를 단일 엔진 위에서 팬아웃.',
+      '[실패 전략] Soft Delete 컨벤션 + Audit Log + Evaluation Activity Log + Revision Request 3중 이력으로 "누가 언제 왜 바꿨나" 항상 복원, "부분 승인" 로직을 Query/Command 분리로 레거시 미반영 요구사항을 정상 기능으로 편입.',
+    ],
+    links: [],
+  },
+  {
+    id: 'ats',
+    year: '2025', month: '04', date: '2025.04',
+    tag: 'WORK', name: '채용관리시스템', role: 'PM · 자발적 사내 프로젝트', status: 'shipped',
+    oneliner: '채용 JD → 인터뷰 → 평가 → 수습까지 하나의 플로우로 — 27개 도메인 모듈형 모놀리식',
+    stack: ['NestJS 11', 'TypeScript 5', 'MongoDB · Mongoose', 'JWT · Refresh · Blacklist', 'AWS S3', 'Vercel Cron'],
+    metrics: [
+      { k: 'domains',    v: '27' },
+      { k: 'hire lead',  v: '45d → 18d' },
+      { k: 'commits',    v: '1,210' },
+    ],
+    problem: [
+      'JD · 지원자 · 인터뷰 · 평가 · 오퍼가 4개 툴(구글폼 / 시트 / 노션 / 메일)에 흩어져 있었다. 후보자 스테이지 파악에만 리더가 하루를 썼다.',
+      '인터뷰 피드백은 개인 노션에 남아 재활용 불가, 동일 포지션 반복 채용에서 룩업이 불가능했다.',
+      '전사에서 "필수 기능"이 아닌 자발적 사내 프로젝트 — 스코프, 우선순위, 납기를 엔지니어가 직접 정의하고 설득해야 했다.',
+    ],
+    plan: [
+      '채용 담당·인터뷰어·팀장 12명 인터뷰 → pain point 4개(가시성·재활용·캘린더·평가 스탠다드)로 축약 — 각 pain point 해소를 서비스 완료 기준으로 설정.',
+      '스코프 정책: MVP = JD·지원자·인터뷰 일정·평가 폼, 수습 평가·서류 검토·메일 워크플로우는 phase 2로 분리 — 전사 필수 기능이 아닌 자발적 프로젝트이므로 설득 가능한 범위부터 착수.',
+      '릴리스 정책: "매주 시연, 매주 반영"을 원칙으로 — 실사용 피드백이 사전 스펙보다 우선, 1,210 커밋이 주간 릴리스 리듬의 결과.',
+      '데이터 정책: 인터뷰 피드백을 구조화된 폼으로 저장해 동일 포지션 반복 채용 시 이력 검색 가능 — 개인 노션·구글시트 분산 데이터를 단일 소스로 통합.',
+    ],
+    diagram: `architecture · 3-layer modular monolith
+
+  src/
+  ├─ interfaces/web/   40 controllers  · REST endpoints
+  ├─ business/          9 modules      · 도메인 간 use-case 조정
+  └─ domains/          27 domains      · entity · schema
+                                        └─ *-query.service.ts (read model)
+      의존 방향: interfaces ─▶ business ─▶ domains  (역방향 차단)
+
+bounded contexts · 7
+
+  Sourcing     applicant · recruitment · application-document
+  Interview    interview · interview-report · interview-assignment
+  Evaluation   probationary-evaluation · document-review
+  x-cut        Mail · Auth · Calendar · Timeline
+
+event fan-out · @nestjs/event-emitter  (in-process · no broker)
+
+  applicant.applied      ─▶  timeline · mail
+  interview.completed    ─▶  evaluation-form · mail · calendar
+  evaluated              ─▶  probation · dashboard
+
+auth · infra
+
+  auth   JWT + Refresh Token + Blacklist       (3-tier guard)
+  db     MongoDB · Mongoose · 13 migrations    · AWS S3
+  cron   Vercel × 5   auto-complete-iv (5m) · send-iv-notif (23:00) · ...`,
+    design: [
+      '모듈형 모놀리식을 선택한 근거: 채용 플로우(JD→지원→인터뷰→평가→수습)는 도메인 간 조합이 잦아 MSA로 분리하면 네트워크 호출 비용과 분산 트랜잭션 복잡도가 높다 — 사내 툴 규모에서 운영 복잡도가 결합도 완화 이익보다 크므로 단일 프로세스를 유지하되 의존 방향(interfaces→business→domains)을 엄격히 고정해 경계를 코드 수준에서 강제.',
+      'CQRS 프레임워크 없이 `*-query.service.ts` 패턴을 선택한 근거: NestJS CQRS 모듈은 Event Bus·Handler 등록 보일러플레이트가 크고, 이 규모에서는 읽기 서비스 파일 분리만으로도 쓰기와 읽기의 복잡도를 격리할 수 있다 — MongoDB aggregation pipeline 18개를 query.service에 집중시켜 N+1 없는 1-query read model을 확보하면서 프레임워크 의존도는 최소화.',
+      'in-process event emitter를 선택한 근거: applicant.applied→timeline·mail 팬아웃은 Kafka 없이도 처리 가능한 규모다 — 메시지 브로커 도입 시 운영 인프라(클러스터·모니터링·재시도 정책)가 추가되고, 사내 툴에서 그 비용이 이득을 넘는다. 나중에 규모가 커지면 event emitter를 Kafka publisher로 교체하는 것은 어렵지 않도록 인터페이스만 추상화.',
+      'JWT + Refresh + Blacklist 3-tier를 선택한 근거: 지원자(익명 링크)·인터뷰어(사내)·리크루터라는 세 종류의 인증 주체가 존재한다 — 단일 JWT만으로는 토큰 탈취 시 만료까지 무효화가 불가능. Blacklist로 즉시 무효화 경로를 확보하고 세 주체를 하나의 Guard로 처리해 인증 로직 중복 제거.',
+    ],
+    build: [
+      '[프레임워크] NestJS 11 기반 3-Layer 모듈형 모놀리식으로 의존 방향을 `interfaces → business → domains`로 고정 — 468 TS 파일·27 도메인·40 controller 규모에서도 새 기능은 business 모듈 1개 추가로 끝나 리그레션 면적을 최소화.',
+      '[성능] 채용 리드타임 45일 → 18일 (−60%) · 월 100명 채용 진행: `*-query.service.ts` 패턴으로 MongoDB aggregation pipeline 18개를 분리해 대시보드/타임라인을 1-query read model로 서빙, N+1 제거.',
+      '[이벤트 드리븐] `@nestjs/event-emitter` in-process 팬아웃으로 `applicant.applied → timeline·mail`, `interview.completed → evaluation·mail·calendar`, `evaluated → probation·dashboard` 배선 — 메시지 브로커 없이 단일 프로세스로 스테이지 파악 자동화.',
+      '[실패 전략] JWT + Refresh Token + Blacklist 3-tier Guard로 세션 탈취 시 즉시 무효화, Vercel Cron 5종(면접 자동 완료 5m · 매일 23시 알림 · 수습 갱신 · 임시 파일 정리 · 메타 동기화) + `@shelf/jest-mongodb` 메모리 서버 단위 테스트로 운영 개입/회귀 리스크 동시 차단.',
+    ],
+    links: [],
+  },
+  {
+    id: 'lsms',
+    year: '2025', month: '02', date: '2025.02',
+    tag: 'WORK', name: '자원및근태관리시스템', role: 'PM + tech lead', status: 'shipped',
+    oneliner: '차량·회의실·장비·스케줄·예약·근태를 한 콘솔에 — MDC 3-Layer(Business 10 · Context 7 · Domain 30)',
+    stack: ['NestJS 10', 'TypeScript 5.8', 'TypeORM 0.3', 'PostgreSQL · Supabase', 'FCM · Web Push · SMTP', 'Vercel Serverless'],
+    metrics: [
+      { k: 'layers',      v: 'Business 10 · Context 7 · Domain 30' },
+      { k: 'migrations',  v: '28' },
+      { k: 'tx services', v: '14 (queryRunner)' },
+    ],
+    problem: [
+      '기존 ERP 캘린더는 일정 표시 수준에 그쳐 자원 예약·중복 방지·승인 흐름을 지원하지 못했다 — 회의실·차량·장비 예약이 메일과 구두 협의로 처리되어 이중 예약과 승인 기록 부재가 상시적.',
+      '법인차량·실험 장비 등 회사 자산을 장부(엑셀/수기)로 관리하고 있어 현재 위치·대출 현황·정비 이력을 실시간으로 파악할 수 없었다 — 사용 후 반납 프로세스가 없어 장비 상태 품질 저하와 분실 시 책임 소재 불명확이 반복.',
+      '근태 관리를 엑셀로 운영하여 출퇴근 기록·연차·초과근무 집계를 수동으로 취합 — 오집계·누락이 발생하고 인사팀의 월말 마감 공수가 과도했다.',
+    ],
+    plan: [
+      '통합 정책: 차량·회의실·장비·소모품·스케줄·예약·근태 7종 자원을 단일 콘솔로 통합 — 이중 예약 0건·승인 이력 100% 추적을 운영 정책 기준으로 확정.',
+      '자원 분류 정책: 차량(+정비 이력)·고정 자산·소모품·회의실을 스키마 수준에서 엄격히 세분화 — 자원 종류 추가 시 기존 구조 수정 없이 확장 가능한 것을 설계 제약으로 설정.',
+      '알림 정책: 예약·스케줄·근태 변경 시 FCM·Web Push·SMTP 중 사용자별 선호 채널로 발송 — 채널 미수신 0건이 운영 SLA.',
+      '접근·감사 정책: 사내 SSO 단일 진입, 모든 API 호출을 감사 가능하게 기록 의무화 — 책임 소재 불분명 케이스와 승인 기록 부재를 구조적으로 제거.',
+    ],
+    design: [
+      'Domain 30→Context 7 응집 구조를 선택한 근거: 30개 도메인을 Business 레이어가 직접 참조하면 30개 의존성이 생겨 하나의 도메인 변경이 Business 전체로 파급된다 — Context가 도메인을 응집해 Business는 7개 Context와만 대화하도록 설계. 새 자원 유형(예: 드론) 추가 시 Domain 1개와 해당 Context만 수정하면 Business는 무변경.',
+      'queryRunner 기반 트랜잭션을 선택한 근거: 예약 생성 시 자원 상태 변경·스케줄 등록·알림 발송이 하나의 원자적 연산이 되어야 한다 — TypeORM의 @Transaction 데코레이터는 중첩 트랜잭션에서 예측하지 못한 동작이 있어, 14개 multi-step 서비스 전체에 queryRunner를 직접 주입해 commit/rollback 경로를 명시적으로 제어.',
+      '전역 RequestInterceptor를 선택한 근거: 자원 예약 분쟁 해결의 근거가 "누가 언제 어떤 요청을 했는지"이므로 감사 로그는 누락이 허용되지 않는다 — 감사 로그를 각 서비스에 분산 구현하면 빠진 구간이 생긴다. 전역 Interceptor로 모든 HTTP 요청을 단일 엔티티(endpoint·method·statusCode·duration·traceId·requestBody·responseBody)로 기록해 누락 0 보장.',
+      'FCM·Web Push·SMTP 멀티채널을 NotificationService로 통합한 근거: 채널을 서비스별로 직접 호출하면 채널 추가나 정책 변경 시 호출 지점을 전부 수정해야 한다 — 단일 추상화 뒤에 채널 구현체를 숨기고 사용자별 선호 채널을 테이블로 선언해, 채널 추가는 구현체 등록만으로 끝나도록 설계.',
+    ],
+    build: [
+      '[프레임워크] NestJS 10 + TypeScript 5.8 + TypeORM 0.3 기반 MDC 3-Layer(Business 10 · Context 7 · Domain 30)로 의존 방향을 Business → Context → Domain 단방향 고정 — 298 TS 파일·28 migration 규모에서도 새 기능은 Context 1개 수정으로 끝나 Business는 orchestration만 담당.',
+      '[성능] `relations` 기반 연관 로딩으로 N+1 제거 + queryRunner 트랜잭션 14개 서비스 적용 + `deletedAt` 인덱스(`IDX_schedules_deletedAt`)로 소프트 삭제 조회 성능 유지 — 예약+차량 배정 등 multi-step 연산의 원자성과 조회 속도 동시 확보.',
+      '[이벤트 드리븐] `@nestjs/event-emitter` + FCM/Web Push/SMTP 멀티채널 알림 허브를 도메인 후단에 배치해 예약·스케줄·근태 변경이 다채널로 자동 팬아웃되는 구조로 설계 — 채널 추가 시 NotificationService 구현체만 교체.',
+      '[실패 전략] 전역 RequestInterceptor + RequestLog 엔티티(endpoint·method·statusCode·duration·traceId·requestBody·responseBody·errorMessage)로 모든 호출을 추적, queryRunner rollback + 전역 Exception Filter + @lumir-company/sso-sdk + JWT + bcryptjs로 실패/세션 탈취 시 즉시 롤백·재인증 경로 확보.',
+    ],
+    links: [],
+  },
+  {
+    id: 'tmtc-console',
+    year: '2024', month: '06', date: '2024 (전체)',
+    tag: 'WORK', name: 'SOS', role: 'tech lead', status: 'maintained',
+    oneliner: '회사 최초 위성과 통신하기 위한 지상국 운용 프로그램 — TM 수신 · TC 송신 · 상태 감시를 0→1',
+    stack: ['React', 'NestJS', 'WebSocket', 'BullMQ · Redis', 'CCSDS'],
+    metrics: [
+      { k: 'scope',     v: '회사 최초 위성' },
+      { k: 'telemetry', v: '8 Hz · 24/7' },
+      { k: 'cmd p95',   v: '240ms' },
+    ],
+    problem: [
+      '회사 최초 위성과 통신하는 프로그램을 0에서 만들어야 했다 — 참고할 사내 자산이 없어 TM/TC 프로토콜 해석부터 운영자 UX까지 전 구간을 새로 설계.',
+      'TM 스트림의 스키마·패킷 구조가 아직 확정되지 않아 운영자가 이상 탐지를 감으로 수행, 장애 감지까지의 공백이 크다.',
+      'TC(명령)는 한 번의 오조작이 미션 자체를 망칠 수 있어 감사 추적과 사전 안전장치를 구조적으로 강제해야 했다.',
+    ],
+    plan: [
+      '서비스 범위 정책: 회사 최초 위성과의 TM 수신·TC 송신·상태 감시를 0→1로 구축 — 사내 참고 자산이 없어 TM/TC 프로토콜 정의부터 운영자 UX 정책까지 전 구간을 새로 확정.',
+      '2단계 릴리스 정책: Phase 1 = TM 통합 조회 대시보드(가시성 확보), Phase 2 = TC 명령·스케줄 발신 + 감사 로그(명령 안전성 확보) — Phase 1 운영 피드백으로 Phase 2 스펙 확정.',
+      '안전 정책: 운영자 워크숍에서 "가장 두려운 조작 실수 top 5"를 수집해 각 시나리오를 시스템 요구사항으로 격상 — TC 오조작 1건 = 미션 손실로 정의, 구조적 차단을 정책 기준으로 확정.',
+      '재사용 정책: 첫 위성에서 확보한 TM 스키마·운영 패턴이 후속 미션과 MCE(군집위성시스템)의 도메인 자산으로 승계되도록 확장 포인트를 먼저 고정.',
+    ],
+    design: [
+      'WebSocket(실시간) + BullMQ(후처리) 이중 경로를 선택한 근거: 8Hz telemetry 실시간 뷰는 지연이 곧 운영 품질이므로 경로를 가볍게 유지해야 한다 — 이상 탐지·알림 승격·TC 재시도는 실패 시 재시도가 필요한 무거운 작업으로, 같은 경로에 두면 후처리 부하가 실시간 루프를 블로킹한다. 두 성격이 다른 작업을 경로 수준에서 분리해 실시간 루프는 항상 가볍게 유지.',
+      'TC에 2-man rule + 타임아웃 confirm + 불변 실행 로그를 선택한 근거: 최초 위성이라 TC 오류의 영향 범위를 사전에 검증할 수 없다 — 단일 확인으로는 운영자 한 명의 실수가 미션 자체를 망칠 수 있어, 발신자·확인자를 분리한 2-man rule로 1차 차단, 타임아웃 confirm으로 2차 차단, 불변 실행 로그로 감사 추적을 3중 구조로 설계.',
+      '이상 탐지를 룰 엔진(임계치 + 패턴) 방식으로 선택한 근거: TM 스키마·패킷 구조가 확정되지 않은 단계에서 ML 기반 이상 탐지는 학습 데이터가 없어 불가하다 — 운영자가 임계치와 패턴 룰을 직접 정의하고 BullMQ 잡이 주기적으로 평가해 알림을 승격하는 구조로, 스키마 변경에도 룰만 수정하면 되도록 설계. 실패 시 지수 백오프 재시도로 일시적 장애에 자동 복구.',
+    ],
+    build: [
+      '[프레임워크] React + NestJS 기반 통합 콘솔을 0→1로 구축 — 회사 최초 위성과의 통신 프로그램으로 TM 수신/해석/가시화와 TC 송신/감사를 단일 파이프라인으로 설계, 공통 TM 스키마 + 어댑터로 후속 미션 재사용 기반 확보.',
+      '[성능] 8Hz telemetry 24/7 실시간 대시보드 · TC 명령 전송 p95 240ms: WebSocket push로 폴링을 제거하고 TM 후처리를 BullMQ 워커로 떼어내 실시간 루프는 가볍게 유지, 이상 탐지 룰 엔진(임계치+패턴)이 사람 개입 시점을 자동 승격해 장애 감지 공백 축소.',
+      '[이벤트 드리븐] BullMQ(Redis) 기반 잡 큐로 TM 후처리(이상 탐지 · 알림 승격)와 TC 실행/재시도를 실시간 경로와 완전 분리 — 실시간 WebSocket 루프는 가볍게 유지, 후처리 워커만 독립적으로 스케일링.',
+      '[실패 전략] TC(명령)는 2-man rule + 타임아웃 confirm + 불변 실행 로그로 재해급 오조작을 구조적으로 차단 + BullMQ attempts·backoff·DLQ로 지상국 전송 실패 시 지수 백오프 재시도 후 Dead Letter로 격리 — 최초 위성이라 검증 대상이 없는 상황에서 감사 로그 자체가 운영 1차 자산이 되도록 설계, 2026 하반기 "군집위성시스템 개발(MCE)"의 도메인 모델 자산으로 승계.',
+    ],
+    links: [],
+  },
+  {
+    id: 'web-gis',
+    year: '2023', month: '10', date: '2023.10',
+    tag: 'WORK', name: 'web-gis', role: 'project lead · backend', status: 'maintained',
+    oneliner: '위성 SAR 데이터를 시계열로 수집·카탈로그화해 사용자에게 검색·처리·웹뷰어를 제공하는 통합 플랫폼 — DB 97% · 렌더 93% · 캐시 97.5% 개선',
+    stack: ['NestJS', 'TypeScript', 'PostgreSQL · PostGIS', 'Redis 캐시', 'GDAL · COG', 'GitLab CI/CD'],
+    metrics: [
+      { k: 'render',  v: '3s → 0.2s' },
+      { k: 'query',   v: '10s → 0.3s' },
+      { k: 'cache',   v: '4s → 0.1s' },
+    ],
+    problem: [
+      '위성이 SAR 데이터를 전송할 때마다 쌓이는 시계열 원시 데이터를 검색·조회 가능한 카탈로그로 관리하는 통합 플랫폼이 없어, 데이터가 파일 시스템에 산재하고 특정 날짜·지역 제품을 찾으려면 담당자가 수동 탐색해야 했다.',
+      '수 GB 단위 SAR scene을 검색·열람하려면 외부 GIS 툴 업로드·다운로드 왕복이 필요해 사용자가 원하는 영상을 찾고 프로세싱 결과를 확인하기까지 2-3일이 걸렸다.',
+      '어노테이션과 SAR 처리 결과물이 Photoshop·QGIS 등 개인 툴에 분산되어 포맷 호환성이 상시 깨지고, 처리 이력·버전 추적이 불가능했다.',
+    ],
+    plan: [
+      '서비스 정책: 위성 SAR 데이터가 수신될 때마다 카탈로그에 자동 등록되어 사용자가 날짜·지역 조건으로 검색하고 웹뷰어에서 즉시 열람 가능 — "링크 하나로 열람"을 서비스 SLA로 정의.',
+      '접근성 정책: 사용자가 외부 GIS 툴 없이 플랫폼 내에서 SAR 영상을 검색하고 프로세싱 결과를 즉시 열람 가능 — 검색 요청부터 결과 확인까지 2-3일 → 수 분 단축을 완료 기준으로 설정.',
+      '어노테이션 정책: Photoshop·QGIS 분산 작업을 플랫폼 내 표준 레이어로 통합 — GeoJSON 어노테이션 + TMS 표준으로 외부 툴 호환 확보, 처리 결과물의 버전 이력 추적 의무화.',
+      '개발 원칙: 선례 없는 도메인인 만큼 DDD + TDD로 서비스 경계를 먼저 고정 — 500+ 테스트로 리그레션을 막아야 대담한 성능 최적화가 가능하다는 판단.',
+    ],
+    design: [
+      'PostGIS 공간+시간 복합 인덱스를 선택한 근거: 사용자 조회 패턴이 항상 "특정 지역 × 날짜 범위"로 묶인다 — 공간 인덱스 단독 사용 시 날짜 필터가 전체 scan으로 떨어지고, B-tree 시간 인덱스 단독 사용 시 공간 조건이 느리다. 두 인덱스를 복합 구조로 조합해 두 조건을 동시에 활용, 1,000만 건 카탈로그 검색 10s → 0.3s 달성.',
+      'GDAL 워커 + S3 직서빙(COG)을 선택한 근거: 전통적인 타일 서버(GeoServer·MapServer)는 별도 인프라와 캐시 워밍이 필요하고 수 GB SAR 데이터를 실시간 변환하면 응답 지연이 크다 — Cloud-Optimized GeoTIFF로 사전 변환 후 S3에서 HTTP Range 요청으로 필요한 타일만 직접 서빙해 타일 서버 없이도 위성 미션 수가 늘어도 S3 스케일로 흡수.',
+      'NestJS 멀티 서비스(on-premise) 구조를 선택한 근거: 수집·처리·카탈로그·뷰어가 각각 다른 스케일링 요구사항을 가진다 — 처리 서비스는 SAR 변환 시 CPU 집약적이고 카탈로그·뷰어는 I/O 위주. 하나의 프로세스로 묶으면 SAR 변환 부하가 API 응답을 저하시키므로 서비스 경계로 분리해 독립 스케일링. DDD + TDD 500+ 테스트로 경계 변경 시 리그레션을 막아 대담한 성능 최적화 기반 마련.',
+    ],
+    build: [
+      '[프레임워크] DDD + TDD 기반 NestJS MSA(on-premise)로 수집·처리·카탈로그·뷰어를 서비스 경계로 분리 — 500+ 테스트로 변경에 강한 구조 확립해 대담한 성능 최적화 기반 마련.',
+      '[성능] SAR 영상 렌더링 3s → 0.2s (−93%): GDAL 워커 병렬 처리 + 렌더 파이프라인 재설계로 동기 블로킹 구간 제거.',
+      '[성능] 시계열 카탈로그 1,000만 건 공간 검색 10s → 0.3s (−97%): 쿼리 프로파일링 후 PostGIS 공간+시간 복합 인덱스 재설계.',
+      '[성능] 지도 이미지 First Loading 4s → 0.1s (−97.5%): Hit-Miss 캐시 전략 + 요청 경로 프리페치 + CDN 계층 도입.',
+      '[실패 전략] RBAC + Token Allow List로 세션 탈취 즉시 무효화, GitLab CI/CD 파이프라인 실패 시 자동 롤백 경로 확보 — 영상 검색·프로세싱 사이클 2-3일 → 수 분, 6개 사용자 조직 온보딩, 운용 중인 위성 프로젝트 전반 채택.',
+    ],
+    links: [],
+  },
+];
+
+</script>
+
+<!-- ============================================================ -->
+<!-- src/components/Hero.jsx                                       -->
+<!-- ============================================================ -->
+<script type="text/babel">
+const { useEffect, useState, useRef } = React;
+
+function Caret() {
+  const [on, setOn] = useState(true);
+  useEffect(() => { const t = setInterval(() => setOn(o => !o), 520); return () => clearInterval(t); }, []);
+  return <span style={{ opacity: on ? 1 : 0 }}>▊</span>;
+}
+
+function BootBanner({ theme, strings, density }) {
+  const [shown, setShown] = useState(0);
+  useEffect(() => {
+    setShown(0);
+    const interval = setInterval(() => {
+      setShown(s => {
+        if (s >= strings.bootLines.length) { clearInterval(interval); return s; }
+        return s + 1;
+      });
+    }, 260);
+    return () => clearInterval(interval);
+  }, [strings]);
+
+  return (
+    <div style={{
+      fontFamily: theme.fontMono,
+      color: theme.textDim,
+      fontSize: density === 'compact' ? 11 : 12,
+      lineHeight: 1.65,
+      padding: density === 'compact' ? '12px 0 4px' : '20px 0 10px',
+    }}>
+      {strings.bootLines.slice(0, shown).map((l, i) => (
+        <div key={i}>
+          <span style={{ color: theme.accent }}>$</span>{' '}
+          <span>{l}</span>
+          {i === shown - 1 && shown < strings.bootLines.length + 1 && <Caret />}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Hero({ theme, strings, density }) {
+  const pad = density === 'compact' ? '20px 28px' : '40px 48px';
+  return (
+    <section data-screen-label="hero" style={{
+      borderBottom: `1px solid ${theme.border}`,
+      padding: pad,
+      position: 'relative',
+    }}>
+      <BootBanner theme={theme} strings={strings} density={density} />
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 380px)',
+        gap: density === 'compact' ? 32 : 56,
+        alignItems: 'start',
+        marginTop: density === 'compact' ? 12 : 24,
+      }}>
+        <div>
+          <div style={{
+            fontFamily: theme.fontMono,
+            color: theme.textDim,
+            fontSize: 12,
+            marginBottom: 10,
+            letterSpacing: 1,
+          }}>
+            ~/portfolio <span style={{ color: theme.accent }}>main</span> $ whoami
+          </div>
+          <h1 style={{
+            fontFamily: theme.fontMono,
+            color: theme.textBright,
+            fontSize: density === 'compact' ? 42 : 64,
+            margin: 0,
+            fontWeight: 700,
+            letterSpacing: -1,
+            textShadow: theme.glow,
+            lineHeight: 1.0,
+          }}>
+            {strings.heroName}<span style={{ color: theme.accent }}>_</span>
+          </h1>
+          <div style={{
+            fontFamily: theme.fontMono,
+            color: theme.text,
+            fontSize: density === 'compact' ? 14 : 17,
+            marginTop: 10,
+            opacity: 0.9,
+          }}>
+            &gt; {strings.heroRole}
+          </div>
+          <p style={{
+            fontFamily: theme.fontSans,
+            color: theme.text,
+            fontSize: density === 'compact' ? 13 : 15,
+            lineHeight: 1.7,
+            maxWidth: 620,
+            marginTop: 24,
+            textWrap: 'pretty',
+          }}>
+            {strings.heroBio}
+          </p>
+        </div>
+        <div style={{
+          border: `1px solid ${theme.border}`,
+          background: theme.panelSoft,
+          fontFamily: theme.fontMono,
+          fontSize: 12,
+        }}>
+          <div style={{
+            padding: '8px 12px',
+            borderBottom: `1px solid ${theme.border}`,
+            color: theme.textDim,
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}>
+            <span>~/identity.toml</span>
+            <span style={{ color: theme.accent }}>●</span>
+          </div>
+          <div style={{ padding: '14px 16px' }}>
+            {strings.heroMeta.map((m, i) => (
+              <div key={i} style={{ display: 'flex', padding: '5px 0' }}>
+                <span style={{ color: theme.textDim, width: 84, flexShrink: 0 }}>{m.k}</span>
+                <span style={{ color: theme.textDim }}>=&nbsp;</span>
+                <span style={{ color: theme.textBright }}>"{m.v}"</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+window.Hero = Hero;
+</script>
+
+<!-- ============================================================ -->
+<!-- src/components/SectionHeader.jsx                              -->
+<!-- ============================================================ -->
+<script type="text/babel">
+function SectionHeader({ theme, density, n, title, sub }) {
+  return (
+    <div style={{ fontFamily: theme.fontMono }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 }}>
+        <span style={{ color: theme.textDim, fontSize: 12 }}>[{n}]</span>
+        <h2 style={{
+          color: theme.textBright,
+          fontSize: density === 'compact' ? 22 : 28,
+          margin: 0,
+          fontWeight: 700,
+          textShadow: theme.glow,
+        }}>
+          <span style={{ color: theme.accent }}>$ </span>{title}
+        </h2>
+      </div>
+      <div style={{ color: theme.textDim, fontSize: 12, marginTop: 6 }}>
+        # {sub}
+      </div>
+    </div>
+  );
+}
+
+window.SectionHeader = SectionHeader;
+</script>
+
+<!-- ============================================================ -->
+<!-- src/components/Timeline.jsx                                   -->
+<!-- ============================================================ -->
+<script type="text/babel">
+function ProjectsSection({ theme, strings, lang, density, projects, selectedId, setSelectedId }) {
+  const SectionHeader = window.SectionHeader;
+  return (
+    <section data-screen-label="projects" style={{
+      borderBottom: `1px solid ${theme.border}`,
+      padding: density === 'compact' ? '24px 28px' : '40px 48px',
+    }}>
+      <SectionHeader theme={theme} density={density}
+        n="02" title={strings.timelineTitle} sub={strings.timelineSub} />
+
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'minmax(340px, 440px) minmax(0, 1fr)',
+        gap: 32,
+        marginTop: 28,
+        alignItems: 'start',
+      }}>
+        <Timeline theme={theme} density={density} lang={lang} projects={projects}
+          selectedId={selectedId} setSelectedId={setSelectedId} />
+        <DetailPanel theme={theme} density={density} lang={lang} strings={strings}
+          project={projects.find(p => p.id === selectedId)} />
+      </div>
+    </section>
+  );
+}
+
+function Timeline({ theme, density, lang, projects, selectedId, setSelectedId }) {
+  const years = {};
+  projects.forEach(p => { (years[p.year] = years[p.year] || []).push(p); });
+  const yearKeys = Object.keys(years).sort().reverse();
+
+  return (
+    <div style={{ fontFamily: theme.fontMono, position: 'relative' }}>
+      {yearKeys.map(y => (
+        <div key={y} style={{ marginBottom: 28 }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            color: theme.textDim,
+            fontSize: 11,
+            marginBottom: 10,
+            letterSpacing: 1,
+          }}>
+            <span style={{ color: theme.accent }}>▸</span>
+            <span style={{ color: theme.textBright }}>{y}</span>
+            <span style={{ flex: 1, height: 1, background: theme.border }} />
+            <span>{years[y].length} projects</span>
+          </div>
+          <div style={{ position: 'relative', paddingLeft: 18 }}>
+            <div style={{
+              position: 'absolute', left: 4, top: 6, bottom: 6, width: 1,
+              background: theme.border,
+            }} />
+            {years[y].map(p => {
+              const active = p.id === selectedId;
+              return (
+                <button key={p.id}
+                  onClick={() => setSelectedId(p.id)}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    textAlign: 'left',
+                    background: active ? theme.panel : 'transparent',
+                    border: `1px solid ${active ? theme.accent : 'transparent'}`,
+                    borderLeft: `1px solid ${active ? theme.accent : 'transparent'}`,
+                    padding: density === 'compact' ? '8px 12px' : '12px 14px',
+                    margin: '4px 0',
+                    cursor: 'pointer',
+                    color: 'inherit',
+                    fontFamily: 'inherit',
+                    position: 'relative',
+                    transition: 'background 120ms, border 120ms',
+                  }}
+                  onMouseEnter={e => { if (!active) e.currentTarget.style.background = theme.panelSoft; }}
+                  onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
+                >
+                  <span style={{
+                    position: 'absolute',
+                    left: -18,
+                    top: density === 'compact' ? 12 : 16,
+                    width: 9, height: 9,
+                    background: active ? theme.accent : theme.bg,
+                    border: `1px solid ${active ? theme.accent : theme.muted}`,
+                    borderRadius: theme.id === 'modern' ? '50%' : 0,
+                    boxShadow: active ? theme.glow : 'none',
+                  }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, color: theme.textDim }}>
+                    <span>{p.date}</span>
+                    <Tag theme={theme} kind={p.tag} />
+                    <Status theme={theme} status={p.status} />
+                  </div>
+                  <div style={{
+                    fontSize: density === 'compact' ? 14 : 15,
+                    color: active ? theme.textBright : theme.text,
+                    marginTop: 4,
+                    fontWeight: 600,
+                  }}>
+                    {p.name}
+                  </div>
+                  <div style={{ color: theme.textDim, fontSize: 12, marginTop: 3, textWrap: 'pretty' }}>
+                    {p.oneliner}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Tag({ theme, kind }) {
+  const map = {
+    WORK: { bg: theme.accent, fg: theme.bg },
+    OSS:  { bg: 'transparent', fg: theme.accent, border: theme.accent },
+    SIDE: { bg: 'transparent', fg: theme.textDim, border: theme.muted },
+  };
+  const s = map[kind] || map.WORK;
+  return (
+    <span style={{
+      fontSize: 9,
+      letterSpacing: 1,
+      padding: '2px 6px',
+      background: s.bg,
+      color: s.fg,
+      border: s.border ? `1px solid ${s.border}` : 'none',
+      fontWeight: 700,
+    }}>{kind}</span>
+  );
+}
+
+function Status({ theme, status }) {
+  const color = status === 'active' ? theme.accent
+             : status === 'shipped' ? theme.text
+             : status === 'maintained' ? theme.warn
+             : status === 'planned' ? theme.textDim
+             : theme.textDim;
+  const dashed = status === 'planned';
+  return (
+    <span style={{ fontSize: 10, color, display: 'flex', alignItems: 'center', gap: 4, fontStyle: dashed ? 'italic' : 'normal' }}>
+      <span style={{
+        width: 6, height: 6, borderRadius: '50%',
+        background: dashed ? 'transparent' : color,
+        border: dashed ? `1px dashed ${color}` : 'none',
+        boxShadow: status === 'active' ? `0 0 6px ${color}` : 'none',
+      }} />
+      {status}
+    </span>
+  );
+}
+
+function DetailPanel({ theme, density, lang, strings, project }) {
+  const [tab, setTab] = React.useState(0);
+  React.useEffect(() => { setTab(0); }, [project && project.id]);
+
+  if (!project) return null;
+  const tabKeys = ['problem', 'plan', 'design', 'build'];
+  const content = project[tabKeys[tab]] || [];
+
+  return (
+    <div style={{
+      position: 'sticky',
+      top: 20,
+      fontFamily: theme.fontMono,
+      border: `1px solid ${theme.border}`,
+      background: theme.panel,
+      fontSize: 12,
+    }}>
+      <div style={{
+        display: 'flex', alignItems: 'center',
+        padding: '10px 14px',
+        borderBottom: `1px solid ${theme.border}`,
+        background: theme.panelSoft,
+        gap: 10,
+      }}>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <ChromeDot c={theme.danger} /><ChromeDot c={theme.warn} /><ChromeDot c={theme.accent} />
+        </div>
+        <div style={{ color: theme.textDim, marginLeft: 6 }}>
+          ~/projects/{project.name}.md
+        </div>
+        <div style={{ marginLeft: 'auto', color: theme.textDim, fontSize: 10 }}>
+          {project.date}
+        </div>
+      </div>
+
+      <div style={{ padding: density === 'compact' ? '18px 20px 8px' : '24px 28px 12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+          <Tag theme={theme} kind={project.tag} />
+          <Status theme={theme} status={project.status} />
+          <span style={{ color: theme.textDim }}>· role: <span style={{ color: theme.text }}>{project.role}</span></span>
+        </div>
+        <h3 style={{
+          margin: 0,
+          color: theme.textBright,
+          fontSize: density === 'compact' ? 22 : 28,
+          fontWeight: 700,
+          letterSpacing: -0.5,
+          textShadow: theme.glow,
+        }}>
+          {project.name}
+          <span style={{ color: theme.accent }}>()</span>
+        </h3>
+        <div style={{ color: theme.text, fontSize: 13, marginTop: 6, textWrap: 'pretty' }}>
+          {project.oneliner}
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 14 }}>
+          {project.stack.map(s => (
+            <span key={s} style={{
+              fontSize: 10,
+              padding: '3px 7px',
+              color: theme.text,
+              background: theme.panelSoft,
+              border: `1px solid ${theme.border}`,
+            }}>{s}</span>
+          ))}
+        </div>
+
+        {project.metrics.length > 0 && (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${project.metrics.length}, 1fr)`,
+            gap: 0,
+            marginTop: 18,
+            border: `1px solid ${theme.border}`,
+          }}>
+            {project.metrics.map((m, i) => (
+              <div key={i} style={{
+                padding: '10px 12px',
+                borderRight: i < project.metrics.length - 1 ? `1px solid ${theme.border}` : 'none',
+                background: theme.panelSoft,
+              }}>
+                <div style={{ color: theme.textDim, fontSize: 10, letterSpacing: 0.5 }}>{m.k}</div>
+                <div style={{ color: theme.accent, fontSize: 18, fontWeight: 700, marginTop: 2, textShadow: theme.glow }}>{m.v}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div style={{ display: 'flex', borderTop: `1px solid ${theme.border}`, borderBottom: `1px solid ${theme.border}`, marginTop: 14 }}>
+        {strings.detailTabs.map((t, i) => {
+          const active = tab === i;
+          return (
+            <button key={i}
+              onClick={() => setTab(i)}
+              style={{
+                flex: 1,
+                padding: '10px 12px',
+                background: active ? theme.bg : 'transparent',
+                color: active ? theme.accent : theme.textDim,
+                border: 'none',
+                borderRight: i < strings.detailTabs.length - 1 ? `1px solid ${theme.border}` : 'none',
+                borderBottom: active ? `2px solid ${theme.accent}` : '2px solid transparent',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+                fontSize: 12,
+                textAlign: 'center',
+                fontWeight: active ? 700 : 400,
+              }}
+            >
+              <span style={{ color: theme.textDim, marginRight: 4 }}>0{i+1}.</span>{t}
+            </button>
+          );
+        })}
+      </div>
+
+      <div style={{ padding: density === 'compact' ? '18px 20px' : '24px 28px' }}>
+        {tab === 2 && project.diagram && (
+          <pre style={{
+            margin: '0 0 16px',
+            padding: '14px 16px',
+            background: theme.bg,
+            border: `1px solid ${theme.border}`,
+            color: theme.textBright,
+            fontFamily: theme.fontMono,
+            fontSize: 11,
+            lineHeight: 1.55,
+            overflowX: 'auto',
+            whiteSpace: 'pre',
+            textShadow: theme.glow,
+          }}>{project.diagram}</pre>
+        )}
+        {content.length === 0 && (
+          <div style={{ color: theme.textDim }}>// no notes yet</div>
+        )}
+        {content.map((line, i) => (
+          <div key={i} style={{
+            display: 'flex',
+            gap: 12,
+            padding: '6px 0',
+            color: theme.text,
+            fontSize: 13,
+            lineHeight: 1.65,
+            fontFamily: theme.fontSans,
+          }}>
+            <span style={{ color: theme.accent, fontFamily: theme.fontMono, flexShrink: 0 }}>
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span style={{ textWrap: 'pretty' }}>{line}</span>
+          </div>
+        ))}
+      </div>
+
+      {project.links.length > 0 && (
+        <div style={{
+          display: 'flex',
+          gap: 14,
+          padding: '14px 20px',
+          borderTop: `1px solid ${theme.border}`,
+          background: theme.panelSoft,
+        }}>
+          {project.links.map((l, i) => (
+            <a key={i} href={l.href} style={{ color: theme.accent, textDecoration: 'none', fontSize: 12 }}>
+              → {l.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ChromeDot({ c }) {
+  return <span style={{ width: 10, height: 10, background: c, borderRadius: '50%', display: 'inline-block', opacity: 0.85 }} />;
+}
+
+window.ProjectsSection = ProjectsSection;
+</script>
+
+<!-- ============================================================ -->
+<!-- src/components/Tweaks.jsx                                     -->
+<!-- ============================================================ -->
+<script type="text/babel">
+function TweaksPanel({ active, state, setState, onReset }) {
+  if (!active) return null;
+  const themes = ['classic', 'amber', 'modern'];
+  const fonts = ['JetBrains Mono + Inter', 'IBM Plex Mono + Plex Sans', 'Fira Code + Geist', 'Space Mono + Space Grotesk'];
+  const densities = ['compact', 'comfortable'];
+  const langs = ['ko', 'en'];
+
+  const t = window.THEMES[state.theme];
+
+  return (
+    <div style={{
+      position: 'fixed',
+      right: 20,
+      top: 20,
+      width: 300,
+      maxHeight: 'calc(100vh - 40px)',
+      overflowY: 'auto',
+      background: t.panel,
+      border: `1px solid ${t.border}`,
+      color: t.text,
+      fontFamily: t.fontMono,
+      fontSize: 12,
+      zIndex: 200,
+      boxShadow: `0 20px 60px rgba(0,0,0,0.7)`,
+    }}>
+      {/* header */}
+      <div style={{
+        padding: '10px 14px',
+        borderBottom: `1px solid ${t.border}`,
+        background: t.panelSoft,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
+        <span style={{ color: t.accent, fontWeight: 700, fontSize: 13 }}>$ tweaks --live</span>
+        <span style={{ color: t.textDim, fontSize: 10 }}>esc to close</span>
+      </div>
+
+      {/* aesthetic */}
+      <TGroup t={t} label="// aesthetic">
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {themes.map(k => {
+            const sel = state.theme === k;
+            return (
+              <button key={k} onClick={() => setState({ ...state, theme: k })} style={{
+                padding: '5px 12px',
+                border: `1px solid ${sel ? t.accent : t.border}`,
+                background: sel ? t.panelSoft : 'transparent',
+                color: sel ? t.accent : t.text,
+                fontFamily: 'inherit',
+                fontSize: 11,
+                cursor: 'pointer',
+              }}>{window.THEMES[k].label}</button>
+            );
+          })}
+        </div>
+      </TGroup>
+
+      {/* font pairing */}
+      <TGroup t={t} label="// font pairing">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {fonts.map((f, i) => {
+            const sel = state.fontIdx === i;
+            return (
+              <button key={i} onClick={() => setState({ ...state, fontIdx: i })} style={{
+                display: 'block',
+                width: '100%',
+                padding: '7px 10px',
+                border: `1px solid ${sel ? t.accent : t.border}`,
+                background: sel ? t.panelSoft : 'transparent',
+                color: sel ? t.accent : t.text,
+                fontFamily: 'inherit',
+                fontSize: 11,
+                cursor: 'pointer',
+                textAlign: 'left',
+              }}>{f}</button>
+            );
+          })}
+        </div>
+      </TGroup>
+
+      {/* density */}
+      <TGroup t={t} label="// density">
+        <div style={{ display: 'flex', gap: 6 }}>
+          {densities.map(d => {
+            const sel = state.density === d;
+            return (
+              <button key={d} onClick={() => setState({ ...state, density: d })} style={{
+                padding: '5px 14px',
+                border: `1px solid ${sel ? t.accent : t.border}`,
+                background: sel ? t.panelSoft : 'transparent',
+                color: sel ? t.accent : t.text,
+                fontFamily: 'inherit',
+                fontSize: 11,
+                cursor: 'pointer',
+              }}>{d}</button>
+            );
+          })}
+        </div>
+      </TGroup>
+
+      {/* language */}
+      <TGroup t={t} label="// language">
+        <div style={{ display: 'flex', gap: 6 }}>
+          {[['ko','한국어'],['en','English']].map(([v, label]) => {
+            const sel = state.lang === v;
+            return (
+              <button key={v} onClick={() => setState({ ...state, lang: v })} style={{
+                padding: '5px 14px',
+                border: `1px solid ${sel ? t.accent : t.border}`,
+                background: sel ? t.panelSoft : 'transparent',
+                color: sel ? t.accent : t.text,
+                fontFamily: 'inherit',
+                fontSize: 11,
+                cursor: 'pointer',
+              }}>{label}</button>
+            );
+          })}
+        </div>
+      </TGroup>
+
+      {/* section order */}
+      <TGroup t={t} label="// section order">
+        {state.sectionOrder.map((s, i) => (
+          <div key={s} style={{
+            display: 'flex', alignItems: 'center',
+            padding: '7px 10px',
+            border: `1px solid ${t.border}`,
+            marginBottom: 4,
+            background: t.panelSoft,
+          }}>
+            <span style={{ color: t.textDim, marginRight: 10, minWidth: 18 }}>{i+1}.</span>
+            <span style={{ color: t.textBright, fontWeight: 700, flex: 1, letterSpacing: 0.3 }}>{s}</span>
+            <button disabled={i === 0}
+              onClick={() => {
+                const o = [...state.sectionOrder];
+                [o[i-1], o[i]] = [o[i], o[i-1]];
+                setState({ ...state, sectionOrder: o });
+              }}
+              style={tBtnStyle(t, i === 0)}>↑</button>
+            <button disabled={i === state.sectionOrder.length - 1}
+              onClick={() => {
+                const o = [...state.sectionOrder];
+                [o[i+1], o[i]] = [o[i], o[i+1]];
+                setState({ ...state, sectionOrder: o });
+              }}
+              style={tBtnStyle(t, i === state.sectionOrder.length - 1)}>↓</button>
+          </div>
+        ))}
+      </TGroup>
+
+      {/* effects */}
+      <TGroup t={t} label="// effects">
+        <TToggle t={t} label="scanlines overlay"
+          value={state.scanlines}
+          onChange={v => setState({ ...state, scanlines: v })} />
+        <TToggle t={t} label="cursor glow"
+          value={state.glow}
+          onChange={v => setState({ ...state, glow: v })} />
+      </TGroup>
+
+      <div style={{ padding: '10px 14px', borderTop: `1px solid ${t.border}` }}>
+        <button onClick={onReset} style={{
+          width: '100%',
+          padding: '7px 10px',
+          background: 'transparent',
+          border: `1px solid ${t.border}`,
+          color: t.textDim,
+          fontFamily: 'inherit',
+          fontSize: 11,
+          cursor: 'pointer',
+          letterSpacing: 0.3,
+        }}>rm -rf ./tweaks  # reset</button>
+      </div>
+    </div>
+  );
+}
+
+function tBtnStyle(t, disabled) {
+  return {
+    width: 24, height: 24,
+    background: 'transparent',
+    border: `1px solid ${disabled ? t.muted : t.border}`,
+    color: disabled ? t.muted : t.text,
+    marginLeft: 4,
+    cursor: disabled ? 'default' : 'pointer',
+    fontFamily: 'inherit',
+    fontSize: 12,
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+  };
+}
+
+function TGroup({ t, label, children }) {
+  return (
+    <div style={{ padding: '12px 14px', borderBottom: `1px solid ${t.border}` }}>
+      <div style={{ color: t.textDim, marginBottom: 10, fontSize: 11, letterSpacing: 0.3 }}>{label}</div>
+      {children}
+    </div>
+  );
+}
+
+function TToggle({ t, label, value, onChange }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', padding: '6px 0' }}>
+      <span style={{ flex: 1, color: t.text, fontSize: 12 }}>{label}</span>
+      <button onClick={() => onChange(!value)} style={{
+        width: 44, height: 22,
+        background: 'transparent',
+        border: 'none',
+        padding: 0,
+        cursor: 'pointer',
+        position: 'relative',
+        display: 'flex',
+      }}>
+        <span style={{
+          display: 'block', width: 22, height: 22,
+          background: value ? t.border : t.border,
+          border: `1px solid ${t.border}`,
+          flexShrink: 0,
+        }} />
+        <span style={{
+          display: 'block', width: 22, height: 22,
+          background: value ? t.accent : t.border,
+          border: `1px solid ${value ? t.accent : t.border}`,
+          flexShrink: 0,
+          transition: 'background 150ms, border-color 150ms',
+        }} />
+      </button>
+    </div>
+  );
+}
+
+window.Tweaks = TweaksPanel;
+</script>
+
+<!-- ============================================================ -->
+<!-- src/app.jsx                                                   -->
+<!-- ============================================================ -->
+<script type="text/babel">
+const FONT_STACKS = [
+  { mono: "'JetBrains Mono', ui-monospace, monospace", sans: "'Inter', system-ui, sans-serif" },
+  { mono: "'IBM Plex Mono', ui-monospace, monospace", sans: "'IBM Plex Sans', system-ui, sans-serif" },
+  { mono: "'Fira Code', ui-monospace, monospace", sans: "'Geist', system-ui, sans-serif" },
+  { mono: "'Space Mono', ui-monospace, monospace", sans: "'Space Grotesk', system-ui, sans-serif" },
+];
+
+const DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "classic",
+  "fontIdx": 0,
+  "density": "comfortable",
+  "lang": "ko",
+  "sectionOrder": ["hero", "projects"],
+  "scanlines": true,
+  "glow": true
+}/*EDITMODE-END*/;
+
+function App() {
+  const [state, setState] = React.useState(DEFAULTS);
+  const [tweaksActive, setTweaksActive] = React.useState(false);
+  const [selectedId, setSelectedId] = React.useState(window.PROJECTS[0].id);
+
+  const strings = window.STRINGS[state.lang];
+
+  const baseTheme = window.THEMES[state.theme];
+  const fonts = FONT_STACKS[state.fontIdx];
+  const theme = {
+    ...baseTheme,
+    fontMono: fonts.mono,
+    fontSans: state.theme === 'modern' ? fonts.sans : fonts.mono,
+    glow: state.glow ? baseTheme.glow : 'none',
+  };
+
+  React.useEffect(() => {
+    const handler = (e) => {
+      if (!e.data) return;
+      if (e.data.type === '__activate_edit_mode') setTweaksActive(true);
+      if (e.data.type === '__deactivate_edit_mode') setTweaksActive(false);
+    };
+    window.addEventListener('message', handler);
+    try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (_) {}
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  React.useEffect(() => {
+    try {
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: state }, '*');
+    } catch (_) {}
+  }, [state]);
+
+  React.useEffect(() => {
+    const k = (e) => {
+      if (e.key === 'Escape' && tweaksActive) setTweaksActive(false);
+    };
+    window.addEventListener('keydown', k);
+    return () => window.removeEventListener('keydown', k);
+  }, [tweaksActive]);
+
+  const reset = () => setState(DEFAULTS);
+
+  const Hero = window.Hero;
+  const ProjectsSection = window.ProjectsSection;
+  const Tweaks = window.Tweaks;
+
+  const sections = {
+    hero: <Hero key="hero" theme={theme} strings={strings} density={state.density} />,
+    projects: <ProjectsSection key="projects" theme={theme} strings={strings} lang={state.lang}
+                density={state.density} projects={window.PROJECTS}
+                selectedId={selectedId} setSelectedId={setSelectedId} />,
+  };
+
+  return (
+    <div style={{
+      background: theme.bg,
+      color: theme.text,
+      fontFamily: theme.fontMono,
+      minHeight: '100vh',
+      position: 'relative',
+    }}>
+      <TopBar theme={theme} state={state} onTweaks={() => setTweaksActive(a => !a)} />
+      {state.sectionOrder.map(k => sections[k])}
+      <Footer theme={theme} strings={strings} density={state.density} />
+
+      {state.scanlines && theme.scanlines && <Scanlines />}
+      <CRTVignette theme={theme} />
+
+      <Tweaks
+        active={tweaksActive}
+        state={state}
+        setState={setState}
+        onReset={reset}
+      />
+    </div>
+  );
+}
+
+function TopBar({ theme, state, onTweaks }) {
+  return (
+    <div style={{
+      position: 'sticky',
+      top: 0,
+      zIndex: 100,
+      background: `${theme.bg}ee`,
+      backdropFilter: 'blur(6px)',
+      WebkitBackdropFilter: 'blur(6px)',
+      borderBottom: `1px solid ${theme.border}`,
+      padding: '8px 16px',
+      fontFamily: theme.fontMono,
+      fontSize: 11,
+      color: theme.textDim,
+      display: 'flex',
+      alignItems: 'center',
+      gap: 14,
+    }}>
+      <div style={{ display: 'flex', gap: 6 }}>
+        <TopDot c={theme.danger} /><TopDot c={theme.warn} /><TopDot c={theme.accent} />
+      </div>
+      <span style={{ color: theme.text }}>~/portfolio</span>
+      <span style={{ color: theme.accent }}>main</span>
+      <span>·</span>
+      <span>{state.lang === 'ko' ? 'TPM 포트폴리오 · 김종식' : 'TPM portfolio · Kim Jongsik'}</span>
+      <button onClick={onTweaks} style={{
+        marginLeft: 'auto',
+        background: 'transparent',
+        border: `1px solid ${theme.border}`,
+        color: theme.text,
+        padding: '3px 10px',
+        fontFamily: 'inherit',
+        fontSize: 11,
+        cursor: 'pointer',
+      }}>$ tweaks</button>
+      <span>
+        <Blinker c={theme.accent} /> online
+      </span>
+    </div>
+  );
+}
+
+function TopDot({ c }) {
+  return <span style={{ width: 9, height: 9, background: c, borderRadius: '50%', display: 'inline-block', opacity: 0.85 }} />;
+}
+
+function Blinker({ c }) {
+  const [on, setOn] = React.useState(true);
+  React.useEffect(() => { const t = setInterval(() => setOn(o => !o), 900); return () => clearInterval(t); }, []);
+  return <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: c, marginRight: 6, opacity: on ? 1 : 0.2, boxShadow: `0 0 6px ${c}` }} />;
+}
+
+function Footer({ theme, strings, density }) {
+  return (
+    <section style={{
+      padding: density === 'compact' ? '36px 28px' : '64px 48px',
+      fontFamily: theme.fontMono,
+    }}>
+      <div style={{ color: theme.textDim, fontSize: 12, marginBottom: 8 }}># contact</div>
+      <div style={{ color: theme.textBright, fontSize: density === 'compact' ? 22 : 28, fontWeight: 700, textShadow: theme.glow, textWrap: 'pretty' }}>
+        {strings.contactCTA}
+      </div>
+      <div style={{ display: 'flex', gap: 12, marginTop: 20, flexWrap: 'wrap' }}>
+        <a href="https://github.com/CodingGamePlayer" target="_blank" rel="noopener noreferrer" style={{
+          color: theme.textBright, border: `1px solid ${theme.accent}`,
+          padding: '10px 18px', textDecoration: 'none', fontSize: 13, fontWeight: 600,
+          display: 'inline-flex', alignItems: 'center', gap: 8,
+        }}>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.89.88 2.35.67.07-.52.28-.88.51-1.08-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          {strings.githubButton}
+        </a>
+      </div>
+      <div style={{ color: theme.textDim, fontSize: 11, marginTop: 40, borderTop: `1px solid ${theme.border}`, paddingTop: 16 }}>
+        built with html + care · 김종식 · otw1917@naver.com · <span style={{ color: theme.accent }}>EOF</span>
+      </div>
+    </section>
+  );
+}
+
+function Scanlines() {
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      pointerEvents: 'none',
+      zIndex: 150,
+      backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0) 4px)',
+      mixBlendMode: 'multiply',
+    }} />
+  );
+}
+
+function CRTVignette({ theme }) {
+  if (theme.id === 'modern') return null;
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      pointerEvents: 'none',
+      zIndex: 140,
+      background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%)',
+    }} />
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>
