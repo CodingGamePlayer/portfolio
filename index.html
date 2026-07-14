@@ -320,7 +320,148 @@
     </div>
   </section>
 
-  <!-- 10 OTHER PROJECTS -->
+  <!-- 10 SDPE overview -->
+  <section class="slide">
+    <div class="eyebrow">Flagship Project 03</div>
+    <div class="ptop"><h2 class="stitle">SAR Data Processing Element</h2><span class="pill">PM · Architecture 설계</span></div>
+    <p class="ssub">SAR 프로세싱 전 과정을 DAG로 구성·자동화하는 처리 시스템 (MSA · EDA)</p>
+    <div class="pblock problem"><div class="h">Problem</div><p>SAR 프로세싱은 단계마다 대용량 중간 산출물을 NAS에 쓰고 다시 읽는 구조라 I/O 대기가 반복됐고, 단일 처리로 한 장면에 10분 이상이 걸렸습니다. 처리 순서·파라미터가 코드와 수작업에 묶여 있어 사용자가 파이프라인을 바꾸려면 개발이 필요했습니다.</p></div>
+    <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
+  </section>
+
+  <!-- 11 SDPE architecture -->
+  <section class="slide">
+    <div class="eyebrow">SDPE · Architecture</div>
+    <h2 class="stitle">DAG 오케스트레이션 & 이벤트 기반 처리</h2>
+    <div class="arch">
+      <div class="archcap">MSA · EDA 구조</div>
+      <svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arC" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Cb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Cgpu{fill:#10231c;stroke:#2dd4a7;stroke-width:1.8}
+          .Cq{fill:#13203a;stroke:#3182f6;stroke-width:1.8}
+          .Ct{fill:#e8edf5;font-size:12px;font-weight:700}.Cs{fill:#9aa6bd;font-size:9.5px}
+          .Cg{fill:#2dd4a7;font-size:9.5px;font-weight:700}
+          .Cln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arC)}
+          .Clbl{fill:#7e8aa0;font-size:8.5px}.Ccap{fill:#6b7689;font-size:9px;font-weight:700}
+        </style>
+        <text class="Ccap" x="72" y="30" text-anchor="middle">사용자 설정</text>
+        <text class="Ccap" x="558" y="30" text-anchor="middle">처리 서비스 (MSA)</text>
+        <rect class="Cb" x="16" y="124" width="112" height="52" rx="10"/><text class="Ct" x="72" y="146" text-anchor="middle">DAG 설정 UI</text><text class="Cs" x="72" y="162" text-anchor="middle">단계·파라미터 구성</text>
+        <rect class="Cb" x="160" y="124" width="124" height="52" rx="10"/><text class="Ct" x="222" y="146" text-anchor="middle">오케스트레이터</text><text class="Cs" x="222" y="162" text-anchor="middle">DAG 해석 · 스텝 발행</text>
+        <rect class="Cq" x="316" y="124" width="104" height="52" rx="10"/><text class="Ct" x="368" y="146" text-anchor="middle">Event Queue</text><text class="Cs" x="368" y="162" text-anchor="middle">재시도 · 멱등성</text>
+        <rect class="Cb" x="452" y="44" width="212" height="46" rx="10"/><text class="Ct" x="558" y="64" text-anchor="middle">데이터 수집</text><text class="Cs" x="558" y="79" text-anchor="middle">원시 SAR 데이터 수신</text>
+        <rect class="Cgpu" x="452" y="112" width="212" height="76" rx="10"/><text class="Ct" x="558" y="134" text-anchor="middle">SAR 처리 워커 · GPU</text><text class="Cg" x="558" y="152" text-anchor="middle">Azimuth 블록 분할 → 병렬 처리</text><text class="Cs" x="558" y="170" text-anchor="middle">단계 간 메모리 로딩 (NAS 왕복 제거)</text>
+        <rect class="Cb" x="452" y="210" width="212" height="46" rx="10"/><text class="Ct" x="558" y="230" text-anchor="middle">후처리 · 카탈로그</text><text class="Cs" x="558" y="245" text-anchor="middle">산출물 등록 · 메타데이터</text>
+        <rect class="Cb" x="160" y="278" width="124" height="46" rx="10"/><text class="Ct" x="222" y="298" text-anchor="middle">PostgreSQL</text><text class="Cs" x="222" y="313" text-anchor="middle">상태 · 카탈로그</text>
+        <rect class="Cb" x="316" y="278" width="124" height="46" rx="10"/><text class="Ct" x="378" y="298" text-anchor="middle">공유 NAS</text><text class="Cs" x="378" y="313" text-anchor="middle">원시 · 최종 산출물</text>
+        <path class="Cln" d="M128,150 H156"/>
+        <path class="Cln" d="M284,150 H312"/><text class="Clbl" x="298" y="142" text-anchor="middle">step</text>
+        <path class="Cln" d="M420,150 V67 H448"/><text class="Clbl" x="434" y="59" text-anchor="middle">event</text>
+        <path class="Cln" d="M420,150 H448"/><text class="Clbl" x="434" y="142" text-anchor="middle">event</text>
+        <path class="Cln" d="M420,150 V233 H448"/><text class="Clbl" x="434" y="225" text-anchor="middle">event</text>
+        <path class="Cln" d="M558,256 V301 H444"/><text class="Clbl" x="500" y="294" text-anchor="middle">원시 읽기 · 최종 쓰기</text>
+        <path class="Cln" d="M222,176 V274"/><text class="Clbl" x="230" y="230">상태 · 이력</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 12 SDPE impact -->
+  <section class="slide">
+    <div class="eyebrow">SDPE · Impact</div>
+    <h2 class="stitle">10분 이상 걸리던 처리를 40초대로</h2>
+    <div class="perf">
+      <div class="pf"><div class="pfh"><span class="lab">SAR 프로세싱 처리 시간</span><span class="val">10분+ → 40초대 <span class="imp">(93%↓)</span></span></div><div class="bar"><i style="--w:93%"></i></div></div>
+    </div>
+    <div class="pblock" style="margin-top:24px"><div class="h">Deep Dive · 처리 구조 재설계</div><p>병목의 실체는 알고리즘이 아니라 <b>NAS 쓰기·읽기 대기</b>였습니다. 단계 간 중간 산출물을 파일로 떨구지 않고 메모리에 올린 채로 넘기도록 실행 모델을 바꿔 I/O를 걷어내고, 그 위에서 영상을 Azimuth 방향 블록으로 잘라 GPU에 병렬 투입해 처리 자체를 스케일아웃했습니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>PM으로 요구사항·일정·이해관계자를 관리하면서, 아키텍처 설계(MSA 서비스 경계, 이벤트 기반 처리 흐름, DAG 오케스트레이션 모델, 성능 개선 설계)를 직접 담당했습니다. 현재 진행 중인 프로젝트입니다.</p></div>
+    <div class="chips">
+      <span class="chip">MSA</span><span class="chip">EDA · Event Queue</span><span class="chip">DAG 오케스트레이션</span><span class="chip">GPU 병렬 처리</span><span class="chip">메모리 로딩 최적화</span><span class="chip">Kubernetes</span><span class="chip">PostgreSQL</span><span class="chip">GitLab CI/CD</span>
+    </div>
+  </section>
+
+  <!-- 13 LIID overview -->
+  <section class="slide">
+    <div class="eyebrow">Flagship Project 04</div>
+    <div class="ptop"><h2 class="stitle">LIID · 위성영상 정보 배포 서비스</h2><span class="pill">PM · Architecture 설계</span></div>
+    <p class="ssub">SDPE 산출물을 사용자 서비스로 전달 · LLM + DEM 기반 3D 지형 모니터링 · SAR 영상 검색 · 촬영 요청</p>
+    <div class="pblock problem"><div class="h">Problem</div><p>SDPE가 만들어낸 production 영상과 정보는 그 자체로는 사용자가 쓸 수 있는 서비스가 아닙니다. 지형을 3D로 보여주려면 DEM과 영상을 합친 대용량 데이터를 그대로 내려줘야 해 응답이 느려지고, 영상 검색·촬영 요청·지형 분석이 서로 다른 경로로 흩어져 있었습니다. 위성 데이터 특성상 분석에 외부 LLM API로 데이터를 내보낼 수도 없었습니다.</p></div>
+    <div class="pblock solution"><div class="h">Solution</div><p>SDPE 산출물을 받아 서비스 도메인으로 변환·제공하는 백엔드를 설계하고, 사용자에게는 <b>LLM + DEM 기반 3D 지형 모니터링</b>과 <b>SAR 영상 검색·촬영 요청</b>을 하나의 진입점으로 제공합니다. LLM은 <b>로컬(온프레미스) 모델</b>로 구성해 데이터를 밖으로 내보내지 않고, 대용량 3D 전달 경로에는 <b>캐시 서버</b>를 두어 Hit/Miss 전략으로 응답 지연을 흡수했습니다.</p></div>
+  </section>
+
+  <!-- 14 LIID architecture -->
+  <section class="slide">
+    <div class="eyebrow">LIID · Architecture</div>
+    <h2 class="stitle">SDPE → 서비스 백엔드 → 캐시 → 사용자</h2>
+    <div class="arch">
+      <div class="archcap">서비스 전달 구조</div>
+      <svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arD" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker>
+        <marker id="arDw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffb454"/></marker></defs>
+        <style>
+          .Db{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Dcore{fill:#13203a;stroke:#3182f6;stroke-width:1.8}
+          .Dllm{fill:#10231c;stroke:#2dd4a7;stroke-width:1.8}.Dcache{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
+          .Dt{fill:#e8edf5;font-size:12px;font-weight:700}.Ds{fill:#9aa6bd;font-size:9.5px}
+          .Dg{fill:#2dd4a7;font-size:9.5px;font-weight:700}
+          .Dln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arD)}
+          .Dtask{stroke:#ffb454;stroke-width:1.5;fill:none;marker-end:url(#arDw);stroke-dasharray:5 3}
+          .Dlbl{fill:#7e8aa0;font-size:8.5px}.Dtl{fill:#ffb454;font-size:8.5px;font-weight:700}
+        </style>
+        <rect class="Db" x="16" y="140" width="112" height="56" rx="10"/><text class="Dt" x="72" y="163" text-anchor="middle">SDPE</text><text class="Ds" x="72" y="180" text-anchor="middle">production 영상 · 정보</text>
+        <rect class="Dcore" x="172" y="122" width="148" height="92" rx="12"/><text class="Dt" x="246" y="148" text-anchor="middle">LIID 백엔드</text><text class="Ds" x="246" y="166" text-anchor="middle">영상 · DEM 서비스 API</text><text class="Ds" x="246" y="182" text-anchor="middle">검색 · 3D 지형 · 요청 접수</text>
+        <rect class="Dcache" x="366" y="140" width="122" height="56" rx="10"/><text class="Dt" x="427" y="163" text-anchor="middle">캐시 서버</text><text class="Ds" x="427" y="180" text-anchor="middle">3D 데이터 · Hit / Miss</text>
+        <rect class="Db" x="530" y="140" width="134" height="56" rx="10"/><text class="Dt" x="597" y="163" text-anchor="middle">사용자</text><text class="Ds" x="597" y="180" text-anchor="middle">3D 지형 모니터링 · 검색</text>
+        <rect class="Dllm" x="172" y="252" width="148" height="58" rx="10"/><text class="Dt" x="246" y="276" text-anchor="middle">로컬 LLM</text><text class="Dg" x="246" y="294" text-anchor="middle">온프레미스 추론 · 반출 없음</text>
+        <path class="Dln" d="M128,168 H168"/><text class="Dlbl" x="148" y="160" text-anchor="middle">전달</text>
+        <path class="Dln" d="M320,168 H362"/><text class="Dlbl" x="341" y="160" text-anchor="middle">3D 데이터</text>
+        <path class="Dln" d="M488,168 H526"/><text class="Dlbl" x="507" y="160" text-anchor="middle">응답</text>
+        <path class="Dln" d="M246,214 V248"/><text class="Dlbl" x="254" y="236">자연어 질의</text>
+        <path class="Dtask" d="M597,140 V72 H246 V118"/><text class="Dtl" x="424" y="64" text-anchor="middle">SAR 촬영 요청 (tasking) 접수</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 15 LIID cache -->
+  <section class="slide">
+    <div class="eyebrow">LIID · Design</div>
+    <h2 class="stitle">대용량 3D 전달 · 캐시 Hit / Miss 전략</h2>
+    <div class="arch">
+      <div class="archcap">캐시 흐름</div>
+      <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arE" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker>
+        <marker id="arEg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2dd4a7"/></marker></defs>
+        <style>
+          .Eb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Ec{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
+          .Et{fill:#e8edf5;font-size:12px;font-weight:700}.Es{fill:#9aa6bd;font-size:9.5px}
+          .Eln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arE)}
+          .Ehit{stroke:#2dd4a7;stroke-width:1.6;fill:none;marker-end:url(#arEg)}
+          .Elbl{fill:#7e8aa0;font-size:8.5px}.Ehl{fill:#2dd4a7;font-size:9px;font-weight:700}
+        </style>
+        <rect class="Eb" x="20" y="96" width="124" height="52" rx="10"/><text class="Et" x="82" y="118" text-anchor="middle">사용자 요청</text><text class="Es" x="82" y="134" text-anchor="middle">3D 타일 · 영상</text>
+        <rect class="Ec" x="212" y="96" width="140" height="52" rx="10"/><text class="Et" x="282" y="118" text-anchor="middle">캐시 서버</text><text class="Es" x="282" y="134" text-anchor="middle">최근 조회 데이터 보관</text>
+        <rect class="Eb" x="424" y="96" width="152" height="52" rx="10"/><text class="Et" x="500" y="118" text-anchor="middle">원본 · 스토리지</text><text class="Es" x="500" y="134" text-anchor="middle">LIID 백엔드 · NAS</text>
+        <path class="Eln" d="M144,122 H208"/><text class="Elbl" x="176" y="114" text-anchor="middle">요청</text>
+        <path class="Ehit" d="M282,96 V54 H90 V92"/><text class="Ehl" x="190" y="46" text-anchor="middle">Hit → 캐시에서 즉시 응답</text>
+        <path class="Eln" d="M352,122 H420"/><text class="Elbl" x="386" y="114" text-anchor="middle">Miss</text>
+        <path class="Eln" d="M500,148 V186 H286"/><text class="Elbl" x="400" y="180" text-anchor="middle">원본 조회 → 캐시 적재 후 응답</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
+  </section>
+
+  <!-- 16 LIID LLM + role -->
+  <section class="slide">
+    <div class="eyebrow">LIID · Deep Dive</div>
+    <h2 class="stitle">로컬 LLM · 촬영 요청까지 하나의 서비스로</h2>
+    <div class="pblock"><div class="h">로컬 LLM</div><p>위성 데이터는 외부로 반출할 수 없어 상용 LLM API를 쓸 수 없습니다. 그래서 <b>LLM을 로컬 모델로 구성</b>해 추론이 내부에서 끝나도록 하고, DEM·영상 정보와 결합해 3D 지형을 자연어로 조회·모니터링할 수 있게 설계했습니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">SAR 촬영 요청 (Tasking)</div><p>사용자가 보고 있는 지역에 대해 <b>SAR 영상 촬영을 직접 요청</b>할 수 있도록 요청 접수 흐름을 서비스 안으로 넣었습니다. 조회 → 분석 → 신규 촬영 요청이 끊기지 않는 하나의 사용자 흐름이 됩니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>PM으로 요구사항·일정·이해관계자를 관리하면서 아키텍처 설계(서비스 경계, 캐시 계층 전략, 로컬 LLM 구성, SDPE 연계 구조)를 직접 담당하고 있습니다. 현재 진행 중인 프로젝트입니다.</p></div>
+    <div class="chips">
+      <span class="chip">MSA</span><span class="chip">캐시 계층 · Hit/Miss</span><span class="chip">Local LLM</span><span class="chip">DEM · 3D Terrain</span><span class="chip">SAR 영상 검색</span><span class="chip">Tasking 요청</span><span class="chip">SDPE 연계</span>
+    </div>
+  </section>
+
+  <!-- 17 OTHER PROJECTS -->
   <section class="slide">
     <div class="eyebrow">Selected Projects</div>
     <h2 class="stitle">시스템을 설계하고, 끝까지 운영합니다</h2>
@@ -335,7 +476,7 @@
     </div>
   </section>
 
-  <!-- 11 SKILLS -->
+  <!-- 18 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -350,7 +491,7 @@
     </div>
   </section>
 
-  <!-- 12 CAREER -->
+  <!-- 19 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -371,7 +512,7 @@
     </div>
   </section>
 
-  <!-- 13 GITHUB GRASS -->
+  <!-- 20 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -384,7 +525,7 @@
     </div>
   </section>
 
-  <!-- 14 CLOSING -->
+  <!-- 21 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
