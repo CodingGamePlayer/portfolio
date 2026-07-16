@@ -462,7 +462,94 @@
     </div>
   </section>
 
-  <!-- 17 OTHER PROJECTS -->
+  <!-- 17 FILE-ENGINE overview -->
+  <section class="slide">
+    <div class="eyebrow">Flagship Project 05</div>
+    <div class="ptop"><h2 class="stitle">대용량 파일 전송 엔진 · 분산 파일 서버</h2><span class="pill">Tech Lead · 설계 주도</span></div>
+    <p class="ssub">OneDrive식 Windows API 전송 엔진 · 청크 병렬 전송 · k8s 오토스케일 · 큐 기반 부하 분산</p>
+    <div class="pblock problem"><div class="h">Problem</div><p>기존에는 NAS에 <b>권한을 부여하는 방식</b>으로 파일을 다뤄, 대용량 전송이 느리고 서버 한 대에 부하가 몰렸습니다. 50GB급 데이터를 한 번에 밀어 넣으면 전송이 길어지고, 중간에 서버가 죽으면 처음부터 다시 올려야 했습니다. 트래픽이 몰릴 때 서버를 늘리거나 부하를 나눌 방법도 없었습니다.</p></div>
+    <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 50GB 데이터를 수 분 내에 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
+  </section>
+
+  <!-- 18 FILE-ENGINE architecture -->
+  <section class="slide">
+    <div class="eyebrow">파일 엔진 · Architecture</div>
+    <h2 class="stitle">전송 엔진 · 큐 · 오토스케일 파일 서버</h2>
+    <div class="arch">
+      <div class="archcap">분산 전송 구조</div>
+      <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arF" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Fb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Fcore{fill:#13203a;stroke:#3182f6;stroke-width:1.8}
+          .Fq{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}.Fnode{fill:#10231c;stroke:#2dd4a7;stroke-width:1.6}
+          .Ft{fill:#e8edf5;font-size:12px;font-weight:700}.Fs{fill:#9aa6bd;font-size:9.5px}
+          .Fg{fill:#2dd4a7;font-size:9px;font-weight:700}
+          .Fln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arF)}
+          .Flbl{fill:#7e8aa0;font-size:8.5px}.Fcap{fill:#6b7689;font-size:9px;font-weight:700}
+        </style>
+        <text class="Fcap" x="72" y="28" text-anchor="middle">클라이언트</text>
+        <text class="Fcap" x="556" y="28" text-anchor="middle">파일 서버 (k8s · 오토스케일)</text>
+        <rect class="Fb" x="16" y="128" width="118" height="70" rx="10"/><text class="Ft" x="75" y="152" text-anchor="middle">전송 엔진</text><text class="Fs" x="75" y="169" text-anchor="middle">Windows API</text><text class="Fs" x="75" y="184" text-anchor="middle">청크 분할·병렬</text>
+        <rect class="Fcore" x="176" y="128" width="128" height="70" rx="11"/><text class="Ft" x="240" y="152" text-anchor="middle">게이트웨이</text><text class="Fs" x="240" y="169" text-anchor="middle">청크 수신 · 라우팅</text><text class="Fs" x="240" y="184" text-anchor="middle">전송 상태 관리</text>
+        <rect class="Fq" x="344" y="128" width="112" height="70" rx="10"/><text class="Ft" x="400" y="152" text-anchor="middle">큐 시스템</text><text class="Fs" x="400" y="169" text-anchor="middle">청크 작업 분배</text><text class="Fs" x="400" y="184" text-anchor="middle">부하 분산</text>
+        <rect class="Fnode" x="500" y="60" width="164" height="40" rx="9"/><text class="Ft" x="582" y="84" text-anchor="middle">파일 서버 Pod #1</text>
+        <rect class="Fnode" x="500" y="112" width="164" height="40" rx="9"/><text class="Ft" x="582" y="136" text-anchor="middle">파일 서버 Pod #2</text>
+        <rect class="Fnode" x="500" y="164" width="164" height="40" rx="9"/><text class="Fg" x="582" y="182" text-anchor="middle">… HPA 오토스케일업</text><text class="Fs" x="582" y="196" text-anchor="middle">부하 따라 Pod 증설</text>
+        <rect class="Fq" x="344" y="238" width="112" height="46" rx="10"/><text class="Ft" x="400" y="258" text-anchor="middle">Redis 캐시</text><text class="Fs" x="400" y="273" text-anchor="middle">전송 상태 · 재개</text>
+        <rect class="Fb" x="500" y="238" width="164" height="46" rx="10"/><text class="Ft" x="582" y="258" text-anchor="middle">NAS · 스토리지</text><text class="Fs" x="582" y="273" text-anchor="middle">최종 저장</text>
+        <path class="Fln" d="M134,163 H172"/><text class="Flbl" x="153" y="155" text-anchor="middle">청크</text>
+        <path class="Fln" d="M304,163 H340"/>
+        <path class="Fln" d="M456,150 H496"/><text class="Flbl" x="476" y="142" text-anchor="middle">분배</text>
+        <path class="Fln" d="M456,120 V80 H496"/>
+        <path class="Fln" d="M456,176 V184 H496"/>
+        <path class="Fln" d="M400,198 V234"/><text class="Flbl" x="408" y="220">상태 저장</text>
+        <path class="Fln" d="M582,204 V234"/><text class="Flbl" x="590" y="222">기록</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 19 FILE-ENGINE chunk -->
+  <section class="slide">
+    <div class="eyebrow">파일 엔진 · Deep Dive</div>
+    <h2 class="stitle">50GB를 수 분 내로 · 청크 병렬 전송</h2>
+    <div class="arch">
+      <div class="archcap">청크 병렬 전송</div>
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Gb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Gc{fill:#13203a;stroke:#3182f6;stroke-width:1.5}
+          .Gt{fill:#e8edf5;font-size:11px;font-weight:700}.Gs{fill:#9aa6bd;font-size:9px}
+          .Gln{stroke:#5ea0ff;stroke-width:1.4;fill:none;marker-end:url(#arG)}
+          .Glbl{fill:#7e8aa0;font-size:8.5px}
+        </style>
+        <rect class="Gb" x="16" y="78" width="130" height="52" rx="10"/><text class="Gt" x="81" y="100" text-anchor="middle">원본 파일 50GB</text><text class="Gs" x="81" y="116" text-anchor="middle">대용량 단일 파일</text>
+        <rect class="Gc" x="250" y="24" width="150" height="30" rx="7"/><text class="Gt" x="325" y="44" text-anchor="middle">Chunk 1</text>
+        <rect class="Gc" x="250" y="62" width="150" height="30" rx="7"/><text class="Gt" x="325" y="82" text-anchor="middle">Chunk 2</text>
+        <rect class="Gc" x="250" y="100" width="150" height="30" rx="7"/><text class="Gt" x="325" y="120" text-anchor="middle">Chunk 3</text>
+        <rect class="Gc" x="250" y="138" width="150" height="30" rx="7"/><text class="Gt" x="325" y="158" text-anchor="middle">Chunk N</text>
+        <rect class="Gb" x="510" y="78" width="154" height="52" rx="10"/><text class="Gt" x="587" y="100" text-anchor="middle">서버에서 재조립</text><text class="Gs" x="587" y="116" text-anchor="middle">순서·무결성 검증</text>
+        <path class="Gln" d="M146,96 L246,39"/><path class="Gln" d="M146,100 L246,77"/><path class="Gln" d="M146,108 L246,115"/><path class="Gln" d="M146,112 L246,153"/>
+        <text class="Glbl" x="198" y="70" text-anchor="middle">분할</text>
+        <path class="Gln" d="M400,39 L506,92"/><path class="Gln" d="M400,77 L506,98"/><path class="Gln" d="M400,115 L506,106"/><path class="Gln" d="M400,153 L506,112"/>
+        <text class="Glbl" x="455" y="70" text-anchor="middle">병렬 전송</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 수 분 내에 이동하고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
+  </section>
+
+  <!-- 20 FILE-ENGINE resilience -->
+  <section class="slide">
+    <div class="eyebrow">파일 엔진 · Design</div>
+    <h2 class="stitle">부하 분산 · 죽어도 이어가는 전송</h2>
+    <div class="pblock"><div class="h">오토스케일 · 큐 부하 분산</div><p>파일 서버를 <b>k8s 오토스케일업</b>으로 구성해 부하가 오르면 Pod가 늘어나 트래픽을 나눠 받습니다. 그 앞에 <b>큐 시스템</b>을 두어 청크 작업을 물리 서버들에 고르게 분배, 특정 서버에 몰리지 않도록 병렬·분산 처리합니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">Redis 캐시 · 전송 재개</div><p>전송 진행 상태를 <b>Redis 캐시</b>에 보관해, 처리 중이던 <b>중간 서버가 죽어도</b> 다른 서버가 마지막 지점부터 이어서 전송을 마칩니다. 대용량 전송 도중의 단일 장애가 전체 실패로 번지지 않습니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>Tech Lead로 전송 엔진·분산 아키텍처 설계를 주도했습니다(Windows API 전송 엔진, 청크 병렬 전송, k8s 오토스케일, 큐 기반 부하 분산, Redis 기반 재개 구조).</p></div>
+    <div class="chips">
+      <span class="chip">Windows API</span><span class="chip">청크 병렬 전송</span><span class="chip">Kubernetes · HPA</span><span class="chip">큐 · 부하 분산</span><span class="chip">Redis 캐시</span><span class="chip">Fault Tolerance</span><span class="chip">50GB / 수 분</span>
+    </div>
+  </section>
+
+  <!-- 21 OTHER PROJECTS -->
   <section class="slide">
     <div class="eyebrow">Selected Projects</div>
     <h2 class="stitle">시스템을 설계하고, 끝까지 운영합니다</h2>
@@ -477,7 +564,7 @@
     </div>
   </section>
 
-  <!-- 18 SKILLS -->
+  <!-- 22 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -492,7 +579,7 @@
     </div>
   </section>
 
-  <!-- 19 CAREER -->
+  <!-- 23 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -513,7 +600,7 @@
     </div>
   </section>
 
-  <!-- 20 GITHUB GRASS -->
+  <!-- 24 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -526,7 +613,7 @@
     </div>
   </section>
 
-  <!-- 21 CLOSING -->
+  <!-- 25 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
