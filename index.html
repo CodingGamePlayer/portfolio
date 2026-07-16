@@ -325,7 +325,7 @@
     <div class="eyebrow">Flagship Project 03</div>
     <div class="ptop"><h2 class="stitle">SAR Data Processing Element</h2><span class="pill">PM · Architecture 설계</span></div>
     <p class="ssub">SAR 프로세싱 전 과정을 DAG로 구성·자동화하는 처리 시스템 (MSA · EDA)</p>
-    <div class="pblock problem"><div class="h">Problem</div><p>SAR 프로세싱은 단계마다 대용량 중간 산출물을 NAS에 쓰고 다시 읽는 구조라 I/O 대기가 반복됐고, 단일 처리로 한 장면에 10분 이상이 걸렸습니다. 처리 순서·파라미터가 코드와 수작업에 묶여 있어 사용자가 파이프라인을 바꾸려면 개발이 필요했습니다.</p></div>
+    <div class="pblock problem"><div class="h">Problem</div><p>기존에는 SAR 처리의 각 단계를 <b>사람이 하나씩 수작업으로 실행</b>했습니다. 담당자가 명령을 순서대로 돌리고 중간 산출물을 확인하며 다음 단계로 넘기는 방식이라 느리고 휴먼에러에 취약했습니다. 게다가 단계마다 대용량 산출물을 NAS에 쓰고 다시 읽어 I/O 대기가 반복됐고, 단일 처리로 한 장면에 10분 이상이 걸렸습니다.</p></div>
     <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
   </section>
 
@@ -373,7 +373,8 @@
     <div class="perf">
       <div class="pf"><div class="pfh"><span class="lab">SAR 프로세싱 처리 시간</span><span class="val">10분+ → 40초대 <span class="imp">(93%↓)</span></span></div><div class="bar"><i style="--w:93%"></i></div></div>
     </div>
-    <div class="pblock" style="margin-top:24px"><div class="h">Deep Dive · 처리 구조 재설계</div><p>병목의 실체는 알고리즘이 아니라 <b>NAS 쓰기·읽기 대기</b>였습니다. 단계 간 중간 산출물을 파일로 떨구지 않고 메모리에 올린 채로 넘기도록 실행 모델을 바꿔 I/O를 걷어내고, 그 위에서 영상을 Azimuth 방향 블록으로 잘라 GPU에 병렬 투입해 처리 자체를 스케일아웃했습니다.</p></div>
+    <div class="pblock" style="margin-top:24px"><div class="h">Deep Dive · 수작업 → 무인 자동화</div><p>사람이 단계마다 명령을 돌리던 수작업 처리를, DAG로 정의한 파이프라인을 시스템이 스스로 순서대로 실행하는 <b>무인 자동화</b>로 전환했습니다. 담당자가 붙어 있지 않아도 수집→처리→후처리가 끝까지 흐르고, 실패 단계는 이벤트 큐에서 재시도됩니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">Deep Dive · 처리 구조 재설계</div><p>병목의 실체는 알고리즘이 아니라 <b>NAS 쓰기·읽기 대기</b>였습니다. 단계 간 중간 산출물을 파일로 떨구지 않고 메모리에 올린 채로 넘기도록 실행 모델을 바꿔 I/O를 걷어내고, 그 위에서 영상을 Azimuth 방향 블록으로 잘라 GPU에 병렬 투입해 처리 자체를 스케일아웃했습니다.</p></div>
     <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>PM으로 요구사항·일정·이해관계자를 관리하면서, 아키텍처 설계(MSA 서비스 경계, 이벤트 기반 처리 흐름, DAG 오케스트레이션 모델, 성능 개선 설계)를 직접 담당했습니다. 현재 진행 중인 프로젝트입니다.</p></div>
     <div class="chips">
       <span class="chip">MSA</span><span class="chip">EDA · Event Queue</span><span class="chip">DAG 오케스트레이션</span><span class="chip">GPU 병렬 처리</span><span class="chip">메모리 로딩 최적화</span><span class="chip">Kubernetes</span><span class="chip">PostgreSQL</span><span class="chip">GitLab CI/CD</span>
