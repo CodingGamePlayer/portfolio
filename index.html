@@ -180,18 +180,18 @@
     </div>
   </section>
 
-  <!-- 4 WEB-GIS overview -->
+  <!-- 4 LIID overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 01</div>
-    <div class="ptop"><h2 class="stitle">Web-GIS 위성영상 플랫폼</h2><span class="pill">Project Lead · Backend 단독</span></div>
-    <p class="ssub">대용량 위성영상을 검색·구매하는 BM 서비스 · 8GB 단위 · 1,000만+ 메타데이터</p>
-    <div class="pblock problem"><div class="h">Problem</div><p>타일맵 기본 기능으로는 영상 사이즈가 커 렌더링이 느렸고, 1,000만 건 공간 검색과 지도 초기 로딩이 모두 병목. 위성 제품별 데이터 성질이 달라 단일 구조로는 확장이 어려웠습니다.</p></div>
-    <div class="pblock solution"><div class="h">Solution</div><p>요구사항 분석부터 아키텍처·DevOps·백엔드까지 단독 주도. 타일맵을 최적화 래스터 직접 렌더링 + 캐시로 전환하고, 공간쿼리·파티셔닝·인덱싱으로 검색을 튜닝. 위성 제품별로 서비스 경계를 나눈 MSA로 설계하고 DDD·TDD로 변경에 강한 구조를 확립했습니다.</p></div>
+    <div class="ptop"><h2 class="stitle">LIID · 위성영상 플랫폼</h2><span class="pill">PM · Architecture · Backend</span></div>
+    <p class="ssub">위성영상 검색·구매부터 LLM·DEM 3D 지형 모니터링·촬영 요청까지 · 8GB 단위 · 1,000만+ 메타데이터</p>
+    <div class="pblock problem"><div class="h">Problem</div><p>타일맵 기본 기능으로는 8GB급 영상 렌더링이 느렸고, 1,000만 건 공간 검색·지도 초기 로딩이 모두 병목이었습니다. SDPE가 만든 production 영상·DEM을 3D로 그대로 내려주면 대용량 응답이 느려지고, 검색·촬영 요청·지형 분석이 서로 다른 경로로 흩어져 있었습니다. 위성 데이터 특성상 분석을 외부 LLM API로 내보낼 수도 없었습니다.</p></div>
+    <div class="pblock solution"><div class="h">Solution</div><p>요구사항 분석부터 아키텍처·백엔드까지 주도. 타일맵을 <b>최적화 래스터 직접 렌더링 + 캐시</b>로 전환하고 <b>공간쿼리·파티셔닝</b>으로 검색을 튜닝. SDPE 산출물을 서비스 도메인으로 변환해 <b>LLM·DEM 3D 지형 모니터링 · SAR 검색 · 촬영 요청</b>을 단일 진입점으로 제공하고, LLM은 <b>로컬 모델</b>로, 대용량 3D는 <b>캐시 Hit/Miss</b>로 처리. 위성 제품별 MSA·DDD·TDD로 구성했습니다.</p></div>
   </section>
 
-  <!-- 5 WEB-GIS architecture -->
+  <!-- 5 LIID architecture -->
   <section class="slide">
-    <div class="eyebrow">Web-GIS · Architecture</div>
+    <div class="eyebrow">LIID · Architecture</div>
     <h2 class="stitle">데이터 흐름 & 비동기 처리</h2>
     <div class="arch">
       <div class="archcap">시스템 아키텍처</div>
@@ -201,28 +201,28 @@
           .b{fill:#161b27;stroke:#27406b;rx:10}.t{fill:#e8edf5;font-size:12px;font-weight:700}
           .s{fill:#9aa6bd;font-size:10px}.ln{stroke:#5ea0ff;stroke-width:1.6;fill:none;marker-end:url(#ar)}.lbl{fill:#7e8aa0;font-size:9px}
         </style>
-        <rect class="b" x="24" y="112" width="104" height="48" rx="10"/><text class="t" x="76" y="132" text-anchor="middle">Client</text><text class="s" x="76" y="148" text-anchor="middle">Web-GIS Map</text>
-        <rect class="b" x="170" y="112" width="110" height="48" rx="10"/><text class="t" x="225" y="132" text-anchor="middle">API Server</text><text class="s" x="225" y="148" text-anchor="middle">NestJS · RBAC</text>
+        <rect class="b" x="24" y="112" width="104" height="48" rx="10"/><text class="t" x="76" y="132" text-anchor="middle">Client</text><text class="s" x="76" y="148" text-anchor="middle">Map · 3D 뷰</text>
+        <rect class="b" x="170" y="112" width="110" height="48" rx="10"/><text class="t" x="225" y="132" text-anchor="middle">API Server</text><text class="s" x="225" y="148" text-anchor="middle">NestJS · MSA · RBAC</text>
         <rect class="b" x="170" y="196" width="110" height="48" rx="10"/><text class="t" x="225" y="216" text-anchor="middle">PostgreSQL</text><text class="s" x="225" y="232" text-anchor="middle">PostGIS · 파티셔닝</text>
         <rect class="b" x="330" y="36" width="130" height="48" rx="10"/><text class="t" x="395" y="56" text-anchor="middle">Redis Cache</text><text class="s" x="395" y="72" text-anchor="middle">15m TTL · prodId key</text>
         <rect class="b" x="510" y="36" width="146" height="48" rx="10"/><text class="t" x="583" y="56" text-anchor="middle">Raster Render</text><text class="s" x="583" y="72" text-anchor="middle">최적화 렌더 + 캐시</text>
         <rect class="b" x="330" y="112" width="130" height="48" rx="10"/><text class="t" x="395" y="132" text-anchor="middle">Bull Broker</text><text class="s" x="395" y="148" text-anchor="middle">Saga · retry/backoff</text>
-        <rect class="b" x="510" y="112" width="146" height="48" rx="10"/><text class="t" x="583" y="132" text-anchor="middle">SAR 알고리즘 처리</text><text class="s" x="583" y="148" text-anchor="middle">async worker</text>
-        <rect class="b" x="510" y="196" width="146" height="48" rx="10"/><text class="t" x="583" y="216" text-anchor="middle">AI 처리</text><text class="s" x="583" y="232" text-anchor="middle">async worker</text>
+        <rect class="b" x="510" y="112" width="146" height="48" rx="10"/><text class="t" x="583" y="132" text-anchor="middle">SDPE 연계</text><text class="s" x="583" y="148" text-anchor="middle">production 영상 · DEM</text>
+        <rect class="b" x="510" y="196" width="146" height="48" rx="10"/><text class="t" x="583" y="216" text-anchor="middle">로컬 LLM</text><text class="s" x="583" y="232" text-anchor="middle">온프레미스 3D 질의</text>
         <path class="ln" d="M128,136 H166"/>
         <path class="ln" d="M280,136 H326"/>
-        <path class="ln" d="M460,136 H506"/><text class="lbl" x="485" y="128" text-anchor="middle">algorithm</text>
+        <path class="ln" d="M460,136 H506"/><text class="lbl" x="485" y="128" text-anchor="middle">SDPE</text>
         <path class="ln" d="M225,112 V60 H326"/><text class="lbl" x="285" y="52" text-anchor="middle">cache</text>
         <path class="ln" d="M460,60 H506"/><text class="lbl" x="485" y="52" text-anchor="middle">render</text>
         <path class="ln" d="M225,160 V192"/><text class="lbl" x="233" y="181">query · search</text>
-        <path class="ln" d="M395,160 V220 H506"/><text class="lbl" x="452" y="212" text-anchor="middle">AI</text>
+        <path class="ln" d="M395,160 V220 H506"/><text class="lbl" x="452" y="212" text-anchor="middle">LLM</text>
       </svg>
     </div>
   </section>
 
-  <!-- 6 WEB-GIS perf -->
+  <!-- 6 LIID perf -->
   <section class="slide">
-    <div class="eyebrow">Web-GIS · Impact</div>
+    <div class="eyebrow">LIID · Impact</div>
     <h2 class="stitle">정량 성과 & 분산 트랜잭션</h2>
     <div class="perf">
       <div class="pf"><div class="pfh"><span class="lab">영상 렌더링 속도</span><span class="val">3s → 0.2s <span class="imp">(93%↓)</span></span></div><div class="bar"><i style="--w:93%"></i></div></div>
@@ -235,7 +235,47 @@
     </div>
   </section>
 
-  <!-- 7 BACKOFFICE overview -->
+  <!-- 7 LIID service -->
+  <section class="slide">
+    <div class="eyebrow">LIID · Service</div>
+    <h2 class="stitle">로컬 LLM · 3D 지형 모니터링 · 촬영 요청</h2>
+    <div class="pblock"><div class="h">로컬 LLM · 3D 지형 모니터링</div><p>위성 데이터는 외부로 반출할 수 없어 상용 LLM API를 쓸 수 없습니다. 그래서 <b>LLM을 로컬 모델로 구성</b>해 추론이 내부에서 끝나도록 하고, DEM·영상 정보와 결합해 3D 지형을 자연어로 조회·모니터링할 수 있게 설계했습니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">SAR 촬영 요청 (Tasking)</div><p>사용자가 보고 있는 지역에 대해 <b>SAR 영상 촬영을 직접 요청</b>할 수 있도록 요청 접수 흐름을 서비스 안으로 넣었습니다. 검색 → 조회 → 분석 → 신규 촬영 요청이 끊기지 않는 하나의 사용자 흐름이 됩니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>PM으로 요구사항·일정·이해관계자를 관리하면서, 아키텍처 설계(서비스 경계·캐시 계층·로컬 LLM·SDPE 연계)와 백엔드 개발(검색·렌더 최적화·MSA)을 직접 담당했습니다. 현재도 고도화 중인 프로젝트입니다.</p></div>
+    <div class="chips">
+      <span class="chip">Local LLM</span><span class="chip">DEM · 3D Terrain</span><span class="chip">SAR 영상 검색</span><span class="chip">Tasking 요청</span><span class="chip">SDPE 연계</span>
+    </div>
+  </section>
+
+  <!-- 8 LIID cache -->
+  <section class="slide">
+    <div class="eyebrow">LIID · Design</div>
+    <h2 class="stitle">대용량 3D 전달 · 캐시 Hit / Miss 전략</h2>
+    <div class="arch">
+      <div class="archcap">캐시 흐름</div>
+      <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arE" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker>
+        <marker id="arEg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2dd4a7"/></marker></defs>
+        <style>
+          .Eb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Ec{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
+          .Et{fill:#e8edf5;font-size:12px;font-weight:700}.Es{fill:#9aa6bd;font-size:9.5px}
+          .Eln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arE)}
+          .Ehit{stroke:#2dd4a7;stroke-width:1.6;fill:none;marker-end:url(#arEg)}
+          .Elbl{fill:#7e8aa0;font-size:8.5px}.Ehl{fill:#2dd4a7;font-size:9px;font-weight:700}
+        </style>
+        <rect class="Eb" x="20" y="96" width="124" height="52" rx="10"/><text class="Et" x="82" y="118" text-anchor="middle">사용자 요청</text><text class="Es" x="82" y="134" text-anchor="middle">3D 타일 · 영상</text>
+        <rect class="Ec" x="212" y="96" width="140" height="52" rx="10"/><text class="Et" x="282" y="118" text-anchor="middle">캐시 서버</text><text class="Es" x="282" y="134" text-anchor="middle">최근 조회 데이터 보관</text>
+        <rect class="Eb" x="424" y="96" width="152" height="52" rx="10"/><text class="Et" x="500" y="118" text-anchor="middle">원본 · 스토리지</text><text class="Es" x="500" y="134" text-anchor="middle">LIID 백엔드 · NAS</text>
+        <path class="Eln" d="M144,122 H208"/><text class="Elbl" x="176" y="114" text-anchor="middle">요청</text>
+        <path class="Ehit" d="M282,96 V54 H90 V92"/><text class="Ehl" x="190" y="46" text-anchor="middle">Hit → 캐시에서 즉시 응답</text>
+        <path class="Eln" d="M352,122 H420"/><text class="Elbl" x="386" y="114" text-anchor="middle">Miss</text>
+        <path class="Eln" d="M500,148 V186 H286"/><text class="Elbl" x="400" y="180" text-anchor="middle">원본 조회 → 캐시 적재 후 응답</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
+  </section>
+
+  <!-- 9 BACKOFFICE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 02</div>
     <div class="ptop"><h2 class="stitle">백오피스 통합 플랫폼</h2><span class="pill">PM + Tech Lead · 설계·기획·개발 주도</span></div>
@@ -244,7 +284,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>분산 시스템을 SSO 기반 단일 진입점으로 재설계하고 7개 모듈을 융합. 위성 전용 MES를 직접 구축. 외부 시스템(Amaranth 10·SmartNotes)은 REST API로, 출입 H/W는 DB 레벨로 연동. DDD 전술 패턴으로 도메인을 보호했습니다.</p></div>
   </section>
 
-  <!-- 8 BACKOFFICE system arch -->
+  <!-- 10 BACKOFFICE system arch -->
   <section class="slide">
     <div class="eyebrow">백오피스 · Architecture</div>
     <h2 class="stitle">시스템 아키텍처 · MSA 백엔드 + 웹·모바일</h2>
@@ -288,7 +328,7 @@
     <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>NestJS MSA</b> 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리되어 개별 배포·확장이 가능합니다.</p>
   </section>
 
-  <!-- 9 BACKOFFICE integration -->
+  <!-- 11 BACKOFFICE integration -->
   <section class="slide">
     <div class="eyebrow">백오피스 · Integration</div>
     <h2 class="stitle">시스템 · H/W 연동 구조</h2>
@@ -328,7 +368,7 @@
     </div>
   </section>
 
-  <!-- 10 SDPE overview -->
+  <!-- 12 SDPE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 03</div>
     <div class="ptop"><h2 class="stitle">SAR Data Processing Element</h2><span class="pill">PM · Architecture 설계</span></div>
@@ -337,7 +377,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
   </section>
 
-  <!-- 11 SDPE architecture -->
+  <!-- 13 SDPE architecture -->
   <section class="slide">
     <div class="eyebrow">SDPE · Architecture</div>
     <h2 class="stitle">DAG 오케스트레이션 & 이벤트 기반 처리</h2>
@@ -374,7 +414,7 @@
     </div>
   </section>
 
-  <!-- 12 SDPE impact -->
+  <!-- 14 SDPE impact -->
   <section class="slide">
     <div class="eyebrow">SDPE · Impact</div>
     <h2 class="stitle">10분 이상 걸리던 처리를 40초대로</h2>
@@ -389,97 +429,16 @@
     </div>
   </section>
 
-  <!-- 13 LIID overview -->
+  <!-- 15 FILE-ENGINE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 04</div>
-    <div class="ptop"><h2 class="stitle">LIID · 위성영상 정보 배포 서비스</h2><span class="pill">PM · Architecture 설계</span></div>
-    <p class="ssub">SDPE 산출물을 사용자 서비스로 전달 · LLM + DEM 기반 3D 지형 모니터링 · SAR 영상 검색 · 촬영 요청</p>
-    <div class="pblock problem"><div class="h">Problem</div><p>SDPE가 만들어낸 production 영상과 정보는 그 자체로는 사용자가 쓸 수 있는 서비스가 아닙니다. 지형을 3D로 보여주려면 DEM과 영상을 합친 대용량 데이터를 그대로 내려줘야 해 응답이 느려지고, 영상 검색·촬영 요청·지형 분석이 서로 다른 경로로 흩어져 있었습니다. 위성 데이터 특성상 분석에 외부 LLM API로 데이터를 내보낼 수도 없었습니다.</p></div>
-    <div class="pblock solution"><div class="h">Solution</div><p>SDPE 산출물을 받아 서비스 도메인으로 변환·제공하는 백엔드를 설계하고, 사용자에게는 <b>LLM + DEM 기반 3D 지형 모니터링</b>과 <b>SAR 영상 검색·촬영 요청</b>을 하나의 진입점으로 제공합니다. LLM은 <b>로컬(온프레미스) 모델</b>로 구성해 데이터를 밖으로 내보내지 않고, 대용량 3D 전달 경로에는 <b>캐시 서버</b>를 두어 Hit/Miss 전략으로 응답 지연을 흡수했습니다.</p></div>
-  </section>
-
-  <!-- 14 LIID architecture -->
-  <section class="slide">
-    <div class="eyebrow">LIID · Architecture</div>
-    <h2 class="stitle">SDPE → 서비스 백엔드 → 캐시 → 사용자</h2>
-    <div class="arch">
-      <div class="archcap">서비스 전달 구조</div>
-      <svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="arD" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker>
-        <marker id="arDw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffb454"/></marker></defs>
-        <style>
-          .Db{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Dcore{fill:#13203a;stroke:#3182f6;stroke-width:1.8}
-          .Dllm{fill:#10231c;stroke:#2dd4a7;stroke-width:1.8}.Dcache{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
-          .Dt{fill:#e8edf5;font-size:12px;font-weight:700}.Ds{fill:#9aa6bd;font-size:9.5px}
-          .Dg{fill:#2dd4a7;font-size:9.5px;font-weight:700}
-          .Dln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arD)}
-          .Dtask{stroke:#ffb454;stroke-width:1.5;fill:none;marker-end:url(#arDw);stroke-dasharray:5 3}
-          .Dlbl{fill:#7e8aa0;font-size:8.5px}.Dtl{fill:#ffb454;font-size:8.5px;font-weight:700}
-        </style>
-        <rect class="Db" x="16" y="140" width="112" height="56" rx="10"/><text class="Dt" x="72" y="163" text-anchor="middle">SDPE</text><text class="Ds" x="72" y="180" text-anchor="middle">production 영상 · 정보</text>
-        <rect class="Dcore" x="172" y="122" width="148" height="92" rx="12"/><text class="Dt" x="246" y="148" text-anchor="middle">LIID 백엔드</text><text class="Ds" x="246" y="166" text-anchor="middle">영상 · DEM 서비스 API</text><text class="Ds" x="246" y="182" text-anchor="middle">검색 · 3D 지형 · 요청 접수</text>
-        <rect class="Dcache" x="366" y="140" width="122" height="56" rx="10"/><text class="Dt" x="427" y="163" text-anchor="middle">캐시 서버</text><text class="Ds" x="427" y="180" text-anchor="middle">3D 데이터 · Hit / Miss</text>
-        <rect class="Db" x="530" y="140" width="134" height="56" rx="10"/><text class="Dt" x="597" y="163" text-anchor="middle">사용자</text><text class="Ds" x="597" y="180" text-anchor="middle">3D 지형 모니터링 · 검색</text>
-        <rect class="Dllm" x="172" y="252" width="148" height="58" rx="10"/><text class="Dt" x="246" y="276" text-anchor="middle">로컬 LLM</text><text class="Dg" x="246" y="294" text-anchor="middle">온프레미스 추론 · 반출 없음</text>
-        <path class="Dln" d="M128,168 H168"/><text class="Dlbl" x="148" y="160" text-anchor="middle">전달</text>
-        <path class="Dln" d="M320,168 H362"/><text class="Dlbl" x="341" y="160" text-anchor="middle">3D 데이터</text>
-        <path class="Dln" d="M488,168 H526"/><text class="Dlbl" x="507" y="160" text-anchor="middle">응답</text>
-        <path class="Dln" d="M246,214 V248"/><text class="Dlbl" x="254" y="236">자연어 질의</text>
-        <path class="Dtask" d="M597,140 V72 H246 V118"/><text class="Dtl" x="424" y="64" text-anchor="middle">SAR 촬영 요청 (tasking) 접수</text>
-      </svg>
-    </div>
-  </section>
-
-  <!-- 15 LIID cache -->
-  <section class="slide">
-    <div class="eyebrow">LIID · Design</div>
-    <h2 class="stitle">대용량 3D 전달 · 캐시 Hit / Miss 전략</h2>
-    <div class="arch">
-      <div class="archcap">캐시 흐름</div>
-      <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="arE" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker>
-        <marker id="arEg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2dd4a7"/></marker></defs>
-        <style>
-          .Eb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Ec{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
-          .Et{fill:#e8edf5;font-size:12px;font-weight:700}.Es{fill:#9aa6bd;font-size:9.5px}
-          .Eln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arE)}
-          .Ehit{stroke:#2dd4a7;stroke-width:1.6;fill:none;marker-end:url(#arEg)}
-          .Elbl{fill:#7e8aa0;font-size:8.5px}.Ehl{fill:#2dd4a7;font-size:9px;font-weight:700}
-        </style>
-        <rect class="Eb" x="20" y="96" width="124" height="52" rx="10"/><text class="Et" x="82" y="118" text-anchor="middle">사용자 요청</text><text class="Es" x="82" y="134" text-anchor="middle">3D 타일 · 영상</text>
-        <rect class="Ec" x="212" y="96" width="140" height="52" rx="10"/><text class="Et" x="282" y="118" text-anchor="middle">캐시 서버</text><text class="Es" x="282" y="134" text-anchor="middle">최근 조회 데이터 보관</text>
-        <rect class="Eb" x="424" y="96" width="152" height="52" rx="10"/><text class="Et" x="500" y="118" text-anchor="middle">원본 · 스토리지</text><text class="Es" x="500" y="134" text-anchor="middle">LIID 백엔드 · NAS</text>
-        <path class="Eln" d="M144,122 H208"/><text class="Elbl" x="176" y="114" text-anchor="middle">요청</text>
-        <path class="Ehit" d="M282,96 V54 H90 V92"/><text class="Ehl" x="190" y="46" text-anchor="middle">Hit → 캐시에서 즉시 응답</text>
-        <path class="Eln" d="M352,122 H420"/><text class="Elbl" x="386" y="114" text-anchor="middle">Miss</text>
-        <path class="Eln" d="M500,148 V186 H286"/><text class="Elbl" x="400" y="180" text-anchor="middle">원본 조회 → 캐시 적재 후 응답</text>
-      </svg>
-    </div>
-    <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
-  </section>
-
-  <!-- 16 LIID LLM + role -->
-  <section class="slide">
-    <div class="eyebrow">LIID · Deep Dive</div>
-    <h2 class="stitle">로컬 LLM · 촬영 요청까지 하나의 서비스로</h2>
-    <div class="pblock"><div class="h">로컬 LLM</div><p>위성 데이터는 외부로 반출할 수 없어 상용 LLM API를 쓸 수 없습니다. 그래서 <b>LLM을 로컬 모델로 구성</b>해 추론이 내부에서 끝나도록 하고, DEM·영상 정보와 결합해 3D 지형을 자연어로 조회·모니터링할 수 있게 설계했습니다.</p></div>
-    <div class="pblock" style="margin-top:16px"><div class="h">SAR 촬영 요청 (Tasking)</div><p>사용자가 보고 있는 지역에 대해 <b>SAR 영상 촬영을 직접 요청</b>할 수 있도록 요청 접수 흐름을 서비스 안으로 넣었습니다. 조회 → 분석 → 신규 촬영 요청이 끊기지 않는 하나의 사용자 흐름이 됩니다.</p></div>
-    <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>PM으로 요구사항·일정·이해관계자를 관리하면서 아키텍처 설계(서비스 경계, 캐시 계층 전략, 로컬 LLM 구성, SDPE 연계 구조)를 직접 담당하고 있습니다. 현재 진행 중인 프로젝트입니다.</p></div>
-    <div class="chips">
-      <span class="chip">MSA</span><span class="chip">캐시 계층 · Hit/Miss</span><span class="chip">Local LLM</span><span class="chip">DEM · 3D Terrain</span><span class="chip">SAR 영상 검색</span><span class="chip">Tasking 요청</span><span class="chip">SDPE 연계</span>
-    </div>
-  </section>
-
-  <!-- 17 FILE-ENGINE overview -->
-  <section class="slide">
-    <div class="eyebrow">Flagship Project 05</div>
     <div class="ptop"><h2 class="stitle">대용량 파일 전송 엔진 · 분산 파일 서버</h2><span class="pill">Tech Lead · 설계 주도</span></div>
     <p class="ssub">OneDrive식 Windows API 전송 엔진 · 청크 병렬 전송 · k8s 오토스케일 · 큐 기반 부하 분산</p>
     <div class="pblock problem"><div class="h">Problem</div><p>기존에는 NAS에 <b>권한을 부여하는 방식</b>으로 파일을 다뤄, 대용량 전송이 느리고 서버 한 대에 부하가 몰렸습니다. 50GB급 데이터를 한 번에 밀어 넣으면 전송이 길어지고, 중간에 서버가 죽으면 처음부터 다시 올려야 했습니다. 트래픽이 몰릴 때 서버를 늘리거나 부하를 나눌 방법도 없었습니다.</p></div>
     <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 50GB 데이터를 수 분 내에 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
   </section>
 
-  <!-- 18 FILE-ENGINE architecture -->
+  <!-- 16 FILE-ENGINE architecture -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Architecture</div>
     <h2 class="stitle">전송 엔진 · 큐 · 오토스케일 파일 서버</h2>
@@ -516,7 +475,7 @@
     </div>
   </section>
 
-  <!-- 19 FILE-ENGINE chunk -->
+  <!-- 17 FILE-ENGINE chunk -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Deep Dive</div>
     <h2 class="stitle">50GB를 수 분 내로 · 청크 병렬 전송</h2>
@@ -545,7 +504,7 @@
     <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 수 분 내에 이동하고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
   </section>
 
-  <!-- 20 FILE-ENGINE resilience -->
+  <!-- 18 FILE-ENGINE resilience -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Design</div>
     <h2 class="stitle">부하 분산 · 죽어도 이어가는 전송</h2>
@@ -557,7 +516,7 @@
     </div>
   </section>
 
-  <!-- 21 FILE-ENGINE SSO -->
+  <!-- 19 FILE-ENGINE SSO -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Integration</div>
     <h2 class="stitle">Portal SSO 연동 · 엔진 자동 로그인</h2>
@@ -588,7 +547,7 @@
     </div>
   </section>
 
-  <!-- 22 OTHER PROJECTS -->
+  <!-- 20 OTHER PROJECTS -->
   <section class="slide">
     <div class="eyebrow">Selected Projects</div>
     <h2 class="stitle">시스템을 설계하고, 끝까지 운영합니다</h2>
@@ -602,7 +561,7 @@
     </div>
   </section>
 
-  <!-- 23 INFRA overview -->
+  <!-- 21 INFRA overview -->
   <section class="slide">
     <div class="eyebrow">Infrastructure &amp; DevOps</div>
     <div class="ptop"><h2 class="stitle">온프레미스 + 클라우드 하이브리드 인프라</h2><span class="pill">설계·구축 주도</span></div>
@@ -637,7 +596,7 @@
     <p class="ssub" style="margin-top:12px">사내망 전용 서비스는 <b>온프레미스 k8s</b>, 사내 ERP는 <b>AWS 클라우드</b>, 공공기관 납품은 <b>CSAP 인증 경계로 완전 분리</b> — 워크로드마다 맞는 환경에 배치하는 하이브리드 전략입니다.</p>
   </section>
 
-  <!-- 24 INFRA on-prem -->
+  <!-- 22 INFRA on-prem -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">사내 PaaS · Kubernetes 플랫폼 (구축·운영)</h2>
@@ -649,7 +608,7 @@
     </div>
   </section>
 
-  <!-- 25 INFRA k8s topology -->
+  <!-- 23 INFRA k8s topology -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">Kubernetes 클러스터 설계 · CI/CD → 배포 → 노출</h2>
@@ -696,7 +655,7 @@
     </div>
   </section>
 
-  <!-- 26 INFRA cloud -->
+  <!-- 24 INFRA cloud -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">클라우드 인프라 · AWS 컨테이너 플랫폼 (설계·전환)</h2>
@@ -708,7 +667,7 @@
     </div>
   </section>
 
-  <!-- 27 INFRA cloud arch -->
+  <!-- 25 INFRA cloud arch -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">AWS 클라우드 아키텍처 · Stage / Prod · public·private 분리</h2>
@@ -752,7 +711,7 @@
     <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
   </section>
 
-  <!-- 28 ENG-CONV DDD -->
+  <!-- 26 ENG-CONV DDD -->
   <section class="slide">
     <div class="eyebrow">Engineering Convention</div>
     <h2 class="stitle">DDD 전술 패턴 · Context / Business 계층</h2>
@@ -789,7 +748,7 @@
     </div>
   </section>
 
-  <!-- 29 SKILLS -->
+  <!-- 27 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -805,7 +764,7 @@
     </div>
   </section>
 
-  <!-- 30 CAREER -->
+  <!-- 28 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -815,12 +774,12 @@
         <div class="when">2023.06 – 재직중 · 개발 경력 3년</div>
         <h4>루미르 · 개발PM / Web파트장 (선임연구원)</h4>
         <div class="where">위성 제조·운용 전문기업 · 웹 개발 조직 창설 멤버 · 스톡옵션</div>
-        <ul><li>웹 개발 조직 0→11명 신설·성장 (백5·프4·기획1·AI1)</li><li>입사 8개월 차 선임연구원, 1년 6개월 차 파트장 승진</li><li>회사 핵심 시스템 설계·개발 주도, 리드타임 67% 단축</li><li>Web-GIS·백오피스·SDPE·LIID 등 핵심 시스템 설계 및 온프레미스·클라우드 하이브리드 인프라 구축</li></ul>
+        <ul><li>웹 개발 조직 0→11명 신설·성장 (백5·프4·기획1·AI1)</li><li>입사 8개월 차 선임연구원, 1년 6개월 차 파트장 승진</li><li>회사 핵심 시스템 설계·개발 주도, 리드타임 67% 단축</li><li>LIID 위성영상 플랫폼·백오피스·SDPE 등 핵심 시스템 설계 및 온프레미스·클라우드 하이브리드 인프라 구축</li></ul>
       </div>
     </div>
   </section>
 
-  <!-- 31 GITHUB GRASS -->
+  <!-- 29 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -833,7 +792,7 @@
     </div>
   </section>
 
-  <!-- 32 CLOSING -->
+  <!-- 30 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
