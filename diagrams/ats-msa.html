@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>ats-backend · MSA domain map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="_shared.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+  <span class="crumb">~/portfolio/<em>diagrams/ats-msa.html</em></span>
+  <span class="sep">·</span>
+  <span>채용 end-to-end · MSA 11개 서비스</span>
+  <a class="back" href="../Portfolio.html">← back to portfolio</a>
+</div>
+
+<h1>ats-backend <span class="accent">()</span></h1>
+<div class="sub">
+  자발 사내 프로젝트로 시작한 채용 · 인터뷰 · 평가 · 오퍼 통합 플랫폼. DDD + CQRS,
+  Combined Auth Guard(JWT + SSO), RabbitMQ 이벤트 버스로 11개 도메인 서비스를 느슨하게 엮었다.
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>01.</b>도메인 맵 — 4개 바운디드 컨텍스트 × 11개 서비스</div>
+  <div class="mermaid">
+flowchart TB
+  subgraph GW["API Gateway · Combined Auth Guard"]
+    AUTH["auth<br/>JWT + SSO"]
+  end
+  subgraph SRC["Sourcing"]
+    JD["jd-service<br/>포지션"]
+    CAND["candidate-service<br/>후보자"]
+    REF["referral-service<br/>레퍼럴"]
+  end
+  subgraph INTV["Interview"]
+    CAL["calendar-service<br/>일정/가용"]
+    PANEL["panel-service<br/>인터뷰어 매칭"]
+    MEET["meeting-service<br/>zoom 링크/녹화"]
+  end
+  subgraph EVAL["Evaluation"]
+    EV["evaluation-service<br/>평가 폼"]
+    SCORE["score-service<br/>읽기 전용 view"]
+  end
+  subgraph OFFER["Offer"]
+    OF["offer-service<br/>오퍼 레터"]
+    NOTI["notification-service<br/>메일/슬랙"]
+  end
+  BUS(("RabbitMQ<br/>event bus")):::bus
+  MONGO[(MongoDB)]:::db
+  REDIS[(Redis)]:::db
+
+  AUTH --> SRC
+  AUTH --> INTV
+  AUTH --> EVAL
+  AUTH --> OFFER
+
+  JD --> BUS
+  CAND --> BUS
+  REF --> BUS
+  CAL --> BUS
+  PANEL --> BUS
+  MEET --> BUS
+  EV --> BUS
+  OF --> BUS
+
+  BUS --> NOTI
+  BUS --> SCORE
+
+  JD --- MONGO
+  CAND --- MONGO
+  CAL --- MONGO
+  EV --- MONGO
+  SCORE --- MONGO
+  CAL --- REDIS
+  NOTI --- REDIS
+
+  classDef gw fill:#1d3a1f,stroke:#39ff14,color:#d4ffd4;
+  classDef mod fill:#102012,stroke:#49a83a,color:#d4ffd4;
+  classDef bus fill:#0c1109,stroke:#ffd166,color:#ffe0a8;
+  classDef db fill:#0c1109,stroke:#ffd166,color:#ffe0a8;
+  class AUTH gw;
+  class JD,CAND,REF,CAL,PANEL,MEET,EV,SCORE,OF,NOTI mod;
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>02.</b>후보자 한 명의 여정 — 스테이지 이벤트가 전사로 팬아웃</div>
+  <div class="mermaid">
+sequenceDiagram
+  autonumber
+  participant U as 지원자
+  participant JD as jd-service
+  participant C as candidate-service
+  participant CAL as calendar-service
+  participant EV as evaluation-service
+  participant BUS as event bus
+  participant NOTI as notification-service
+  participant SCORE as score-service
+
+  U->>JD: 지원 (JWT)
+  JD->>C: applicant.created
+  C->>BUS: stage.applied
+  BUS->>NOTI: 담당자 슬랙/메일
+  NOTI-->>U: 접수 확인
+  C->>CAL: 서류통과 → 인터뷰 요청
+  CAL->>U: 후보 시간대 제안
+  U->>CAL: 시간 선택
+  CAL->>BUS: stage.interview_scheduled
+  BUS->>NOTI: 인터뷰어 초대
+  CAL->>EV: 인터뷰 종료 후 평가 폼 오픈
+  EV->>BUS: stage.evaluated
+  BUS->>SCORE: read-model 업데이트
+  Note over SCORE: materialized view로<br/>팀장 대시보드 1-query
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>03.</b>핵심 지표 · TPM 어필 포인트</div>
+  <div class="legend">
+    <div><div class="k">hire lead</div><div class="v">45일 → 18일</div></div>
+    <div><div class="k">services</div><div class="v">11개 도메인 서비스</div></div>
+    <div><div class="k">interviewers</div><div class="v">28명 전사 도입</div></div>
+    <div><div class="k">역할</div><div class="v">PM · 자발적 사내 프로젝트</div></div>
+    <div><div class="k">TPM 관점</div><div class="v">위에서 주어진 문제가 아니라 "문제 자체를 정의"한 사례</div></div>
+    <div><div class="k">후속</div><div class="v">이듬해 전사 HR 시스템으로 정식 편입</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  built with mermaid + care · <span class="accent">EOF</span> ·
+  <a href="../Portfolio.html">← return to portfolio</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+      fontSize: '13px',
+      primaryColor: '#102012',
+      primaryTextColor: '#d4ffd4',
+      primaryBorderColor: '#39ff14',
+      lineColor: '#49a83a',
+      secondaryColor: '#1d3a1f',
+      tertiaryColor: '#0c1109',
+      background: '#0c1109',
+      mainBkg: '#0f1410',
+      clusterBkg: '#0a0e0a',
+      clusterBorder: '#1f3520',
+      edgeLabelBackground: '#0c1109',
+      actorBkg: '#102012',
+      actorBorder: '#39ff14',
+      actorTextColor: '#d4ffd4',
+      signalColor: '#49a83a',
+      signalTextColor: '#9ef29e',
+      noteBkgColor: '#1d3a1f',
+      noteTextColor: '#d4ffd4',
+      noteBorderColor: '#39ff14',
+      sequenceNumberColor: '#0a0e0a',
+      labelBoxBkgColor: '#102012',
+      labelBoxBorderColor: '#39ff14',
+      labelTextColor: '#d4ffd4',
+    },
+  });
+</script>
+
+</body>
+</html>

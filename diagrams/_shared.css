@@ -1,0 +1,71 @@
+/* shared look for all diagram pages — matches the Classic Phosphor portfolio theme */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: #0a0e0a;
+  color: #9ef29e;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  min-height: 100vh;
+  padding: 32px 48px 64px;
+  line-height: 1.55;
+}
+a { color: #39ff14; text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: rgba(57,255,20,0.3); }
+
+.topbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; margin-bottom: 28px;
+  border: 1px solid #1f3520; background: #0f1410;
+  font-size: 11px; color: #4a7a4c;
+}
+.dots { display: flex; gap: 6px; }
+.dots span { width: 9px; height: 9px; border-radius: 50%; display: inline-block; opacity: 0.85; }
+.dots .r { background: #ff5d5d; }
+.dots .y { background: #ffd166; }
+.dots .g { background: #39ff14; }
+.crumb { color: #9ef29e; }
+.crumb em { font-style: normal; color: #39ff14; }
+.topbar .sep { color: #4a7a4c; }
+.topbar .back { margin-left: auto; }
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 32px;
+  color: #d4ffd4;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 6px rgba(57,255,20,0.35);
+}
+h1 .accent { color: #39ff14; }
+.sub { color: #4a7a4c; font-size: 13px; margin-bottom: 28px; }
+
+.panel {
+  border: 1px solid #1f3520;
+  background: #0f1410;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+}
+.panel-title { color: #4a7a4c; font-size: 11px; letter-spacing: 1.2px; margin-bottom: 14px; }
+.panel-title b { color: #39ff14; font-weight: 700; margin-right: 6px; }
+
+.legend {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px 28px;
+  color: #9ef29e; font-size: 13px;
+}
+.legend .k { color: #4a7a4c; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
+.legend .v { color: #d4ffd4; }
+
+.mermaid {
+  background: #0c1109;
+  border: 1px solid #1f3520;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.footer {
+  margin-top: 40px; padding-top: 16px;
+  border-top: 1px solid #1f3520;
+  color: #4a7a4c; font-size: 11px;
+}
+.footer .accent { color: #39ff14; }

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>백오피스 통합 플랫폼 · (planning)/(current) 이원 구조</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="_shared.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+  <span class="crumb">~/portfolio/<em>diagrams/portal-kms.html</em></span>
+  <span class="sep">·</span>
+  <span>6개 레거시 → 1개 플랫폼</span>
+  <a class="back" href="../Portfolio.html">← back to portfolio</a>
+</div>
+
+<h1>백오피스 통합 플랫폼 <span class="accent">()</span></h1>
+<div class="sub">
+  (planning)/(current) 이원 Route Group 구조 — 기획/디자인/정책이 코드 옆에 커밋되고,
+  Cursor AI 룰이 구조 위반을 1차 검수한다. 리드타임 3개월 → 1개월 (67%).
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>01.</b>repo 구조 — 한 페이지가 두 곳에 동시에 산다</div>
+  <pre style="margin:0; color:#c9d1d9; font-size: 12.5px; line-height:1.7; white-space:pre-wrap;">
+app/
+├── (planning)/
+│   └── plan/
+│       ├── planning.mdc          ← Cursor AI 룰 (전역 구조 규칙)
+│       └── (kms|pms|ams|cms|ias|sms|sso)/
+│           └── [page]/
+│               ├── _docs/        ← .md 스펙 (평가기간_상태_흐름_분석.md 등)
+│               ├── _mocks/       ← UI 프로토타입 (mock 데이터 포함)
+│               ├── _config/      ← 정책 · 상태 머신 · 권한 매트릭스
+│               ├── _ui/          ← 디자인 토큰 · 레이아웃 초안
+│               └── page.tsx      ← 기획 페이지 (스펙 확인용)
+│
+└── (current)/
+    └── current/
+        └── (kms|pms|ams|cms|ias|sms|sso)/
+            └── [page]/
+                ├── _services/    ← 실 API · 서버 액션
+                ├── _ui/          ← 실 컴포넌트
+                └── page.tsx      ← 실 서비스 페이지
+  </pre>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>02.</b>작업 흐름 — 기획자 · 디자이너 · 개발자가 같은 PR을 본다</div>
+  <div class="mermaid">
+flowchart LR
+  PM["기획자<br/>(TPM)"] -->|"_docs/*.md<br/>_config/*"| PLAN
+  DE["디자이너"] -->|"_mocks/*<br/>_ui/* (draft)"| PLAN
+  PLAN["(planning)/plan/&lt;module&gt;/&lt;page&gt;/<br/>· spec · mock · policy"]:::plan
+  PLAN -->|"같은 PR 리뷰<br/>· 해석 loss 0"| FE
+  FE["프론트엔드"] -->|"_services/* · _ui/*"| CUR
+  BE["백엔드"] -->|"API · 도메인 모델"| CUR
+  CUR["(current)/current/&lt;module&gt;/&lt;page&gt;/<br/>· 실 서비스"]:::current
+  RULE["planning.mdc<br/>Cursor AI 룰"]:::rule -.->|"구조 위반 1차 검수"| PLAN
+  RULE -.->|"naming · layering 검수"| CUR
+  CUR -->|"배포"| VERCEL["Vercel · Supabase"]:::infra
+
+  classDef plan fill:#1d3a1f,stroke:#39ff14,color:#d4ffd4;
+  classDef current fill:#102012,stroke:#49a83a,color:#d4ffd4;
+  classDef rule fill:#0c1109,stroke:#ffd166,color:#ffd166,stroke-dasharray: 4 3;
+  classDef infra fill:#0c1109,stroke:#4a7a4c,color:#9ef29e;
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>03.</b>모듈 맵 — 6개 레거시를 SSO + 공통 도메인으로 통합</div>
+  <div class="mermaid">
+flowchart TB
+  subgraph SSO["SSO + JWT Combined Guard"]
+    AUTH["auth / session"]
+  end
+  subgraph MODULES["business modules"]
+    KMS["KMS<br/>지식/문서"]
+    PMS["PMS<br/>프로젝트"]
+    AMS["AMS<br/>근태"]
+    CMS["CMS<br/>채용"]
+    IAS["IAS<br/>평가"]
+    SMS["SMS<br/>스케줄"]
+  end
+  subgraph SHARED["shared · design system"]
+    UI["components"]
+    TOKENS["tokens"]
+    UTIL["utils / hooks"]
+  end
+  subgraph DATA["data layer"]
+    PG[("PostgreSQL<br/>Supabase")]
+    MONGO[("MongoDB<br/>legacy")]
+  end
+
+  AUTH --> KMS
+  AUTH --> PMS
+  AUTH --> AMS
+  AUTH --> CMS
+  AUTH --> IAS
+  AUTH --> SMS
+  KMS --> SHARED
+  PMS --> SHARED
+  AMS --> SHARED
+  CMS --> SHARED
+  IAS --> SHARED
+  SMS --> SHARED
+  KMS --> PG
+  PMS --> PG
+  AMS --> PG
+  CMS --> PG
+  IAS --> PG
+  SMS --> PG
+  KMS -.-> MONGO
+  PMS -.-> MONGO
+
+  classDef auth fill:#1d3a1f,stroke:#39ff14,color:#d4ffd4;
+  classDef mod fill:#102012,stroke:#49a83a,color:#d4ffd4;
+  classDef shared fill:#0c1109,stroke:#4a7a4c,color:#9ef29e;
+  classDef db fill:#0c1109,stroke:#ffd166,color:#ffe0a8;
+  class AUTH auth;
+  class KMS,PMS,AMS,CMS,IAS,SMS mod;
+  class UI,TOKENS,UTIL shared;
+  class PG,MONGO db;
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>04.</b>핵심 지표 · TPM 어필 포인트</div>
+  <div class="legend">
+    <div><div class="k">lead time</div><div class="v">3m → 1m · 67% 단축</div></div>
+    <div><div class="k">team</div><div class="v">11명 (프론트/백 혼합) 동시 도입</div></div>
+    <div><div class="k">legacy</div><div class="v">6개 백오피스 + SSO 통합</div></div>
+    <div><div class="k">역할</div><div class="v">PM + tech lead · 이력서 핵심 지표</div></div>
+    <div><div class="k">TPM 관점</div><div class="v">문제를 "스펙 해석 loss"로 재정의 → 구조로 해결</div></div>
+    <div><div class="k">보상 반영</div><div class="v">스톡옵션 3억원 부여 근거</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  built with mermaid + care · <span class="accent">EOF</span> ·
+  <a href="../Portfolio.html">← return to portfolio</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+      fontSize: '13px',
+      primaryColor: '#102012',
+      primaryTextColor: '#d4ffd4',
+      primaryBorderColor: '#39ff14',
+      lineColor: '#49a83a',
+      secondaryColor: '#1d3a1f',
+      tertiaryColor: '#0c1109',
+      background: '#0c1109',
+      mainBkg: '#0f1410',
+      clusterBkg: '#0a0e0a',
+      clusterBorder: '#1f3520',
+      edgeLabelBackground: '#0c1109',
+    },
+  });
+</script>
+
+</body>
+</html>

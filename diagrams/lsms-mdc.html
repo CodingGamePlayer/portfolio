@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>lsms · MDC 3-Layer 아키텍처</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="_shared.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+  <span class="crumb">~/portfolio/<em>diagrams/lsms-mdc.html</em></span>
+  <span class="sep">·</span>
+  <span>스케줄/리소스 관리 · MDC 3-Layer</span>
+  <a class="back" href="../Portfolio.html">← back to portfolio</a>
+</div>
+
+<h1>lsms <span class="accent">()</span></h1>
+<div class="sub">
+  8개 위성 프로젝트 × 엔지니어 70명의 리소스 배정 플랫폼. 레이어 간 의존 방향이
+  한쪽으로만 흐르는 <b style="color:#d4ffd4">Module → Domain → Context</b> 3-Layer 패턴을 도입.
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>01.</b>레이어 정의 — 의존은 언제나 한 방향</div>
+  <div class="mermaid">
+flowchart LR
+  subgraph C["Context Layer (UseCase)"]
+    UC1["AssignResourceUseCase"]
+    UC2["ApproveScheduleUseCase"]
+    UC3["ResolveConflictUseCase"]
+  end
+  subgraph D["Domain Layer (Aggregate)"]
+    A1["Project<br/>(aggregate root)"]
+    A2["Resource"]
+    A3["Assignment"]
+    A4["Schedule"]
+  end
+  subgraph M["Module Layer (Bounded Context)"]
+    M1["project-module"]
+    M2["resource-module"]
+    M3["assignment-module"]
+    M4["schedule-module"]
+    M5["notification-module"]
+  end
+
+  UC1 -->|uses| A1
+  UC1 -->|uses| A2
+  UC1 -->|uses| A3
+  UC2 -->|uses| A4
+  UC3 -->|uses| A3
+  A1 -->|hosted in| M1
+  A2 -->|hosted in| M2
+  A3 -->|hosted in| M3
+  A4 -->|hosted in| M4
+
+  classDef ctx fill:#1d3a1f,stroke:#39ff14,color:#d4ffd4;
+  classDef dom fill:#102012,stroke:#49a83a,color:#d4ffd4;
+  classDef mod fill:#0c1109,stroke:#4a7a4c,color:#9ef29e;
+  class UC1,UC2,UC3 ctx;
+  class A1,A2,A3,A4 dom;
+  class M1,M2,M3,M4,M5 mod;
+  </div>
+  <div style="color:#4a7a4c; font-size: 12px; margin-top:10px; line-height:1.7;">
+    → Context는 Domain만 부른다. Domain은 Module만 부른다. 반대 방향은 컴파일/린트 단계에서 차단.<br/>
+    → 새 기능은 Context 한 개 추가만으로 끝나는 일이 많아짐 → 리그레션 면적이 작다.
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>02.</b>핵심 유스케이스 — "리소스 이중 배정 방지"</div>
+  <div class="mermaid">
+sequenceDiagram
+  autonumber
+  participant UI as Web UI
+  participant UC as AssignResourceUseCase (Context)
+  participant P as Project (Domain)
+  participant R as Resource (Domain)
+  participant A as Assignment (Domain)
+  participant REPO as AssignmentRepo (Module)
+  participant BUS as Event Bus
+  participant NOTI as notification-module
+
+  UI->>UC: assign(projectId, resourceId, slot)
+  UC->>P: load(projectId)
+  UC->>R: load(resourceId)
+  UC->>A: new Assignment(project, resource, slot)
+  A->>A: invariant check<br/>(슬롯 중복 · 역량 매칭)
+  alt conflict
+    A-->>UC: DomainError("slot occupied")
+    UC-->>UI: 409 + 대체 슬롯 제안
+  else ok
+    UC->>REPO: save(assignment)
+    REPO->>BUS: assignment.created
+    BUS->>NOTI: 당사자/PM에 통지
+    UC-->>UI: 200 OK
+  end
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>03.</b>알림 DSL — 채널 · 시간대 · 선호를 한 표현으로</div>
+  <pre style="margin:0; color:#c9d1d9; font-size: 12.5px; line-height:1.7; white-space:pre-wrap;">
+when event.assignment.created
+and user.role in ["pm", "assignee"]
+deliver via first-of(
+  channel.fcm      where user.prefers("push") and now.in(user.workHours),
+  channel.webpush  where user.online,
+  channel.email    otherwise
+)
+quiet-hours 22:00..07:00 (KST)
+  </pre>
+  <div style="color:#4a7a4c; font-size: 12px; margin-top:10px;">
+    → DSL이 먼저, UI가 그 뒤. 사용자는 채널 우선순위를 직접 배치, 개발자는 구현을 추상화 뒤에 숨김.
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title"><b>04.</b>핵심 지표 · TPM 어필 포인트</div>
+  <div class="legend">
+    <div><div class="k">리소스 배정</div><div class="v">주간 5일 → 2.5일</div></div>
+    <div><div class="k">이중 배정</div><div class="v">월 44건 → 4건 (−91%)</div></div>
+    <div><div class="k">domains</div><div class="v">7개 (프로젝트/리소스/스케줄/배정/승인/알림/권한)</div></div>
+    <div><div class="k">역할</div><div class="v">PM + tech lead</div></div>
+    <div><div class="k">TPM 관점</div><div class="v">레거시 재설계 · 경계 재정의로 수정 예측 가능성을 회복</div></div>
+    <div><div class="k">후속</div><div class="v">사내 NestJS 프로젝트 템플릿으로 편입 (3개 팀 재사용)</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  built with mermaid + care · <span class="accent">EOF</span> ·
+  <a href="../Portfolio.html">← return to portfolio</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+      fontSize: '13px',
+      primaryColor: '#102012',
+      primaryTextColor: '#d4ffd4',
+      primaryBorderColor: '#39ff14',
+      lineColor: '#49a83a',
+      secondaryColor: '#1d3a1f',
+      tertiaryColor: '#0c1109',
+      background: '#0c1109',
+      mainBkg: '#0f1410',
+      clusterBkg: '#0a0e0a',
+      clusterBorder: '#1f3520',
+      edgeLabelBackground: '#0c1109',
+      actorBkg: '#102012',
+      actorBorder: '#39ff14',
+      actorTextColor: '#d4ffd4',
+      signalColor: '#49a83a',
+      signalTextColor: '#9ef29e',
+      noteBkgColor: '#1d3a1f',
+      noteTextColor: '#d4ffd4',
+      noteBorderColor: '#39ff14',
+      sequenceNumberColor: '#0a0e0a',
+      labelBoxBkgColor: '#102012',
+      labelBoxBorderColor: '#39ff14',
+      labelTextColor: '#d4ffd4',
+    },
+  });
+</script>
+
+</body>
+</html>
