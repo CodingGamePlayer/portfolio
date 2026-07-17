@@ -306,7 +306,7 @@
     <h2 class="stitle">시스템 아키텍처 · MSA 백엔드 + 웹·모바일</h2>
     <div class="arch">
       <div class="archcap">서비스 구성</div>
-      <svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 680 316" xmlns="http://www.w3.org/2000/svg">
         <defs><marker id="arL" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
         <style>
           .Lb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Lfront{fill:#13203a;stroke:#3182f6;stroke-width:1.6}
@@ -322,23 +322,16 @@
         <!-- gateway -->
         <rect class="Lgw" x="230" y="98" width="220" height="48" rx="10"/><text class="Lt" x="340" y="120" text-anchor="middle">API Gateway · SSO</text><text class="Ls" x="340" y="136" text-anchor="middle">단일 진입점 · 인증</text>
         <!-- MSA group -->
-        <rect class="Lgrp" x="36" y="176" width="608" height="96" rx="12"/>
-        <text class="Lzt" x="50" y="196" fill="#8fd9bf">백엔드 · NestJS MSA — 서비스별 독립 배포 · DDD</text>
-        <rect class="Lsvc" x="50" y="204" width="132" height="28" rx="6"/><text class="Lsc" x="116" y="222" text-anchor="middle">근태</text>
-        <rect class="Lsvc" x="198" y="204" width="132" height="28" rx="6"/><text class="Lsc" x="264" y="222" text-anchor="middle">채용</text>
-        <rect class="Lsvc" x="346" y="204" width="132" height="28" rx="6"/><text class="Lsc" x="412" y="222" text-anchor="middle">KPI</text>
-        <rect class="Lsvc" x="494" y="204" width="136" height="28" rx="6"/><text class="Lsc" x="562" y="222" text-anchor="middle">SSO 인증</text>
-        <rect class="Lsvc" x="50" y="238" width="132" height="28" rx="6"/><text class="Lsc" x="116" y="256" text-anchor="middle">프로젝트</text>
-        <rect class="Lsvc" x="198" y="238" width="132" height="28" rx="6"/><text class="Lsc" x="264" y="256" text-anchor="middle">자원관리</text>
-        <rect class="Lsvc" x="346" y="238" width="132" height="28" rx="6"/><text class="Lsc" x="412" y="256" text-anchor="middle">산출물</text>
-        <rect class="Lsvc" x="494" y="238" width="136" height="28" rx="6"/><text class="Lsc" x="562" y="256" text-anchor="middle">위성 전용 MES</text>
+        <rect class="Lgrp" x="36" y="176" width="608" height="60" rx="12"/>
+        <text class="Lt" x="340" y="202" text-anchor="middle">백엔드 · NestJS MSA</text>
+        <text class="Ls" x="340" y="221" text-anchor="middle">서비스별 독립 배포 · DDD · 도메인 분리</text>
         <!-- data -->
-        <rect class="Ldb" x="36" y="290" width="608" height="34" rx="9"/><text class="Lt" x="340" y="311" text-anchor="middle">서비스별 데이터베이스 · 도메인 이벤트</text>
+        <rect class="Ldb" x="36" y="270" width="608" height="40" rx="9"/><text class="Lt" x="340" y="294" text-anchor="middle">서비스별 데이터베이스 · 도메인 이벤트</text>
         <!-- orthogonal arrows -->
         <path class="Lln" d="M194,64 V82 H336 V96"/><text class="Llbl" x="270" y="78" text-anchor="middle">HTTPS</text>
         <path class="Lln" d="M486,64 V82 H344 V96"/><text class="Llbl" x="410" y="78" text-anchor="middle">HTTPS</text>
         <path class="Lln" d="M340,146 V174"/><text class="Llbl" x="348" y="164">라우팅</text>
-        <path class="Lln" d="M340,272 V288"/><text class="Llbl" x="348" y="284">영속화</text>
+        <path class="Lln" d="M340,236 V268"/><text class="Llbl" x="348" y="256">영속화</text>
       </svg>
     </div>
     <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>NestJS MSA</b> 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리되어 개별 배포·확장이 가능합니다.</p>
