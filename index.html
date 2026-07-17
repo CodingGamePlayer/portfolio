@@ -358,12 +358,14 @@
         <rect class="Amod" x="280" y="198" width="120" height="24" rx="6"/><text class="Am" x="340" y="214" text-anchor="middle">위성 전용 MES (자체 구축)</text>
         <rect class="Abox" x="30" y="92" width="142" height="46" rx="10"/><text class="AAt" x="101" y="112" text-anchor="middle">Amaranth 10</text><text class="AAs" x="101" y="127" text-anchor="middle">회계 시스템</text>
         <rect class="Abox" x="30" y="200" width="142" height="46" rx="10"/><text class="AAt" x="101" y="220" text-anchor="middle">SmartNotes</text><text class="AAs" x="101" y="235" text-anchor="middle">양산 MES</text>
-        <rect class="Abox" x="508" y="92" width="142" height="46" rx="10"/><text class="AAt" x="579" y="112" text-anchor="middle">S-One 지문인식기</text><text class="AAs" x="579" y="127" text-anchor="middle">출입·근태</text>
-        <rect class="Abox" x="508" y="200" width="142" height="46" rx="10"/><text class="AAt" x="579" y="220" text-anchor="middle">출입 QR 리더</text><text class="AAs" x="579" y="235" text-anchor="middle">출입 인증</text>
-        <path class="Aln" d="M101,138 V158 H220"/><text class="Albl" x="160" y="152" text-anchor="middle">REST API</text>
-        <path class="Aln" d="M101,200 V180 H220"/><text class="Albl" x="160" y="174" text-anchor="middle">REST API</text>
-        <path class="Aln" d="M579,138 V158 H460"/><text class="Albl" x="519" y="152" text-anchor="middle">DB Injection</text>
-        <path class="Aln" d="M579,200 V180 H460"/><text class="Albl" x="519" y="174" text-anchor="middle">DB Injection</text>
+        <rect class="Abox" x="508" y="72" width="142" height="44" rx="10"/><text class="AAt" x="579" y="94" text-anchor="middle">S-One 지문인식기</text><text class="AAs" x="579" y="109" text-anchor="middle">출입·근태</text>
+        <rect class="Abox" x="508" y="150" width="142" height="44" rx="10"/><text class="AAt" x="579" y="172" text-anchor="middle">출입 QR 리더</text><text class="AAs" x="579" y="187" text-anchor="middle">출입 인증</text>
+        <rect class="Abox" x="508" y="228" width="142" height="44" rx="10"/><text class="AAt" x="579" y="250" text-anchor="middle">차량 출입 관리</text><text class="AAs" x="579" y="265" text-anchor="middle">번호판 인식(LPR)</text>
+        <path class="Aln" d="M172,115 H220"/><text class="Albl" x="196" y="108" text-anchor="middle">REST API</text>
+        <path class="Aln" d="M172,223 H220"/>
+        <path class="Aln" d="M508,94 H460"/>
+        <path class="Aln" d="M508,172 H460"/><text class="Albl" x="484" y="165" text-anchor="middle">DB Injection</text>
+        <path class="Aln" d="M508,250 H460"/>
       </svg>
     </div>
   </section>
@@ -495,10 +497,10 @@
         <rect class="Gc" x="250" y="100" width="150" height="30" rx="7"/><text class="Gt" x="325" y="120" text-anchor="middle">Chunk 3</text>
         <rect class="Gc" x="250" y="138" width="150" height="30" rx="7"/><text class="Gt" x="325" y="158" text-anchor="middle">Chunk N</text>
         <rect class="Gb" x="510" y="78" width="154" height="52" rx="10"/><text class="Gt" x="587" y="100" text-anchor="middle">서버에서 재조립</text><text class="Gs" x="587" y="116" text-anchor="middle">순서·무결성 검증</text>
-        <path class="Gln" d="M146,96 L246,39"/><path class="Gln" d="M146,100 L246,77"/><path class="Gln" d="M146,108 L246,115"/><path class="Gln" d="M146,112 L246,153"/>
-        <text class="Glbl" x="198" y="70" text-anchor="middle">분할</text>
-        <path class="Gln" d="M400,39 L506,92"/><path class="Gln" d="M400,77 L506,98"/><path class="Gln" d="M400,115 L506,106"/><path class="Gln" d="M400,153 L506,112"/>
-        <text class="Glbl" x="455" y="70" text-anchor="middle">병렬 전송</text>
+        <path class="Gln" d="M146,104 H198 V39 H246"/><path class="Gln" d="M146,104 H198 V77 H246"/><path class="Gln" d="M146,104 H198 V115 H246"/><path class="Gln" d="M146,104 H198 V153 H246"/>
+        <text class="Glbl" x="174" y="64" text-anchor="middle">분할</text>
+        <path class="Gln" d="M400,39 H452 V104 H506"/><path class="Gln" d="M400,77 H452 V104 H506"/><path class="Gln" d="M400,115 H452 V104 H506"/><path class="Gln" d="M400,153 H452 V104 H506"/>
+        <text class="Glbl" x="478" y="64" text-anchor="middle">병렬 전송</text>
       </svg>
     </div>
     <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 수 분 내에 이동하고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
@@ -537,8 +539,8 @@
         <rect class="Hb" x="516" y="90" width="150" height="44" rx="10"/><text class="Ht" x="591" y="110" text-anchor="middle">계정 B 연결</text><text class="Hs" x="591" y="125" text-anchor="middle">대상·권한 세트 B</text>
         <rect class="Hb" x="516" y="150" width="150" height="40" rx="10"/><text class="Hg" x="591" y="174" text-anchor="middle">… 계정별 자동 전환</text>
         <path class="Hln" d="M166,102 H262"/><text class="Hlbl" x="214" y="94" text-anchor="middle">SSO 토큰</text>
-        <path class="Hln" d="M416,96 L512,54"/><path class="Hln" d="M416,102 L512,110"/><path class="Hln" d="M416,110 L512,168"/>
-        <text class="Hlbl" x="470" y="150" text-anchor="middle">계정별 연결</text>
+        <path class="Hln" d="M416,102 H466 V52 H512"/><path class="Hln" d="M416,102 H466 V112 H512"/><path class="Hln" d="M416,102 H466 V170 H512"/>
+        <text class="Hlbl" x="440" y="96" text-anchor="middle">계정별 연결</text>
       </svg>
     </div>
     <div class="pblock" style="margin-top:14px"><div class="h">자동 로그인 · 계정별 연결 변경</div><p>백오피스 <b>Portal의 SSO</b>를 그대로 사용해 전송 엔진이 <b>별도 로그인 없이 자동 인증</b>됩니다. 포털 계정 하나로 엔진까지 이어지고, <b>로그인한 계정에 따라 연결(접근 대상·권한)을 자동으로 전환·변경</b>하도록 처리해 계정마다 맞는 환경으로 곧바로 연결됩니다. Flagship 02 백오피스 통합 플랫폼의 SSO 체계를 재사용해 인증을 일원화했습니다.</p></div>
