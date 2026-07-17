@@ -314,7 +314,7 @@
           .Lsvc{fill:#10231c;stroke:#2dd4a7;stroke-width:1.3}.Ldb{fill:#161b27;stroke:#3a5a92;stroke-width:1.4}
           .Lt{fill:#e8edf5;font-size:12px;font-weight:700}.Ls{fill:#9aa6bd;font-size:8.5px}
           .Lzt{font-size:10px;font-weight:800}.Lsc{fill:#2dd4a7;font-size:9.5px;font-weight:700}
-          .Lln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arL)}.Llbl{fill:#7e8aa0;font-size:8.5px}
+          .Lln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arL)}.Lln0{stroke:#5ea0ff;stroke-width:1.5;fill:none}.Llbl{fill:#7e8aa0;font-size:8.5px}
         </style>
         <!-- frontend -->
         <rect class="Lfront" x="104" y="14" width="180" height="50" rx="10"/><text class="Lt" x="194" y="36" text-anchor="middle">웹 클라이언트</text><text class="Ls" x="194" y="52" text-anchor="middle">Next.js · React</text>
@@ -328,8 +328,10 @@
         <!-- data -->
         <rect class="Ldb" x="36" y="270" width="608" height="40" rx="9"/><text class="Lt" x="340" y="294" text-anchor="middle">서비스별 데이터베이스 · 도메인 이벤트</text>
         <!-- orthogonal arrows -->
-        <path class="Lln" d="M194,64 V82 H336 V96"/><text class="Llbl" x="270" y="78" text-anchor="middle">HTTPS</text>
-        <path class="Lln" d="M486,64 V82 H344 V96"/><text class="Llbl" x="410" y="78" text-anchor="middle">HTTPS</text>
+        <path class="Lln0" d="M194,64 V82"/>
+        <path class="Lln0" d="M486,64 V82"/>
+        <path class="Lln0" d="M194,82 H486"/>
+        <path class="Lln" d="M340,82 V96"/><text class="Llbl" x="340" y="76" text-anchor="middle">HTTPS</text>
         <path class="Lln" d="M340,146 V174"/><text class="Llbl" x="348" y="164">라우팅</text>
         <path class="Lln" d="M340,236 V268"/><text class="Llbl" x="348" y="256">영속화</text>
       </svg>
@@ -349,7 +351,7 @@
           .Abox{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Acore{fill:#13203a;stroke:#3182f6;stroke-width:1.8}
           .Amod{fill:#10231c;stroke:#2a6b54;stroke-width:1.2}.AAt{fill:#e8edf5;font-size:12px;font-weight:700}
           .AAs{fill:#9aa6bd;font-size:10px}.Am{fill:#2dd4a7;font-size:9.5px;font-weight:700}
-          .Aln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arA)}
+          .Aln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arA)}.Aln0{stroke:#5ea0ff;stroke-width:1.5;fill:none}
           .Acap{fill:#6b7689;font-size:9px;font-weight:700}.Albl{fill:#7e8aa0;font-size:8.5px}
         </style>
         <text class="Acap" x="100" y="54" text-anchor="middle">외부 시스템 · REST API</text>
@@ -372,9 +374,11 @@
         <rect class="Abox" x="508" y="228" width="142" height="44" rx="10"/><text class="AAt" x="579" y="250" text-anchor="middle">차량 출입 관리</text><text class="AAs" x="579" y="265" text-anchor="middle">번호판 인식(LPR)</text>
         <path class="Aln" d="M172,115 H220"/><text class="Albl" x="196" y="108" text-anchor="middle">REST API</text>
         <path class="Aln" d="M172,223 H220"/>
-        <path class="Aln" d="M508,94 H460"/>
-        <path class="Aln" d="M508,172 H460"/><text class="Albl" x="484" y="165" text-anchor="middle">DB Injection</text>
-        <path class="Aln" d="M508,250 H460"/>
+        <path class="Aln0" d="M508,94 H480"/>
+        <path class="Aln0" d="M508,172 H480"/>
+        <path class="Aln0" d="M508,250 H480"/>
+        <path class="Aln0" d="M480,94 V250"/>
+        <path class="Aln" d="M480,172 H460"/><text class="Albl" x="470" y="165" text-anchor="middle">DB Injection</text>
       </svg>
     </div>
   </section>
