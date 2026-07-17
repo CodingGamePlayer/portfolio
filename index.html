@@ -30,22 +30,30 @@
   .toc-brand b{color:var(--accent);font-weight:700}
   .toc-sub{padding:7px 30px 22px;font-size:.8rem;color:var(--dim);border-bottom:1px solid var(--line2);margin-bottom:18px}
   .toc-label{font-size:.68rem;font-weight:600;letter-spacing:.16em;color:var(--faint);padding:0 30px 12px}
-  .toc-nav{display:flex;flex-direction:column;gap:6px;padding:0 18px}
-  .toc a{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:10px;
-    cursor:pointer;text-decoration:none;background:rgba(255,255,255,.015);transition:.15s}
-  .toc a:hover{background:rgba(255,255,255,.045)}
-  .toc a.active{background:rgba(91,141,239,.13);box-shadow:inset 0 0 0 1px rgba(91,141,239,.28)}
-  .toc a .num{flex:0 0 42px;width:42px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;
-    font-size:.62rem;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.04em;color:#556170;
-    background:linear-gradient(135deg,#111a2b,#0a0e17);border:1px solid var(--chipln)}
-  .toc a.active .num{color:var(--bright);border-color:rgba(91,141,239,.55)}
-  .toc a .tt{min-width:0;flex:1;font-size:.83rem;font-weight:500;color:var(--body);letter-spacing:-.005em;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .toc a.active .tt{color:var(--txt);font-weight:600}
+  .toc-nav{display:flex;flex-direction:column;gap:5px;padding:0 16px 8px}
+  .toc-item{display:block;padding:6px;border-radius:10px;cursor:pointer;text-decoration:none;background:rgba(255,255,255,.015);transition:background .15s,box-shadow .15s}
+  .toc-item:hover{background:rgba(255,255,255,.05)}
+  .toc-item.active{background:rgba(91,141,239,.13);box-shadow:inset 0 0 0 1px rgba(91,141,239,.28)}
+  .toc-item .thumb{position:relative;width:100%;aspect-ratio:16/9;border-radius:6px;overflow:hidden;border:1px solid var(--chipln);background:#0a0e17}
+  .toc-item.active .thumb{border-color:rgba(91,141,239,.5)}
+  .toc-item .thumb iframe{position:absolute;top:0;left:0;width:1200px;height:675px;border:0;transform-origin:0 0;pointer-events:none;background:#0a0e17}
+  .toc-item .thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.62rem;color:var(--faint);font-variant-numeric:tabular-nums}
+  .toc-item .tlabel{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--body);margin-top:5px;padding:0 2px}
+  .toc-item .tlabel .tnum{font-size:.6rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--faint);flex:none}
+  .toc-item .tlabel .ttx{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .toc-item.active .tlabel{color:var(--txt)}
+  .toc-item.active .tlabel .tnum{color:var(--bright)}
+  .toc-item.sub{margin-left:16px}
   @media(max-width:860px){
     .toc{transform:translateX(-100%)}
     .deck{left:0}
   }
+  /* preview render mode (loaded inside sidebar thumbnails via ?p=N) */
+  body.preview-mode{overflow:hidden}
+  body.preview-mode .toc,body.preview-mode .deckhead,body.preview-mode .deckfoot,body.preview-mode .progress{display:none!important}
+  body.preview-mode .deck{left:0}
+  body.preview-mode .slide{transition:none}
+  body.preview-mode .slide:not(.active){display:none}
   .slide{
     position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
     padding:76px 7vw 62px;opacity:0;pointer-events:none;transition:opacity .35s ease;
@@ -1158,13 +1166,42 @@
     {t:'GitHub 기록', s:37},
     {t:'Closing', s:38}
   ];
+  // Preview render mode: loaded as ?p=N inside a sidebar thumbnail iframe →
+  // render only slide N, no chrome, and stop (no sidebar ⇒ no nested iframes).
+  const pv=new URLSearchParams(location.search).get('p');
+  if(pv!==null){
+    document.body.classList.add('preview-mode');
+    const n=Math.max(0,Math.min(slides.length-1,parseInt(pv,10)||0));
+    slides.forEach((s,idx)=>s.classList.toggle('active',idx===n));
+    return;
+  }
+
   const tocEl=document.getElementById('tocNav');
-  toc.forEach((item,idx)=>{
+  // one preview card per slide (section-start = top level, rest = sub)
+  const items=[];
+  toc.forEach((sec,si)=>{
+    const end=sec.e!==undefined?sec.e:sec.s;
+    for(let idx=sec.s; idx<=end; idx++){
+      if(idx===sec.s) items.push({idx,label:sec.t,sub:false,no:String(si+1).padStart(2,'0')});
+      else{ const st=slides[idx].querySelector('.stitle'); items.push({idx,label:st?st.textContent:('슬라이드 '+(idx+1)),sub:true,no:'ㄴ'}); }
+    }
+  });
+  items.forEach(m=>{
     const a=document.createElement('a');
-    a.innerHTML='<span class="num">'+String(idx+1).padStart(2,'0')+'</span><span class="tt">'+item.t+'</span>';
-    a.onclick=()=>show(item.s);
-    item.el=a;
-    tocEl.appendChild(a);
+    a.className='toc-item'+(m.sub?' sub':'');
+    a.dataset.idx=m.idx;
+    a.innerHTML='<div class="thumb"><span class="ph">'+(m.idx+1)+'</span></div>'+
+      '<div class="tlabel"><span class="tnum">'+m.no+'</span><span class="ttx">'+m.label+'</span></div>';
+    a.onclick=()=>show(m.idx);
+    m.el=a; tocEl.appendChild(a);
+    // live thumbnail: scaled iframe of the slide; browser defers offscreen loads
+    const thumb=a.querySelector('.thumb');
+    const ifr=document.createElement('iframe');
+    ifr.loading='lazy'; ifr.setAttribute('scrolling','no'); ifr.setAttribute('tabindex','-1'); ifr.setAttribute('aria-hidden','true');
+    ifr.style.transform='scale('+(thumb.clientWidth/1200)+')';
+    ifr.onload=()=>{const ph=thumb.querySelector('.ph'); if(ph) ph.remove();};
+    ifr.src='index.html?p='+m.idx;
+    thumb.appendChild(ifr);
   });
 
   function show(n){
@@ -1173,14 +1210,9 @@
     counter.textContent=(i+1)+' / '+slides.length;
     if(progress) progress.style.width=(i/(slides.length-1)*100)+'%';
     let sec='';
-    toc.forEach(item=>{
-      const end=item.e!==undefined?item.e:item.s;
-      const on=i>=item.s && i<=end;
-      item.el.classList.toggle('active', on);
-      if(on) sec=item.t;
-    });
-    const secEl=document.getElementById('secLabel');
-    if(secEl) secEl.textContent=sec;
+    toc.forEach(item=>{const end=item.e!==undefined?item.e:item.s; if(i>=item.s&&i<=end) sec=item.t;});
+    const secEl=document.getElementById('secLabel'); if(secEl) secEl.textContent=sec;
+    items.forEach(m=>{const on=m.idx===i; m.el.classList.toggle('active',on); if(on) m.el.scrollIntoView({block:'nearest'});});
   }
   document.getElementById('prevBtn').onclick=()=>show(i-1);
   document.getElementById('nextBtn').onclick=()=>show(i+1);
