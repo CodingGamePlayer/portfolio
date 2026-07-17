@@ -67,6 +67,12 @@
   .track ul{list-style:none;display:flex;flex-direction:column;gap:8px}
   .track li{display:flex;gap:8px;font-size:.84rem}
   .track li:before{content:"▸";color:var(--accent2);font-weight:700}
+  .tracks.four{grid-template-columns:repeat(4,1fr);max-width:1240px;gap:14px}
+  .tracks.four .track{padding:16px}
+  .tracks.four .track h3{font-size:.92rem}
+  .tracks.four .track p{font-size:.78rem;margin-bottom:10px}
+  .tracks.four .track li{font-size:.785rem}
+  .stepn{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:#12203a;color:var(--accent2);font-weight:800;font-size:.9rem;border:1px solid var(--line);margin-bottom:12px}
 
   /* project header */
   .ptop{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:4px}
@@ -172,52 +178,75 @@
     </div>
   </section>
 
-  <!-- 3 TWO TRACK -->
+  <!-- 3 CORE COMPETENCY (full-cycle 4-track) -->
   <section class="slide">
     <div class="eyebrow">Core Competency</div>
-    <h2 class="stitle">Three-Track 강점</h2>
-    <p class="ssub">백엔드 엔지니어링 · 인프라 구성 · 엔지니어링 리더십 — 세 축 모두에서 즉시 기여</p>
-    <div class="tracks">
+    <h2 class="stitle">기획부터 인프라까지, 풀사이클로</h2>
+    <p class="ssub">제품 기획 · 프론트엔드 · 백엔드 · 인프라 — 한 사람이 전 주기를 설계하고 실행합니다. PM·테크리드로 맡은 모든 프로젝트에서 <b style="color:var(--fg)">메인 기획과 리딩</b>을 직접 수행했습니다.</p>
+    <div class="tracks four">
       <div class="track">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg> Backend Engineering <span class="tag">IC</span></h3>
-        <p>NestJS·TypeScript·MSA 풀사이클 설계·개발</p>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg> 기획 <span class="tag">Product</span></h3>
+        <p>문제 정의부터 화면·도메인 설계까지</p>
         <ul>
-          <li>DDD·TDD 기반 도메인 설계</li>
-          <li>대용량 성능 최적화 (렌더·쿼리·캐시)</li>
-          <li>공간쿼리·파티셔닝·인덱싱 튜닝</li>
-          <li>Saga 분산 트랜잭션 · 멱등성 · 재시도</li>
-          <li>이벤트 기반 EDA · 메시지 큐 설계</li>
-          <li>GPU 병렬 처리 · 대용량 파이프라인</li>
+          <li>요구사항 수립 · As-Is/To-Be 분석</li>
+          <li>시나리오 · 유즈케이스 설계</li>
+          <li>IA · 화면 흐름 설계</li>
+          <li>도메인 상태 · 데이터 구조 설계</li>
+          <li>메인 기획 + 리딩 직접 수행</li>
         </ul>
       </div>
       <div class="track">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="3" width="20" height="6" rx="1"/><rect x="2" y="15" width="20" height="6" rx="1"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg> Infrastructure <span class="tag">DevOps</span></h3>
-        <p>온프레미스 + 클라우드 하이브리드 구성·운영</p>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg> 프론트엔드 <span class="tag">FE</span></h3>
+        <p>Next.js·React·TypeScript 화면 설계·개발</p>
+        <ul>
+          <li>Atomic · Modular 컴포넌트 추상화</li>
+          <li>대용량 3D · GIS 렌더 최적화</li>
+          <li>기획 화면 = 실제 화면 워크플로</li>
+          <li>상태관리 · 데이터 페칭 설계</li>
+          <li>디자인 시스템 · 코드 컨벤션 정립</li>
+        </ul>
+      </div>
+      <div class="track">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg> 백엔드 <span class="tag">BE</span></h3>
+        <p>NestJS·MSA 풀사이클 설계·개발</p>
+        <ul>
+          <li>DDD · TDD 기반 도메인 설계</li>
+          <li>EDA · 메시지 큐 · Saga 트랜잭션</li>
+          <li>대용량 성능 최적화 (쿼리·캐시)</li>
+          <li>공간쿼리 · 파티셔닝 · 인덱싱 튜닝</li>
+          <li>GPU 병렬 · 대용량 파이프라인</li>
+        </ul>
+      </div>
+      <div class="track">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="3" width="20" height="6" rx="1"/><rect x="2" y="15" width="20" height="6" rx="1"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg> 인프라 <span class="tag">DevOps</span></h3>
+        <p>온프레미스 + 클라우드 하이브리드</p>
         <ul>
           <li>7노드 Kubernetes HA 구축·운영</li>
           <li>온프레미스·클라우드 하이브리드 설계</li>
           <li>GitLab CI/CD · Kaniko 병렬 빌드</li>
           <li>MetalLB · ingress · 와일드카드 TLS</li>
-          <li>Harbor · GitHub Actions OIDC · Trivy</li>
-          <li>SSM · Secrets Manager · 무SSH 보안</li>
-        </ul>
-      </div>
-      <div class="track">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Leadership <span class="tag">EM</span></h3>
-        <p>0→11명 조직 빌딩과 프로세스 혁신</p>
-        <ul>
-          <li>채용·온보딩·평가·성장 체계 직접 설계</li>
-          <li>1on1 · 맞춤 커리큘럼 · 기술 세미나 운영</li>
-          <li>부서·외부 이해관계자 협업·조율 주도</li>
-          <li>팀원 평균 근속 2년 · 안정적 조직 운영</li>
-          <li>기술 표준 · 코드 리뷰 문화 정착</li>
-          <li>AI 개발환경 도입, 리드타임 3개월→1개월</li>
+          <li>Harbor · OIDC · Trivy 보안 파이프라인</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 4 LIID overview -->
+  <!-- 4 PLANNING deep dive -->
+  <section class="slide">
+    <div class="eyebrow">Planning · Product Design</div>
+    <h2 class="stitle">기획: 요구사항에서 데이터 구조까지</h2>
+    <p class="ssub">PM·테크리드로 맡은 모든 프로젝트에서 <b style="color:var(--fg)">메인 기획을 직접 수행</b> — 문제 정의부터 화면·도메인 설계까지 일관되게 끌고 갑니다.</p>
+    <div class="grid3" style="max-width:1160px">
+      <div class="mini"><div class="stepn">1</div><h4>요구사항 수립</h4><p>이해관계자 인터뷰로 진짜 문제와 제약·범위를 정의</p></div>
+      <div class="mini"><div class="stepn">2</div><h4>현재·목표 모델 분석</h4><p>As-Is 프로세스를 진단하고 To-Be 모델을 설계</p></div>
+      <div class="mini"><div class="stepn">3</div><h4>시나리오 · 유즈케이스</h4><p>액터·주요 플로우·예외 케이스를 도출·설계</p></div>
+      <div class="mini"><div class="stepn">4</div><h4>IA 설계</h4><p>정보 구조·내비게이션·메뉴 체계를 정의</p></div>
+      <div class="mini"><div class="stepn">5</div><h4>와이어프레임 · 화면 흐름</h4><p>화면 단위 흐름과 인터랙션을 설계</p></div>
+      <div class="mini"><div class="stepn">6</div><h4>도메인 상태 · 데이터 구조</h4><p>상태 전이·엔티티·데이터 모델을 설계</p></div>
+    </div>
+  </section>
+
+  <!-- 5 LIID overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 01</div>
     <div class="ptop"><h2 class="stitle">LIID · 위성영상 플랫폼</h2><span class="pill">PM · Architecture · Backend</span></div>
@@ -226,7 +255,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>요구사항 분석부터 아키텍처·백엔드까지 주도. 타일맵을 <b>최적화 래스터 직접 렌더링 + 캐시</b>로 전환하고 <b>공간쿼리·파티셔닝</b>으로 검색을 튜닝. SDPE 산출물을 서비스 도메인으로 변환해 <b>LLM·DEM 3D 지형 모니터링 · SAR 검색 · 촬영 요청</b>을 단일 진입점으로 제공하고, LLM은 <b>로컬 모델</b>로, 대용량 3D는 <b>캐시 Hit/Miss</b>로 처리. 위성 제품별 MSA·DDD·TDD로 구성했습니다.</p></div>
   </section>
 
-  <!-- 5 LIID architecture -->
+  <!-- 6 LIID architecture -->
   <section class="slide">
     <div class="eyebrow">LIID · Architecture</div>
     <h2 class="stitle">데이터 흐름 & 비동기 처리</h2>
@@ -257,7 +286,7 @@
     </div>
   </section>
 
-  <!-- 6 LIID perf -->
+  <!-- 7 LIID perf -->
   <section class="slide">
     <div class="eyebrow">LIID · Impact</div>
     <h2 class="stitle">정량 성과 & 분산 트랜잭션</h2>
@@ -272,7 +301,7 @@
     </div>
   </section>
 
-  <!-- 7 LIID service -->
+  <!-- 8 LIID service -->
   <section class="slide">
     <div class="eyebrow">LIID · Service</div>
     <h2 class="stitle">로컬 LLM · 3D 지형 모니터링 · 촬영 요청</h2>
@@ -284,7 +313,7 @@
     </div>
   </section>
 
-  <!-- 8 LIID cache -->
+  <!-- 9 LIID cache -->
   <section class="slide">
     <div class="eyebrow">LIID · Design</div>
     <h2 class="stitle">대용량 3D 전달 · 캐시 Hit / Miss 전략</h2>
@@ -312,7 +341,7 @@
     <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
   </section>
 
-  <!-- 9 BACKOFFICE overview -->
+  <!-- 10 BACKOFFICE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 02</div>
     <div class="ptop"><h2 class="stitle">백오피스 통합 플랫폼</h2><span class="pill">PM + Tech Lead · 설계·기획·개발 주도</span></div>
@@ -321,7 +350,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>분산 시스템을 SSO 기반 단일 진입점으로 재설계하고 7개 모듈을 융합. 위성 전용 MES를 직접 구축. 외부 시스템(Amaranth 10·SmartNotes)은 REST API로, 출입 H/W는 DB 레벨로 연동. DDD 전술 패턴으로 도메인을 보호했습니다.</p></div>
   </section>
 
-  <!-- 10 BACKOFFICE system arch -->
+  <!-- 11 BACKOFFICE system arch -->
   <section class="slide">
     <div class="eyebrow">백오피스 · Architecture</div>
     <h2 class="stitle">시스템 아키텍처 · MSA 백엔드 + 웹·모바일</h2>
@@ -360,7 +389,7 @@
     <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>NestJS MSA</b> 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리되어 개별 배포·확장이 가능합니다.</p>
   </section>
 
-  <!-- 11 BACKOFFICE integration -->
+  <!-- 12 BACKOFFICE integration -->
   <section class="slide">
     <div class="eyebrow">백오피스 · Integration</div>
     <h2 class="stitle">시스템 · H/W 연동 구조</h2>
@@ -404,7 +433,7 @@
     </div>
   </section>
 
-  <!-- 12 SDPE overview -->
+  <!-- 13 SDPE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 03</div>
     <div class="ptop"><h2 class="stitle">SAR Data Processing Element</h2><span class="pill">PM · Architecture 설계</span></div>
@@ -413,7 +442,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
   </section>
 
-  <!-- 13 SDPE architecture -->
+  <!-- 14 SDPE architecture -->
   <section class="slide">
     <div class="eyebrow">SDPE · Architecture</div>
     <h2 class="stitle">DAG 오케스트레이션 & 이벤트 기반 처리</h2>
@@ -450,7 +479,7 @@
     </div>
   </section>
 
-  <!-- 14 SDPE impact -->
+  <!-- 15 SDPE impact -->
   <section class="slide">
     <div class="eyebrow">SDPE · Impact</div>
     <h2 class="stitle">10분 이상 걸리던 처리를 40초대로</h2>
@@ -465,7 +494,7 @@
     </div>
   </section>
 
-  <!-- 15 FILE-ENGINE overview -->
+  <!-- 16 FILE-ENGINE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 04</div>
     <div class="ptop"><h2 class="stitle">대용량 파일 전송 엔진 · 분산 파일 서버</h2><span class="pill">Tech Lead · 설계 주도</span></div>
@@ -474,7 +503,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 50GB 데이터를 수 분 내에 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
   </section>
 
-  <!-- 16 FILE-ENGINE architecture -->
+  <!-- 17 FILE-ENGINE architecture -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Architecture</div>
     <h2 class="stitle">전송 엔진 · 큐 · 오토스케일 파일 서버</h2>
@@ -511,7 +540,7 @@
     </div>
   </section>
 
-  <!-- 17 FILE-ENGINE chunk -->
+  <!-- 18 FILE-ENGINE chunk -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Deep Dive</div>
     <h2 class="stitle">50GB를 수 분 내로 · 청크 병렬 전송</h2>
@@ -540,7 +569,7 @@
     <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 수 분 내에 이동하고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
   </section>
 
-  <!-- 18 FILE-ENGINE resilience -->
+  <!-- 19 FILE-ENGINE resilience -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Design</div>
     <h2 class="stitle">부하 분산 · 죽어도 이어가는 전송</h2>
@@ -552,7 +581,7 @@
     </div>
   </section>
 
-  <!-- 19 FILE-ENGINE SSO -->
+  <!-- 20 FILE-ENGINE SSO -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Integration</div>
     <h2 class="stitle">Portal 로그인 · 엔진 자동 로그인 · 공유 폴더 자동 전환</h2>
@@ -583,7 +612,7 @@
     </div>
   </section>
 
-  <!-- 20 OTHER PROJECTS -->
+  <!-- 21 OTHER PROJECTS -->
   <section class="slide">
     <div class="eyebrow">Selected Projects</div>
     <h2 class="stitle">시스템을 설계하고, 끝까지 운영합니다</h2>
@@ -597,7 +626,7 @@
     </div>
   </section>
 
-  <!-- 21 INFRA overview -->
+  <!-- 22 INFRA overview -->
   <section class="slide">
     <div class="eyebrow">Infrastructure &amp; DevOps</div>
     <div class="ptop"><h2 class="stitle">온프레미스 + 클라우드 하이브리드 인프라</h2><span class="pill">설계·구축 주도</span></div>
@@ -632,7 +661,7 @@
     <p class="ssub" style="margin-top:12px">사내망 전용 서비스는 <b>온프레미스 k8s</b>, 사내 ERP는 <b>AWS 클라우드</b>, 공공기관 납품은 <b>CSAP 인증 경계로 완전 분리</b> — 워크로드마다 맞는 환경에 배치하는 하이브리드 전략입니다.</p>
   </section>
 
-  <!-- 22 INFRA on-prem -->
+  <!-- 23 INFRA on-prem -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">사내 PaaS · Kubernetes 플랫폼 (구축·운영)</h2>
@@ -644,7 +673,7 @@
     </div>
   </section>
 
-  <!-- 23 INFRA k8s topology -->
+  <!-- 24 INFRA k8s topology -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">Kubernetes 클러스터 설계 · CI/CD → 배포 → 노출</h2>
@@ -691,7 +720,7 @@
     </div>
   </section>
 
-  <!-- 24 INFRA cloud -->
+  <!-- 25 INFRA cloud -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">클라우드 인프라 · AWS 컨테이너 플랫폼 (설계·전환)</h2>
@@ -703,7 +732,7 @@
     </div>
   </section>
 
-  <!-- 25 INFRA cloud arch -->
+  <!-- 26 INFRA cloud arch -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">AWS 클라우드 아키텍처 · Stage / Prod · public·private 분리</h2>
@@ -749,7 +778,7 @@
     <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
   </section>
 
-  <!-- 26 TECH-LEAD DDD -->
+  <!-- 27 TECH-LEAD DDD -->
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 개발 표준</div>
     <h2 class="stitle">DDD 전술 패턴 · Context / Business 계층</h2>
@@ -786,7 +815,7 @@
     </div>
   </section>
 
-  <!-- 27 TECH-LEAD ai-native -->
+  <!-- 28 TECH-LEAD ai-native -->
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 개발 문화</div>
     <h2 class="stitle">AI Native 개발 문화 · 100% Agent 워크플로</h2>
@@ -798,7 +827,7 @@
     </div>
   </section>
 
-  <!-- 28 TECH-LEAD planning-screen -->
+  <!-- 29 TECH-LEAD planning-screen -->
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 프로세스</div>
     <h2 class="stitle">기획 화면 = 실제 화면 · 재작업 제거</h2>
@@ -810,7 +839,7 @@
     </div>
   </section>
 
-  <!-- 29 TECH-LEAD llm-wiki -->
+  <!-- 30 TECH-LEAD llm-wiki -->
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 지식 관리</div>
     <h2 class="stitle">LLM Wiki · Second Brain으로 인수인계·온보딩</h2>
@@ -838,7 +867,7 @@
     <p class="ssub" style="margin-top:12px">프로젝트·인프라 <b>인수인계와 온보딩</b>의 어려움을 줄이려, 작업하며 <b>LLM Wiki에 Second Brain</b>을 남깁니다. md 문서의 <b>메타데이터에 연관 문서 태그</b>를 달아 문서를 <b>그래프로 연결</b>해 제공하므로, 다음 사람이 맥락을 따라 자연스럽게 업무를 이어갑니다.</p>
   </section>
 
-  <!-- 30 TECH-LEAD fe-convention -->
+  <!-- 31 TECH-LEAD fe-convention -->
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 코드 컨벤션</div>
     <h2 class="stitle">프론트 코드 컨벤션 개편 · 컴포넌트 하이라키</h2>
@@ -867,7 +896,7 @@
     <p class="ssub" style="margin-top:12px">ERP 규모로 조직이 커지며 디자인 코드 복잡도가 올라갔습니다. <b>Atomic·Modular 사이즈만 추상화</b>해 공용화하고, 나머지 디자인 컴포넌트는 <b>페이지 내부에서 구성</b>하도록 <b>Next.js 구조 기반 하이라키 컨벤션</b>을 지정했습니다. <span style="color:var(--accent2)">적용: Lumir Portal</span></p>
   </section>
 
-  <!-- 31 TECH-LEAD testing -->
+  <!-- 32 TECH-LEAD testing -->
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 품질</div>
     <h2 class="stitle">테스트 커버리지 · Domain·Context 100% + Playwright</h2>
@@ -888,7 +917,7 @@
     <p class="ssub" style="margin-top:12px"><b>Domain은 Unit Test</b>, <b>Context는 컨테이너 기반 실제 DB 연동·트랜잭션 검증</b>으로 <b>커버리지 100%</b>를 보증하고, <b>비즈니스 영역은 프론트 Playwright</b>로 자동 검증합니다. 계층별 검증으로 안정성 높은 시스템을 운영합니다.</p>
   </section>
 
-  <!-- 32 SKILLS -->
+  <!-- 33 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -904,7 +933,7 @@
     </div>
   </section>
 
-  <!-- 33 CAREER -->
+  <!-- 34 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -919,7 +948,7 @@
     </div>
   </section>
 
-  <!-- 34 GITHUB GRASS -->
+  <!-- 35 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -932,7 +961,7 @@
     </div>
   </section>
 
-  <!-- 35 CLOSING -->
+  <!-- 36 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
@@ -961,18 +990,18 @@
   const toc=[
     {t:'표지', s:0},
     {t:'About', s:1},
-    {t:'핵심 역량', s:2},
-    {t:'LIID · 위성영상 플랫폼', s:3, e:7},
-    {t:'백오피스 통합 플랫폼', s:8, e:10},
-    {t:'SDPE', s:11, e:13},
-    {t:'대용량 파일 전송 엔진', s:14, e:18},
-    {t:'Selected Projects', s:19},
-    {t:'Infrastructure & DevOps', s:20, e:24},
-    {t:'기술 리딩 (Technical)', s:25, e:30},
-    {t:'기술 스택', s:31},
-    {t:'경력', s:32},
-    {t:'GitHub 기록', s:33},
-    {t:'Closing', s:34}
+    {t:'핵심 역량 · 기획', s:2, e:3},
+    {t:'LIID · 위성영상 플랫폼', s:4, e:8},
+    {t:'백오피스 통합 플랫폼', s:9, e:11},
+    {t:'SDPE', s:12, e:14},
+    {t:'대용량 파일 전송 엔진', s:15, e:19},
+    {t:'Selected Projects', s:20},
+    {t:'Infrastructure & DevOps', s:21, e:25},
+    {t:'기술 리딩 (Technical)', s:26, e:31},
+    {t:'기술 스택', s:32},
+    {t:'경력', s:33},
+    {t:'GitHub 기록', s:34},
+    {t:'Closing', s:35}
   ];
   const tocEl=document.getElementById('toc');
   toc.forEach((item,idx)=>{
