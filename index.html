@@ -642,7 +642,54 @@
     </div>
   </section>
 
-  <!-- 25 INFRA cloud -->
+  <!-- 25 INFRA k8s topology -->
+  <section class="slide">
+    <div class="eyebrow">Infrastructure · On-premise</div>
+    <h2 class="stitle">Kubernetes 클러스터 설계 · CI/CD → 배포 → 노출</h2>
+    <div class="arch">
+      <div class="archcap">k8s 토폴로지</div>
+      <svg viewBox="0 0 680 350" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arJ" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Jb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Jgrp{fill:#0e1421;stroke:#3a5a92;stroke-width:1.4}
+          .Jcp{fill:#13203a;stroke:#3182f6;stroke-width:1.6}.Jwk{fill:#10231c;stroke:#2dd4a7;stroke-width:1.6}
+          .Jexp{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.5}
+          .Jt{fill:#e8edf5;font-size:11.5px;font-weight:700}.Js{fill:#9aa6bd;font-size:9px}
+          .Jgt{font-size:10px;font-weight:800}.Jadd{fill:#7e8aa0;font-size:9px;font-weight:700}
+          .Jln{stroke:#5ea0ff;stroke-width:1.5;fill:none;marker-end:url(#arJ)}.Jlbl{fill:#7e8aa0;font-size:8.5px}
+        </style>
+        <!-- CI/CD lane -->
+        <rect class="Jb" x="16" y="16" width="92" height="44" rx="9"/><text class="Jt" x="62" y="36" text-anchor="middle">개발자</text><text class="Js" x="62" y="51" text-anchor="middle">git push</text>
+        <rect class="Jb" x="140" y="16" width="180" height="44" rx="9"/><text class="Jt" x="230" y="36" text-anchor="middle">GitLab CI · k8s executor</text><text class="Js" x="230" y="51" text-anchor="middle">Kaniko 병렬 빌드 · 캐시</text>
+        <rect class="Jb" x="352" y="16" width="116" height="44" rx="9"/><text class="Jt" x="410" y="36" text-anchor="middle">레지스트리</text><text class="Js" x="410" y="51" text-anchor="middle">이미지 저장</text>
+        <path class="Jln" d="M108,38 H136"/><text class="Jlbl" x="122" y="30" text-anchor="middle">build</text>
+        <path class="Jln" d="M320,38 H348"/><text class="Jlbl" x="334" y="30" text-anchor="middle">push</text>
+        <path class="Jln" d="M410,60 V84"/><text class="Jlbl" x="424" y="76">deploy</text>
+        <!-- cluster group -->
+        <rect class="Jgrp" x="16" y="86" width="440" height="176" rx="12"/>
+        <text class="Jgt" x="32" y="106" fill="#8fb4f5">Kubernetes HA 클러스터</text>
+        <rect class="Jcp" x="32" y="118" width="408" height="46" rx="9"/><text class="Jt" x="236" y="138" text-anchor="middle">Control Plane ×3</text><text class="Js" x="236" y="154" text-anchor="middle">etcd 3-quorum · API Server · Scheduler</text>
+        <rect class="Jwk" x="32" y="174" width="408" height="46" rx="9"/><text class="Jt" x="236" y="194" text-anchor="middle">Worker Node ×4</text><text class="Js" x="236" y="210" text-anchor="middle">워크로드 파드 · containerd · Calico VXLAN</text>
+        <text class="Jadd" x="236" y="244" text-anchor="middle">cert-manager · metrics-server · local-path SC · SMB CSI</text>
+        <!-- exposure stack -->
+        <rect class="Jexp" x="480" y="86" width="184" height="40" rx="9"/><text class="Jt" x="572" y="111" text-anchor="middle">MetalLB (L2)</text>
+        <rect class="Jexp" x="480" y="134" width="184" height="40" rx="9"/><text class="Jt" x="572" y="159" text-anchor="middle">ingress-nginx</text>
+        <rect class="Jexp" x="480" y="182" width="184" height="40" rx="9"/><text class="Jt" x="572" y="200" text-anchor="middle">와일드카드 TLS</text><text class="Js" x="572" y="214" text-anchor="middle">cert-manager 자동 갱신</text>
+        <rect class="Jb" x="480" y="230" width="184" height="40" rx="9"/><text class="Jt" x="572" y="248" text-anchor="middle">사용자</text><text class="Js" x="572" y="262" text-anchor="middle">신뢰 HTTPS</text>
+        <path class="Jln" d="M456,106 H476"/><text class="Jlbl" x="466" y="98" text-anchor="middle">노출</text>
+        <path class="Jln" d="M572,126 V132"/>
+        <path class="Jln" d="M572,174 V180"/>
+        <path class="Jln" d="M572,222 V228"/>
+        <!-- storage -->
+        <rect class="Jb" x="16" y="290" width="216" height="46" rx="9"/><text class="Jt" x="124" y="310" text-anchor="middle">공유 NAS · SMB CSI</text><text class="Js" x="124" y="326" text-anchor="middle">앱 공유 데이터 (RWX)</text>
+        <rect class="Jb" x="248" y="290" width="208" height="46" rx="9"/><text class="Jt" x="352" y="310" text-anchor="middle">local-path</text><text class="Js" x="352" y="326" text-anchor="middle">DB · 상태 (노드 로컬)</text>
+        <path class="Jln" d="M124,262 V286"/><text class="Jlbl" x="132" y="278">RWX</text>
+        <path class="Jln" d="M352,262 V286"/><text class="Jlbl" x="360" y="278">로컬</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 26 INFRA cloud -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">클라우드 인프라 · AWS 컨테이너 플랫폼 (설계·전환)</h2>
@@ -654,7 +701,7 @@
     </div>
   </section>
 
-  <!-- 26 SKILLS -->
+  <!-- 27 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -670,7 +717,7 @@
     </div>
   </section>
 
-  <!-- 27 CAREER -->
+  <!-- 28 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -691,7 +738,7 @@
     </div>
   </section>
 
-  <!-- 28 GITHUB GRASS -->
+  <!-- 29 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -704,7 +751,7 @@
     </div>
   </section>
 
-  <!-- 29 CLOSING -->
+  <!-- 30 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
