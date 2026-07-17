@@ -142,7 +142,7 @@
   <section class="slide">
     <div class="eyebrow">About</div>
     <h2 class="stitle">스펙이 아니라 실행으로 증명합니다</h2>
-    <p class="lead" style="margin-top:6px">삼성중공업 설계 엔지니어 8년 9개월 후, 토스 개발자 블로그에서 레거시를 걷어내고 새 시스템을 세우는 모습을 보고 개발자로 전환. 고졸·학점은행제에서 출발해 3년 만에 0→11명 기술 조직을 만들고 회사 핵심 시스템을 설계·운영하고 있습니다.</p>
+    <p class="lead" style="margin-top:6px">토스 개발자 블로그에서 레거시를 걷어내고 새 시스템을 세우는 모습에 매료돼 개발자로 전환. 고졸·학점은행제에서 출발해 3년 만에 0→11명 기술 조직을 만들고 회사 핵심 시스템을 설계·운영하고 있습니다.</p>
     <div class="stats">
       <div class="stat"><div class="n">3<small>년</small></div><div class="l">개발 경력 (2023.06~)</div></div>
       <div class="stat"><div class="n">0→11<small>명</small></div><div class="l">기술 조직 구축·리드</div></div>
@@ -700,14 +700,58 @@
     </div>
   </section>
 
-  <!-- 27 SKILLS -->
+  <!-- 27 INFRA cloud arch -->
+  <section class="slide">
+    <div class="eyebrow">Infrastructure · Cloud</div>
+    <h2 class="stitle">AWS 클라우드 아키텍처 · Stage / Prod · public·private 분리</h2>
+    <div class="arch">
+      <div class="archcap">클라우드 배포·보안 구조</div>
+      <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arK" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Kb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Kstage{fill:#0e1421;stroke:#3a5a92;stroke-width:1.3}
+          .Kprod{fill:#0e1421;stroke:#7a5cc4;stroke-width:1.3}
+          .Kpub{fill:#13203a;stroke:#3182f6;stroke-width:1.7}.Kpriv{fill:#10231c;stroke:#2dd4a7;stroke-width:1.7}
+          .Ksup{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
+          .Kt{fill:#e8edf5;font-size:12px;font-weight:700}.Ks{fill:#9aa6bd;font-size:8.5px}
+          .Kzt{font-size:10px;font-weight:800}.Kexp{fill:#5ea0ff;font-size:8.5px;font-weight:700}
+          .Kblk{fill:#ffb454;font-size:8.5px;font-weight:700}
+          .Kln{stroke:#5ea0ff;stroke-width:1.4;fill:none;marker-end:url(#arK)}.Klbl{fill:#7e8aa0;font-size:8px}
+        </style>
+        <!-- CI lane -->
+        <rect class="Kb" x="16" y="10" width="88" height="40" rx="9"/><text class="Kt" x="60" y="30" text-anchor="middle">개발자</text><text class="Ks" x="60" y="44" text-anchor="middle">git push</text>
+        <rect class="Kb" x="136" y="10" width="200" height="40" rx="9"/><text class="Kt" x="236" y="28" text-anchor="middle">GitHub Actions · OIDC</text><text class="Ks" x="236" y="43" text-anchor="middle">develop → Stage · main → Prod</text>
+        <rect class="Kb" x="364" y="10" width="126" height="40" rx="9"/><text class="Kt" x="427" y="28" text-anchor="middle">Harbor</text><text class="Ks" x="427" y="43" text-anchor="middle">이미지 레지스트리</text>
+        <path class="Kln" d="M104,30 H134"/>
+        <path class="Kln" d="M336,30 H362"/>
+        <!-- deploy -->
+        <path class="Kln" d="M410,50 V62 H114 V100"/><text class="Klbl" x="122" y="74">deploy</text>
+        <path class="Kln" d="M445,50 V62 H346 V102"/><text class="Klbl" x="354" y="74">deploy</text>
+        <!-- Stage zone -->
+        <rect class="Kstage" x="16" y="72" width="196" height="150" rx="12"/><text class="Kzt" x="30" y="92" fill="#8fb4f5">Stage 서버</text>
+        <rect class="Kb" x="30" y="102" width="168" height="44" rx="8"/><text class="Kt" x="114" y="122" text-anchor="middle">App 컨테이너</text><text class="Ks" x="114" y="137" text-anchor="middle">12개 서비스</text>
+        <rect class="Ksup" x="30" y="156" width="168" height="54" rx="8"/><text class="Kt" x="114" y="180" text-anchor="middle">Supabase</text><text class="Ks" x="114" y="196" text-anchor="middle">관리형 PostgreSQL (Stage DB)</text>
+        <!-- Prod zone -->
+        <rect class="Kprod" x="236" y="72" width="428" height="150" rx="12"/><text class="Kzt" x="250" y="92" fill="#bda4f2">Prod 서버 · public / private 자동 분리</text>
+        <rect class="Kpub" x="250" y="104" width="192" height="106" rx="9"/><text class="Kt" x="346" y="130" text-anchor="middle">Public 서버</text><text class="Kexp" x="346" y="150" text-anchor="middle">인터넷 노출 (HTTPS)</text><text class="Ks" x="346" y="168" text-anchor="middle">도메인 · nginx · 인증 게이트</text><text class="Ks" x="346" y="184" text-anchor="middle">외부 공개 서비스</text>
+        <rect class="Kpriv" x="456" y="104" width="192" height="106" rx="9"/><text class="Kt" x="552" y="130" text-anchor="middle">Private 서버</text><text class="Kblk" x="552" y="150" text-anchor="middle">외부 직접 접근 차단</text><text class="Ks" x="552" y="168" text-anchor="middle">내부 전용 서비스</text><text class="Ks" x="552" y="184" text-anchor="middle">Public 경유로만 접근</text>
+        <path class="Kln" d="M442,157 H454"/><text class="Klbl" x="448" y="150" text-anchor="middle">내부 통신</text>
+        <!-- platform common -->
+        <rect class="Kb" x="16" y="240" width="320" height="40" rx="9"/><text class="Kt" x="176" y="258" text-anchor="middle">SSM Session Manager</text><text class="Ks" x="176" y="272" text-anchor="middle">SSH(22) 차단 · 감사 이력</text>
+        <rect class="Kb" x="350" y="240" width="314" height="40" rx="9"/><text class="Kt" x="507" y="258" text-anchor="middle">Secrets Manager / Parameter Store</text><text class="Ks" x="507" y="272" text-anchor="middle">시크릿 중앙 관리 · IAM 위임</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
+  </section>
+
+  <!-- 28 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
     <p class="ssub">실제 프로덕션에서 설계·운영한 기술 중심</p>
     <div class="skillgrid">
       <div class="skillcat"><div class="sh">Backend</div><div class="sk"><span>NestJS</span><span>Node.js</span><span>TypeScript</span><span>MSA</span><span>DDD</span><span>TDD</span><span>REST API</span><span>Bull</span></div></div>
-      <div class="skillcat"><div class="sh">Data</div><div class="sk"><span>PostgreSQL</span><span>PostGIS</span><span>MySQL</span><span>MongoDB</span><span>Redis</span></div></div>
+      <div class="skillcat"><div class="sh">Data</div><div class="sk"><span>PostgreSQL</span><span>PostGIS</span><span>MySQL</span><span>MongoDB</span><span>Redis</span><span>Supabase</span></div></div>
       <div class="skillcat"><div class="sh">Infra & DevOps</div><div class="sk"><span>Kubernetes</span><span>Docker</span><span>GitLab CI/CD</span><span>GitHub Actions</span><span>AWS · SSM</span><span>Harbor</span><span>온프레미스 · 하이브리드</span></div></div>
       <div class="skillcat"><div class="sh">Frontend & Tools</div><div class="sk"><span>Next.js</span><span>React</span><span>Figma</span><span>Cursor</span><span>JIRA</span></div></div>
       <div class="skillcat"><div class="sh">Leadership</div><div class="sk"><span>조직 빌딩</span><span>채용·평가 설계</span><span>프로그램 관리</span><span>이해관계자 협상</span></div></div>
@@ -716,28 +760,22 @@
     </div>
   </section>
 
-  <!-- 28 CAREER -->
+  <!-- 29 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
-    <p class="ssub">설계 엔지니어 8년 9개월 → 개발자 전환 후 3년</p>
+    <p class="ssub">개발자 전환 후 3년 · 0→11명 기술 조직 구축</p>
     <div class="tl">
       <div class="tlitem">
         <div class="when">2023.06 – 재직중 · 개발 경력 3년</div>
         <h4>루미르 · 개발PM / Web파트장 (선임연구원)</h4>
         <div class="where">위성 제조·운용 전문기업 · 웹 개발 조직 창설 멤버 · 스톡옵션</div>
-        <ul><li>웹 개발 조직 0→11명 신설·성장 (백5·프4·기획1·AI1)</li><li>입사 8개월 차 선임연구원, 1년 6개월 차 파트장 승진</li><li>회사 핵심 시스템 설계·개발 주도, 리드타임 67% 단축</li></ul>
-      </div>
-      <div class="tlitem">
-        <div class="when">2014.01 – 2022.09 · 8년 9개월</div>
-        <h4>삼성중공업 · 기장설계 / 시운전</h4>
-        <div class="where">세계 최대 조선사 · Evergreen 컨테이너선 (계약금 4조 원)</div>
-        <ul><li>2년+ 전담 선주 직접 대응, 다호선 병행 설계</li><li>자재 표준화 데이터 단독 개발 → 연 10억 절감</li></ul>
+        <ul><li>웹 개발 조직 0→11명 신설·성장 (백5·프4·기획1·AI1)</li><li>입사 8개월 차 선임연구원, 1년 6개월 차 파트장 승진</li><li>회사 핵심 시스템 설계·개발 주도, 리드타임 67% 단축</li><li>Web-GIS·백오피스·SDPE·LIID 등 핵심 시스템 설계 및 온프레미스·클라우드 하이브리드 인프라 구축</li></ul>
       </div>
     </div>
   </section>
 
-  <!-- 29 GITHUB GRASS -->
+  <!-- 30 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -750,7 +788,7 @@
     </div>
   </section>
 
-  <!-- 30 CLOSING -->
+  <!-- 31 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
