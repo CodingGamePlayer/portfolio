@@ -42,14 +42,14 @@
   .stat .l{font-size:.82rem;color:var(--muted);margin-top:4px}
 
   /* tracks */
-  .tracks{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:980px}
-  .track{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
-  .track h3{font-size:1.2rem;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1160px}
+  .track{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .track h3{font-size:1.02rem;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .track h3 svg{flex:none}
-  .track .tag{font-size:.72rem;color:var(--accent2);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
-  .track p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
-  .track ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-  .track li{display:flex;gap:10px;font-size:.92rem}
+  .track .tag{font-size:.68rem;color:var(--accent2);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+  .track p{color:var(--muted);font-size:.84rem;margin-bottom:12px}
+  .track ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .track li{display:flex;gap:8px;font-size:.84rem}
   .track li:before{content:"▸";color:var(--accent2);font-weight:700}
 
   /* project header */
@@ -154,23 +154,35 @@
   <!-- 3 TWO TRACK -->
   <section class="slide">
     <div class="eyebrow">Core Competency</div>
-    <h2 class="stitle">Two-Track 강점</h2>
-    <p class="ssub">백엔드 엔지니어링과 엔지니어링 리더십, 어느 쪽으로도 즉시 기여</p>
+    <h2 class="stitle">Three-Track 강점</h2>
+    <p class="ssub">백엔드 엔지니어링 · 인프라 구성 · 엔지니어링 리더십 — 세 축 모두에서 즉시 기여</p>
     <div class="tracks">
       <div class="track">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg> Backend Engineering <span class="tag">IC</span></h3>
-        <p>NestJS·TypeScript·MSA 기반 풀사이클 설계·개발</p>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg> Backend Engineering <span class="tag">IC</span></h3>
+        <p>NestJS·TypeScript·MSA 풀사이클 설계·개발</p>
         <ul>
           <li>DDD·TDD 기반 도메인 설계</li>
           <li>대용량 성능 최적화 (렌더·쿼리·캐시)</li>
           <li>공간쿼리·파티셔닝·인덱싱 튜닝</li>
           <li>Saga 분산 트랜잭션 · 멱등성 · 재시도</li>
           <li>이벤트 기반 EDA · 메시지 큐 설계</li>
-          <li>GitLab CI/CD · Docker · 온프레미스 MSA</li>
+          <li>GPU 병렬 처리 · 대용량 파이프라인</li>
         </ul>
       </div>
       <div class="track">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Engineering Leadership <span class="tag">EM</span></h3>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="3" width="20" height="6" rx="1"/><rect x="2" y="15" width="20" height="6" rx="1"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg> Infrastructure <span class="tag">DevOps</span></h3>
+        <p>온프레미스 + 클라우드 하이브리드 구성·운영</p>
+        <ul>
+          <li>7노드 Kubernetes HA 구축·운영</li>
+          <li>온프레미스·클라우드 하이브리드 설계</li>
+          <li>GitLab CI/CD · Kaniko 병렬 빌드</li>
+          <li>MetalLB · ingress · 와일드카드 TLS</li>
+          <li>Harbor · GitHub Actions OIDC · Trivy</li>
+          <li>SSM · Secrets Manager · 무SSH 보안</li>
+        </ul>
+      </div>
+      <div class="track">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#5ea0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Leadership <span class="tag">EM</span></h3>
         <p>0→11명 조직 빌딩과 프로세스 혁신</p>
         <ul>
           <li>채용·온보딩·평가·성장 체계 직접 설계</li>
