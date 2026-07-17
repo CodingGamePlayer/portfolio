@@ -251,95 +251,89 @@
   </section>
 
   <!-- 5 PLANNING CASE overview -->
-
   <section class="slide">
-    <div class="eyebrow">Planning Case · 사내 업무 관리 시스템</div>
-    <div class="ptop"><h2 class="stitle">업무 보고·승인 &amp; 업무 분장 시스템</h2><span class="pill">메인 기획 · 파트장</span></div>
-    <p class="ssub">배경·목적부터 화면·데이터 모델까지 기획서로 직접 설계 — 파트 단위 업무 가시성 확보</p>
-    <div class="pblock problem" style="max-width:1120px"><div class="h">Problem · As-Is</div><p>파트 업무가 구두·메신저로 흩어져 진행 상황·워크로드·검토 상태가 보이지 않음. 이슈마다 보고 강제 수준이 달라야 하는데 규칙은 획일적이고, 파트장은 검토 대기 보고서를 놓치기 쉬움.</p></div>
-    <div class="pblock solution" style="max-width:1120px"><div class="h">Solution · To-Be</div><p>이슈 기반 정기 보고·승인과 업무 분장을 하나의 시스템으로 통합. 이슈별 <b style="color:var(--fg)">보고 정책(없음/선택/필수)</b>으로 강제 수준을 차등화하고, 검토 대기 큐·Aging 뱃지로 누락을 방지.</p></div>
-    <div class="chips">
-      <span class="chip">요구사항 수립</span><span class="chip">도메인 용어 표준화</span><span class="chip">역할·권한 정의</span><span class="chip">유즈케이스 6종</span><span class="chip">IA 재편</span><span class="chip">승인 워크플로우 설계</span><span class="chip">데이터 모델</span><span class="chip">확장 백로그·의사결정</span>
+    <div class="eyebrow">Planning Case · 사내 통합 ERP</div>
+    <div class="ptop"><h2 class="stitle">사내 통합 ERP 기획 — 문서 기반 의사결정 파이프라인</h2><span class="pill">메인 기획 · 설계 리딩</span></div>
+    <p class="ssub">프로젝트관리·품질·부품/BOM·수입검사·제조·근태 등 10개 모듈의 대규모 ERP를 병행 기획 — 결정이 흩어지지 않도록 프로세스 자체를 설계</p>
+    <div class="pblock problem" style="max-width:1120px"><div class="h">Problem</div><p>여러 모듈을 여러 명이 병행 기획·개발하면 결정이 흩어져 추적이 안 되고, 기획과 코드가 서로 어긋나며(drift), 되돌린 결정의 맥락이 사라짐.</p></div>
+    <div class="pblock solution" style="max-width:1120px"><div class="h">Solution</div><p>모든 설계 결정을 <b style="color:var(--fg)">날짜 스탬프 원자 노트(ADR)</b>로 남기고 → LLM 위키로 컴파일해 단일 권위를 유지 → 기획↔코드 갭으로 개발 우선순위를 뽑는 <b style="color:var(--fg)">추적형 기획 파이프라인</b>을 직접 설계·운영.</p></div>
+    <div class="stats" style="max-width:1120px;margin-top:26px">
+      <div class="stat"><div class="n">236<small>건</small></div><div class="l">의사결정 노트 · 2.5개월 누적</div></div>
+      <div class="stat"><div class="n">10<small>모듈</small></div><div class="l">프로젝트·품질·부품·제조·근태…</div></div>
+      <div class="stat"><div class="n">3<small>산출물</small></div><div class="l">화면별 IA · 유즈케이스 · 시나리오</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">기획 ↔ vault 불일치 (정합 관리)</div></div>
     </div>
   </section>
 
-  <!-- 6 PLANNING CASE usecase-IA -->
-
+  <!-- 6 PLANNING CASE flow -->
   <section class="slide">
-    <div class="eyebrow">Planning · 유즈케이스 &amp; IA</div>
-    <h2 class="stitle">역할·시나리오에서 정보 구조까지</h2>
-    <p class="ssub">액터별 유즈케이스를 도출하고, 평면적 메뉴를 작업·역할 중심 IA로 재편</p>
-    <div class="tracks" style="max-width:1180px">
-      <div class="track">
-        <h3>액터 · 유즈케이스</h3>
-        <p>역할별 핵심 흐름과 예외 시나리오</p>
-        <ul>
-          <li>파트장 — 이슈·정책·템플릿 관리, 검토·승인/반려</li>
-          <li>파트원 — 보고서 작성·요청·재요청</li>
-          <li>관전자 — 조회 (잔디 제외)</li>
-          <li>정상 흐름 · 반려→재요청 루프</li>
-          <li>검토 누락 방지 · 정책 변경 · 모바일</li>
-        </ul>
-      </div>
-      <div class="track">
-        <h3>IA · As-Is</h3>
-        <p>평면적 메뉴 — 한 작업이 분산</p>
-        <ul>
-          <li>대시보드·이슈·내 보고서·승인·검토가 한 층에 평면 나열</li>
-          <li>"내 보고서"가 특정 이슈로 하드코딩 딥링크</li>
-          <li>검토 대기 ↔ 승인이 한 흐름인데 메뉴 2개로 분리</li>
-        </ul>
-      </div>
-      <div class="track">
-        <h3>IA · To-Be</h3>
-        <p>작업·역할 중심 재편 (3안 중 선택)</p>
-        <ul>
-          <li>홈 · 내 작업 · 업무 탐색</li>
-          <li>검토 (대기↔승인 탭 통합)</li>
-          <li>인사이트 · 설정 · 관리(권한·역할)</li>
-          <li>"내 보고서" 흡수·폐기로 개념 명확화</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 PLANNING CASE workflow-data -->
-
-  <section class="slide">
-    <div class="eyebrow">Planning · 화면 흐름 &amp; 데이터 구조</div>
-    <h2 class="stitle">승인 워크플로우와 도메인 데이터 설계</h2>
-    <div class="arch" style="max-width:900px">
-      <div class="archcap">보고서 승인 상태 흐름</div>
-      <svg viewBox="0 0 860 210" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker>
-          <marker id="arPg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2dd4a7"/></marker>
-        </defs>
+    <div class="eyebrow">Planning · 기획 흐름</div>
+    <h2 class="stitle">화면 설계 → 결정 기록 → 위키 컴파일 → 개발 계획</h2>
+    <div class="arch" style="max-width:980px">
+      <div class="archcap">문서 기반 기획 파이프라인</div>
+      <svg viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arQ" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
         <style>
-          .Pb{fill:#161b27;stroke:#27406b;stroke-width:1.4}
-          .Pok{fill:#10231c;stroke:#2dd4a7;stroke-width:1.5}
-          .Pwarn{fill:#241a12;stroke:#d9883b;stroke-width:1.4}
-          .Pt{fill:#e8edf5;font-size:13px;font-weight:700}
-          .Pln{stroke:#5ea0ff;stroke-width:1.6;fill:none;marker-end:url(#arP)}
-          .Plng{stroke:#2dd4a7;stroke-width:1.7;fill:none;marker-end:url(#arPg)}
-          .Plbl{fill:#7e8aa0;font-size:10px}
+          .Qb{fill:#161b27;stroke:#27406b;stroke-width:1.4}
+          .Qt{fill:#e8edf5;font-size:13px;font-weight:800}
+          .Qs{fill:#9aa6bd;font-size:9.5px}
+          .Qln{stroke:#5ea0ff;stroke-width:1.6;fill:none;marker-end:url(#arQ)}
+          .Qlbl{fill:#7e8aa0;font-size:9.5px}
         </style>
-        <rect class="Pb" x="20" y="40" width="120" height="46" rx="9"/><text class="Pt" x="80" y="68" text-anchor="middle">작성 대기</text>
-        <rect class="Pb" x="180" y="40" width="120" height="46" rx="9"/><text class="Pt" x="240" y="68" text-anchor="middle">작성중</text>
-        <rect class="Pb" x="340" y="40" width="130" height="46" rx="9"/><text class="Pt" x="405" y="68" text-anchor="middle">검토 대기</text>
-        <rect class="Pok" x="690" y="40" width="150" height="46" rx="9"/><text class="Pt" x="765" y="68" text-anchor="middle">승인 완료</text>
-        <rect class="Pwarn" x="340" y="140" width="130" height="46" rx="9"/><text class="Pt" x="405" y="168" text-anchor="middle">반려 · 수정</text>
-        <path class="Pln" d="M140,63 H180"/>
-        <path class="Pln" d="M300,63 H340"/>
-        <path class="Plng" d="M470,63 H690"/><text class="Plbl" x="575" y="54" text-anchor="middle">승인</text>
-        <path class="Pln" d="M390,86 V140"/><text class="Plbl" x="360" y="118" text-anchor="end">반려</text>
-        <path class="Pln" d="M420,140 V86"/><text class="Plbl" x="432" y="118">재요청</text>
+        <rect class="Qb" x="14" y="22" width="196" height="52" rx="10"/><text class="Qt" x="112" y="44" text-anchor="middle">① 화면별 기획</text><text class="Qs" x="112" y="62" text-anchor="middle">IA → UC → 시나리오</text>
+        <rect class="Qb" x="238" y="22" width="196" height="52" rx="10"/><text class="Qt" x="336" y="44" text-anchor="middle">② 결정 노트 (ADR)</text><text class="Qs" x="336" y="62" text-anchor="middle">236건 · 대안·trade-off</text>
+        <rect class="Qb" x="462" y="22" width="196" height="52" rx="10"/><text class="Qt" x="560" y="44" text-anchor="middle">③ LLM 위키 컴파일</text><text class="Qs" x="560" y="62" text-anchor="middle">단일 권위 · 모순 ⚠</text>
+        <rect class="Qb" x="686" y="22" width="200" height="52" rx="10"/><text class="Qt" x="786" y="44" text-anchor="middle">④ 기획 ↔ 코드 갭</text><text class="Qs" x="786" y="62" text-anchor="middle">우선순위 P0~P4</text>
+        <path class="Qln" d="M210,48 H238"/>
+        <path class="Qln" d="M434,48 H462"/>
+        <path class="Qln" d="M658,48 H686"/>
+        <path class="Qln" d="M310,74 V100 H112 V76"/><text class="Qlbl" x="211" y="114" text-anchor="middle">되돌림 · 정합 추적</text>
       </svg>
     </div>
     <div class="grid3" style="max-width:1160px;margin-top:14px">
-      <div class="mini"><h4>보고 정책 3단계</h4><p>이슈별 없음/선택/필수 — 슬롯 생성·알림·준수율 계산을 정책별로 차등</p></div>
-      <div class="mini"><h4>상태 스냅샷·이력</h4><p>보고서에 정책 스냅샷 기록, 정책 변경 이력 보존으로 처리 규칙 일관성 유지</p></div>
-      <div class="mini"><h4>업무 분장 5계층</h4><p>System › Element › Subsystem › CSC › CSU · 멤버×역할·난이도로 부하·공백 분석</p></div>
+      <div class="mini"><h4>① 화면별 기획 3종</h4><p>모듈·화면마다 IA → 유즈케이스 → 시나리오 순으로 설계, judge 검증으로 누락·비대칭 점검</p></div>
+      <div class="mini"><h4>② 결정 노트 · ③ 위키</h4><p>결정을 ADR로 기록(불변) → Raw/Wiki/Schema PKM으로 컴파일, 모순은 ⚠로 표시하고 임의 결론 금지</p></div>
+      <div class="mini"><h4>④ 기획 ↔ 코드 갭</h4><p>확정 기획과 코드의 갭을 우선순위·규모·의존·blocking으로 매핑해 개발 계획화</p></div>
+    </div>
+  </section>
+
+  <!-- 7 PLANNING CASE ADR -->
+  <section class="slide">
+    <div class="eyebrow">Planning · 의사결정 기록 (ADR)</div>
+    <h2 class="stitle">결정 노트 한 장에 담기는 것</h2>
+    <p class="ssub">모든 설계 판단을 자기완결적 ADR로 기록 — 왜 그렇게 정했는지, 무엇을 버렸는지까지 보존</p>
+    <div class="tracks" style="max-width:1200px">
+      <div class="track">
+        <h3>ADR 구조</h3>
+        <p>결정 하나 = 노트 하나</p>
+        <ul>
+          <li>배경 · 강제력(Forces) · 제약</li>
+          <li>대안 비교 (Alt-A/B/C + 기각 사유)</li>
+          <li>채택 방향 · 핵심 이유</li>
+          <li>기대 편익 / 감수 비용 (trade-off)</li>
+          <li>후속 검토 과제 · 근거 링크</li>
+        </ul>
+      </div>
+      <div class="track">
+        <h3>추적성</h3>
+        <p>결정의 궤적 자체를 보존</p>
+        <ul>
+          <li>날짜 스탬프 · 불변(append-only)</li>
+          <li>되돌린 결정도 별도 노트로 기록</li>
+          <li>노트 ↔ 위키 back-link 양방향 정합</li>
+          <li>재사용 프롬프트로 검증 위임</li>
+        </ul>
+      </div>
+      <div class="track">
+        <h3>관통 원칙</h3>
+        <p>기획을 검증 가능하게</p>
+        <ul>
+          <li>Mock-first — 목업으로 기획 검증 후 실데이터 배선</li>
+          <li>중복 도메인 통합으로 이중 관리 제거</li>
+          <li>추론 대신 grep·명령으로 검증 강제</li>
+          <li>기획 ↔ 코드 불일치 0 관리</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -1120,7 +1114,7 @@
     {t:'표지', s:0},
     {t:'About', s:1},
     {t:'핵심 역량 · 기획', s:2, e:3},
-    {t:'기획 사례 · 업무관리', s:4, e:6},
+    {t:'기획 사례 · 사내 ERP', s:4, e:6},
     {t:'LIID · 위성영상 플랫폼', s:7, e:11},
     {t:'백오피스 통합 플랫폼', s:12, e:14},
     {t:'SDPE', s:15, e:17},
