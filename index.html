@@ -749,9 +749,9 @@
     <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
   </section>
 
-  <!-- 26 ENG-CONV DDD -->
+  <!-- 26 TECH-LEAD DDD -->
   <section class="slide">
-    <div class="eyebrow">Engineering Convention</div>
+    <div class="eyebrow">Technical Leadership · 개발 표준</div>
     <h2 class="stitle">DDD 전술 패턴 · Context / Business 계층</h2>
     <p class="ssub">특정 프로젝트에 한정하지 않고, 백엔드 전반에 공통 적용하는 설계 컨벤션</p>
     <div class="arch">
@@ -786,7 +786,109 @@
     </div>
   </section>
 
-  <!-- 27 SKILLS -->
+  <!-- 27 TECH-LEAD ai-native -->
+  <section class="slide">
+    <div class="eyebrow">Technical Leadership · 개발 문화</div>
+    <h2 class="stitle">AI Native 개발 문화 · 100% Agent 워크플로</h2>
+    <div class="pblock problem"><div class="h">Problem</div><p>Obsidian·Notion·Figma 등 여러 툴에 업무가 흩어져 있어, 작업을 오가며 <b>Context 스위칭</b>하는 과정에서 비효율이 발생했습니다.</p></div>
+    <div class="pblock solution"><div class="h">Approach</div><p><b>AI Native 조직 문화</b>를 구성해 <b>100% Agent로 업무 → 문서화 → repo 저장</b>하는 단일 흐름으로 바꿨습니다. 도구를 오가지 않고 작업과 기록이 한 곳에서 이어집니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">현황</div><p>기획·디자인·프론트·백엔드 <b>전 직군이 100% Agent를 활용</b>해 일하고 있습니다.</p></div>
+    <div class="chips">
+      <span class="chip">AI Native</span><span class="chip">100% Agent</span><span class="chip">업무 → 문서화 → repo</span><span class="chip">Context 스위칭 제거</span><span class="chip">전 직군 적용</span>
+    </div>
+  </section>
+
+  <!-- 28 TECH-LEAD planning-screen -->
+  <section class="slide">
+    <div class="eyebrow">Technical Leadership · 프로세스</div>
+    <h2 class="stitle">기획 화면 = 실제 화면 · 재작업 제거</h2>
+    <div class="pblock problem"><div class="h">Problem</div><p>기획이 이미지·사진·Figma로 넘어오면 프론트에서 <b>같은 화면을 다시 개발</b>하는 재작업이 반복돼 많은 시수가 낭비됐습니다.</p></div>
+    <div class="pblock solution"><div class="h">Approach</div><p>프론트에서 <b>기획자와 함께 바로 화면을 구성</b>하고, 구성된 페이지의 <b>컨텍스트를 추상화</b>해 <b>목 데이터 ↔ 실제 데이터를 전환</b>할 수 있게 했습니다. 기획 화면이 곧 실제 화면으로 이어지도록 프로세스를 재설계했습니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">효과</div><p>기획→디자인→개발의 중복 제작 단계를 걷어내, <b>기획 화면 = 실제 화면</b>이 바로 진행됩니다. <span style="color:var(--accent2)">적용: Lumir Portal</span></p></div>
+    <div class="chips">
+      <span class="chip">기획 = 실제 화면</span><span class="chip">컨텍스트 추상화</span><span class="chip">목/실 데이터 전환</span><span class="chip">재작업 제거</span>
+    </div>
+  </section>
+
+  <!-- 29 TECH-LEAD llm-wiki -->
+  <section class="slide">
+    <div class="eyebrow">Technical Leadership · 지식 관리</div>
+    <h2 class="stitle">LLM Wiki · Second Brain으로 인수인계·온보딩</h2>
+    <div class="arch">
+      <div class="archcap">문서 그래프</div>
+      <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arM" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Mb{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Mc{fill:#13203a;stroke:#3182f6;stroke-width:1.7}
+          .Mt{fill:#e8edf5;font-size:11px;font-weight:700}.Ms{fill:#9aa6bd;font-size:9px}
+          .Mln{stroke:#5ea0ff;stroke-width:1.4;fill:none;marker-end:url(#arM)}.Mlbl{fill:#7e8aa0;font-size:8.5px}
+        </style>
+        <rect class="Mc" x="264" y="82" width="152" height="46" rx="10"/><text class="Mt" x="340" y="102" text-anchor="middle">작업 문서 (md)</text><text class="Ms" x="340" y="117" text-anchor="middle">Second Brain</text>
+        <rect class="Mb" x="264" y="14" width="152" height="36" rx="9"/><text class="Mt" x="340" y="36" text-anchor="middle">Architecture</text>
+        <rect class="Mb" x="264" y="160" width="152" height="36" rx="9"/><text class="Mt" x="340" y="182" text-anchor="middle">Lessons</text>
+        <rect class="Mb" x="40" y="87" width="160" height="36" rx="9"/><text class="Mt" x="120" y="109" text-anchor="middle">Runbook</text>
+        <rect class="Mb" x="480" y="87" width="160" height="36" rx="9"/><text class="Mt" x="560" y="109" text-anchor="middle">Incident</text>
+        <path class="Mln" d="M340,82 V54"/>
+        <path class="Mln" d="M340,128 V156"/>
+        <path class="Mln" d="M264,105 H204"/>
+        <path class="Mln" d="M416,105 H476"/>
+        <text class="Mlbl" x="340" y="70" text-anchor="middle">메타데이터 태그</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">프로젝트·인프라 <b>인수인계와 온보딩</b>의 어려움을 줄이려, 작업하며 <b>LLM Wiki에 Second Brain</b>을 남깁니다. md 문서의 <b>메타데이터에 연관 문서 태그</b>를 달아 문서를 <b>그래프로 연결</b>해 제공하므로, 다음 사람이 맥락을 따라 자연스럽게 업무를 이어갑니다.</p>
+  </section>
+
+  <!-- 30 TECH-LEAD fe-convention -->
+  <section class="slide">
+    <div class="eyebrow">Technical Leadership · 코드 컨벤션</div>
+    <h2 class="stitle">프론트 코드 컨벤션 개편 · 컴포넌트 하이라키</h2>
+    <div class="arch">
+      <div class="archcap">컴포넌트 구성 컨벤션</div>
+      <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arN" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Nb{fill:#10231c;stroke:#2dd4a7;stroke-width:1.5}.Ngrp{fill:#0e1421;stroke:#3a5a92;stroke-width:1.4}
+          .Npage{fill:#13203a;stroke:#3182f6;stroke-width:1.6}
+          .Nt{fill:#e8edf5;font-size:11px;font-weight:700}.Ns{fill:#9aa6bd;font-size:8.5px}
+          .Nzt{font-size:10px;font-weight:800}.Ng{fill:#2dd4a7;font-size:9px;font-weight:700}
+          .Nln{stroke:#5ea0ff;stroke-width:1.4;fill:none;marker-end:url(#arN)}.Nlbl{fill:#7e8aa0;font-size:8.5px}
+        </style>
+        <text class="Nzt" x="40" y="26" fill="#8fd9bf">공용 추상화 (디자인 시스템)</text>
+        <rect class="Nb" x="40" y="38" width="180" height="46" rx="9"/><text class="Nt" x="130" y="60" text-anchor="middle">Atomic</text><text class="Ns" x="130" y="74" text-anchor="middle">최소 단위 컴포넌트</text>
+        <rect class="Nb" x="40" y="102" width="180" height="46" rx="9"/><text class="Nt" x="130" y="124" text-anchor="middle">Modular</text><text class="Ns" x="130" y="138" text-anchor="middle">조합 단위 컴포넌트</text>
+        <rect class="Ngrp" x="300" y="30" width="340" height="150" rx="12"/><text class="Nzt" x="316" y="50" fill="#8fb4f5">Page · Next.js 라우트 구조</text>
+        <rect class="Npage" x="320" y="66" width="300" height="44" rx="9"/><text class="Nt" x="470" y="88" text-anchor="middle">페이지 스코프 디자인 컴포넌트</text><text class="Ns" x="470" y="102" text-anchor="middle">페이지 내부에서 구성</text>
+        <rect class="Npage" x="320" y="120" width="300" height="44" rx="9"/><text class="Ng" x="470" y="142" text-anchor="middle">공용 컴포넌트 조합</text><text class="Ns" x="470" y="156" text-anchor="middle">Atomic · Modular 주입</text>
+        <path class="Nln" d="M220,61 H278 V88 H316"/>
+        <path class="Nln" d="M220,125 H278 V142 H316"/>
+        <text class="Nlbl" x="260" y="55" text-anchor="middle">주입</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">ERP 규모로 조직이 커지며 디자인 코드 복잡도가 올라갔습니다. <b>Atomic·Modular 사이즈만 추상화</b>해 공용화하고, 나머지 디자인 컴포넌트는 <b>페이지 내부에서 구성</b>하도록 <b>Next.js 구조 기반 하이라키 컨벤션</b>을 지정했습니다. <span style="color:var(--accent2)">적용: Lumir Portal</span></p>
+  </section>
+
+  <!-- 31 TECH-LEAD testing -->
+  <section class="slide">
+    <div class="eyebrow">Technical Leadership · 품질</div>
+    <h2 class="stitle">테스트 커버리지 · Domain·Context 100% + Playwright</h2>
+    <div class="arch">
+      <div class="archcap">계층별 검증 체계</div>
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .Tb{fill:#161b27;stroke:#27406b;stroke-width:1.4}
+          .Tdom{fill:#10231c;stroke:#2dd4a7;stroke-width:1.7}.Tctx{fill:#13203a;stroke:#3182f6;stroke-width:1.7}.Tbiz{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
+          .Tt{fill:#e8edf5;font-size:12px;font-weight:700}.Ts{fill:#9aa6bd;font-size:9px}
+          .Tg{font-size:10px;font-weight:800}
+        </style>
+        <rect class="Tdom" x="40" y="20" width="600" height="46" rx="10"/><text class="Tt" x="70" y="40" text-anchor="start">Domain · Unit Test</text><text class="Ts" x="70" y="55" text-anchor="start">순수 도메인 로직 검증</text><text class="Tg" x="612" y="47" text-anchor="end" fill="#2dd4a7">커버리지 100%</text>
+        <rect class="Tctx" x="40" y="76" width="600" height="46" rx="10"/><text class="Tt" x="70" y="96" text-anchor="start">Context · 컨테이너 DB · 트랜잭션</text><text class="Ts" x="70" y="111" text-anchor="start">실제 DB 연동 · 트랜잭션 검증</text><text class="Tg" x="612" y="103" text-anchor="end" fill="#5ea0ff">커버리지 100%</text>
+        <rect class="Tbiz" x="40" y="132" width="600" height="46" rx="10"/><text class="Tt" x="70" y="152" text-anchor="start">Business · Playwright E2E</text><text class="Ts" x="70" y="167" text-anchor="start">프론트에서 비즈니스 흐름 자동 검증</text><text class="Tg" x="612" y="159" text-anchor="end" fill="#bda4f2">자동 검증</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px"><b>Domain은 Unit Test</b>, <b>Context는 컨테이너 기반 실제 DB 연동·트랜잭션 검증</b>으로 <b>커버리지 100%</b>를 보증하고, <b>비즈니스 영역은 프론트 Playwright</b>로 자동 검증합니다. 계층별 검증으로 안정성 높은 시스템을 운영합니다.</p>
+  </section>
+
+  <!-- 32 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -802,7 +904,7 @@
     </div>
   </section>
 
-  <!-- 28 CAREER -->
+  <!-- 33 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -817,7 +919,7 @@
     </div>
   </section>
 
-  <!-- 29 GITHUB GRASS -->
+  <!-- 34 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -830,7 +932,7 @@
     </div>
   </section>
 
-  <!-- 30 CLOSING -->
+  <!-- 35 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
@@ -866,11 +968,11 @@
     {t:'대용량 파일 전송 엔진', s:14, e:18},
     {t:'Selected Projects', s:19},
     {t:'Infrastructure & DevOps', s:20, e:24},
-    {t:'Engineering Convention', s:25},
-    {t:'기술 스택', s:26},
-    {t:'경력', s:27},
-    {t:'GitHub 기록', s:28},
-    {t:'Closing', s:29}
+    {t:'기술 리딩 (Technical)', s:25, e:30},
+    {t:'기술 스택', s:31},
+    {t:'경력', s:32},
+    {t:'GitHub 기록', s:33},
+    {t:'Closing', s:34}
   ];
   const tocEl=document.getElementById('toc');
   toc.forEach((item,idx)=>{
