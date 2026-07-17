@@ -328,43 +328,7 @@
     </div>
   </section>
 
-  <!-- 10 BACKOFFICE clean arch -->
-  <section class="slide">
-    <div class="eyebrow">백오피스 · Design</div>
-    <h2 class="stitle">DDD 전술 패턴 · Context / Business 계층</h2>
-    <div class="arch">
-      <div class="archcap">백엔드 설계</div>
-      <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="arB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#ffb454"/></marker></defs>
-        <style>
-          .Binfra{fill:#0e1421;stroke:#27406b;stroke-width:1.4}.Bbiz{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.5}
-          .Bctx{fill:#13203a;stroke:#3a5a92;stroke-width:1.4}.Bdom{fill:#10231c;stroke:#2dd4a7;stroke-width:1.8}
-          .Blt{font-size:11px;font-weight:700}.Bls{font-size:9px}
-          .Bcore{fill:#2dd4a7;font-size:12px;font-weight:800}.Bcs{fill:#cfeee3;font-size:9px}
-          .Barr{stroke:#ffb454;stroke-width:1.8;fill:none;marker-end:url(#arB)}
-        </style>
-        <rect class="Binfra" x="40" y="28" width="600" height="284" rx="14"/>
-        <text class="Blt" x="56" y="50" fill="#5ea0ff">Infrastructure</text>
-        <text class="Bls" x="142" y="50" fill="#9aa6bd">— DB · ORM · 외부 어댑터 (Amaranth/SmartNotes API · 지문/QR DB)</text>
-        <rect class="Bbiz" x="110" y="72" width="460" height="220" rx="13"/>
-        <text class="Blt" x="126" y="94" fill="#bda4f2">Business 계층</text>
-        <text class="Bls" x="214" y="94" fill="#9aa6bd">— 외부 시스템 연동 흐름 관리 · 오케스트레이션</text>
-        <rect class="Bctx" x="190" y="118" width="300" height="152" rx="12"/>
-        <text class="Blt" x="206" y="140" fill="#8fb4f5">Context 계층</text>
-        <text class="Bls" x="288" y="140" fill="#9aa6bd">— 전술적 패턴 · 도메인 조합·활용</text>
-        <rect class="Bdom" x="262" y="164" width="156" height="92" rx="11"/>
-        <text class="Bcore" x="340" y="190" text-anchor="middle">Domain Core</text>
-        <text class="Bcs" x="340" y="208" text-anchor="middle">Entities · Aggregates</text>
-        <text class="Bcs" x="340" y="223" text-anchor="middle">Repository Interface</text>
-        <text class="Bcs" x="340" y="238" text-anchor="middle">Domain Service</text>
-        <path class="Barr" d="M600,210 L424,210"/>
-        <text x="600" y="194" text-anchor="end" font-size="9.5" fill="#ffb454" font-weight="700">Dependency Rule</text>
-        <text x="600" y="302" text-anchor="end" font-size="9.5" fill="#9aa6bd">의존성은 항상 바깥 → 안쪽(도메인) 단방향</text>
-      </svg>
-    </div>
-  </section>
-
-  <!-- 11 SDPE overview -->
+  <!-- 10 SDPE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 03</div>
     <div class="ptop"><h2 class="stitle">SAR Data Processing Element</h2><span class="pill">PM · Architecture 설계</span></div>
@@ -373,7 +337,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
   </section>
 
-  <!-- 12 SDPE architecture -->
+  <!-- 11 SDPE architecture -->
   <section class="slide">
     <div class="eyebrow">SDPE · Architecture</div>
     <h2 class="stitle">DAG 오케스트레이션 & 이벤트 기반 처리</h2>
@@ -410,7 +374,7 @@
     </div>
   </section>
 
-  <!-- 13 SDPE impact -->
+  <!-- 12 SDPE impact -->
   <section class="slide">
     <div class="eyebrow">SDPE · Impact</div>
     <h2 class="stitle">10분 이상 걸리던 처리를 40초대로</h2>
@@ -425,7 +389,7 @@
     </div>
   </section>
 
-  <!-- 14 LIID overview -->
+  <!-- 13 LIID overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 04</div>
     <div class="ptop"><h2 class="stitle">LIID · 위성영상 정보 배포 서비스</h2><span class="pill">PM · Architecture 설계</span></div>
@@ -434,7 +398,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>SDPE 산출물을 받아 서비스 도메인으로 변환·제공하는 백엔드를 설계하고, 사용자에게는 <b>LLM + DEM 기반 3D 지형 모니터링</b>과 <b>SAR 영상 검색·촬영 요청</b>을 하나의 진입점으로 제공합니다. LLM은 <b>로컬(온프레미스) 모델</b>로 구성해 데이터를 밖으로 내보내지 않고, 대용량 3D 전달 경로에는 <b>캐시 서버</b>를 두어 Hit/Miss 전략으로 응답 지연을 흡수했습니다.</p></div>
   </section>
 
-  <!-- 15 LIID architecture -->
+  <!-- 14 LIID architecture -->
   <section class="slide">
     <div class="eyebrow">LIID · Architecture</div>
     <h2 class="stitle">SDPE → 서비스 백엔드 → 캐시 → 사용자</h2>
@@ -466,7 +430,7 @@
     </div>
   </section>
 
-  <!-- 16 LIID cache -->
+  <!-- 15 LIID cache -->
   <section class="slide">
     <div class="eyebrow">LIID · Design</div>
     <h2 class="stitle">대용량 3D 전달 · 캐시 Hit / Miss 전략</h2>
@@ -494,7 +458,7 @@
     <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
   </section>
 
-  <!-- 17 LIID LLM + role -->
+  <!-- 16 LIID LLM + role -->
   <section class="slide">
     <div class="eyebrow">LIID · Deep Dive</div>
     <h2 class="stitle">로컬 LLM · 촬영 요청까지 하나의 서비스로</h2>
@@ -506,7 +470,7 @@
     </div>
   </section>
 
-  <!-- 18 FILE-ENGINE overview -->
+  <!-- 17 FILE-ENGINE overview -->
   <section class="slide">
     <div class="eyebrow">Flagship Project 05</div>
     <div class="ptop"><h2 class="stitle">대용량 파일 전송 엔진 · 분산 파일 서버</h2><span class="pill">Tech Lead · 설계 주도</span></div>
@@ -515,7 +479,7 @@
     <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 50GB 데이터를 수 분 내에 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
   </section>
 
-  <!-- 19 FILE-ENGINE architecture -->
+  <!-- 18 FILE-ENGINE architecture -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Architecture</div>
     <h2 class="stitle">전송 엔진 · 큐 · 오토스케일 파일 서버</h2>
@@ -552,7 +516,7 @@
     </div>
   </section>
 
-  <!-- 20 FILE-ENGINE chunk -->
+  <!-- 19 FILE-ENGINE chunk -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Deep Dive</div>
     <h2 class="stitle">50GB를 수 분 내로 · 청크 병렬 전송</h2>
@@ -581,7 +545,7 @@
     <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 수 분 내에 이동하고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
   </section>
 
-  <!-- 21 FILE-ENGINE resilience -->
+  <!-- 20 FILE-ENGINE resilience -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Design</div>
     <h2 class="stitle">부하 분산 · 죽어도 이어가는 전송</h2>
@@ -593,7 +557,7 @@
     </div>
   </section>
 
-  <!-- 22 FILE-ENGINE SSO -->
+  <!-- 21 FILE-ENGINE SSO -->
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Integration</div>
     <h2 class="stitle">Portal SSO 연동 · 엔진 자동 로그인</h2>
@@ -624,7 +588,7 @@
     </div>
   </section>
 
-  <!-- 23 OTHER PROJECTS -->
+  <!-- 22 OTHER PROJECTS -->
   <section class="slide">
     <div class="eyebrow">Selected Projects</div>
     <h2 class="stitle">시스템을 설계하고, 끝까지 운영합니다</h2>
@@ -638,7 +602,7 @@
     </div>
   </section>
 
-  <!-- 24 INFRA overview -->
+  <!-- 23 INFRA overview -->
   <section class="slide">
     <div class="eyebrow">Infrastructure &amp; DevOps</div>
     <div class="ptop"><h2 class="stitle">온프레미스 + 클라우드 하이브리드 인프라</h2><span class="pill">설계·구축 주도</span></div>
@@ -673,7 +637,7 @@
     <p class="ssub" style="margin-top:12px">사내망 전용 서비스는 <b>온프레미스 k8s</b>, 사내 ERP는 <b>AWS 클라우드</b>, 공공기관 납품은 <b>CSAP 인증 경계로 완전 분리</b> — 워크로드마다 맞는 환경에 배치하는 하이브리드 전략입니다.</p>
   </section>
 
-  <!-- 25 INFRA on-prem -->
+  <!-- 24 INFRA on-prem -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">사내 PaaS · Kubernetes 플랫폼 (구축·운영)</h2>
@@ -685,7 +649,7 @@
     </div>
   </section>
 
-  <!-- 26 INFRA k8s topology -->
+  <!-- 25 INFRA k8s topology -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">Kubernetes 클러스터 설계 · CI/CD → 배포 → 노출</h2>
@@ -732,7 +696,7 @@
     </div>
   </section>
 
-  <!-- 27 INFRA cloud -->
+  <!-- 26 INFRA cloud -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">클라우드 인프라 · AWS 컨테이너 플랫폼 (설계·전환)</h2>
@@ -744,7 +708,7 @@
     </div>
   </section>
 
-  <!-- 28 INFRA cloud arch -->
+  <!-- 27 INFRA cloud arch -->
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">AWS 클라우드 아키텍처 · Stage / Prod · public·private 분리</h2>
@@ -786,6 +750,43 @@
       </svg>
     </div>
     <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
+  </section>
+
+  <!-- 28 ENG-CONV DDD -->
+  <section class="slide">
+    <div class="eyebrow">Engineering Convention</div>
+    <h2 class="stitle">DDD 전술 패턴 · Context / Business 계층</h2>
+    <p class="ssub">특정 프로젝트에 한정하지 않고, 백엔드 전반에 공통 적용하는 설계 컨벤션</p>
+    <div class="arch">
+      <div class="archcap">레이어드 아키텍처</div>
+      <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#ffb454"/></marker></defs>
+        <style>
+          .Binfra{fill:#0e1421;stroke:#27406b;stroke-width:1.4}.Bbiz{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.5}
+          .Bctx{fill:#13203a;stroke:#3a5a92;stroke-width:1.4}.Bdom{fill:#10231c;stroke:#2dd4a7;stroke-width:1.8}
+          .Blt{font-size:11px;font-weight:700}.Bls{font-size:9px}
+          .Bcore{fill:#2dd4a7;font-size:12px;font-weight:800}.Bcs{fill:#cfeee3;font-size:9px}
+          .Barr{stroke:#ffb454;stroke-width:1.8;fill:none;marker-end:url(#arB)}
+        </style>
+        <rect class="Binfra" x="40" y="28" width="600" height="284" rx="14"/>
+        <text class="Blt" x="56" y="50" fill="#5ea0ff">Infrastructure</text>
+        <text class="Bls" x="142" y="50" fill="#9aa6bd">— DB · ORM · 외부 시스템 어댑터</text>
+        <rect class="Bbiz" x="110" y="72" width="460" height="220" rx="13"/>
+        <text class="Blt" x="126" y="94" fill="#bda4f2">Business 계층</text>
+        <text class="Bls" x="214" y="94" fill="#9aa6bd">— 유스케이스 흐름 관리 · 오케스트레이션</text>
+        <rect class="Bctx" x="190" y="118" width="300" height="152" rx="12"/>
+        <text class="Blt" x="206" y="140" fill="#8fb4f5">Context 계층</text>
+        <text class="Bls" x="288" y="140" fill="#9aa6bd">— 전술적 패턴 · 도메인 조합·활용</text>
+        <rect class="Bdom" x="262" y="164" width="156" height="92" rx="11"/>
+        <text class="Bcore" x="340" y="190" text-anchor="middle">Domain Core</text>
+        <text class="Bcs" x="340" y="208" text-anchor="middle">Entities · Aggregates</text>
+        <text class="Bcs" x="340" y="223" text-anchor="middle">Repository Interface</text>
+        <text class="Bcs" x="340" y="238" text-anchor="middle">Domain Service</text>
+        <path class="Barr" d="M600,210 L424,210"/>
+        <text x="600" y="194" text-anchor="end" font-size="9.5" fill="#ffb454" font-weight="700">Dependency Rule</text>
+        <text x="600" y="302" text-anchor="end" font-size="9.5" fill="#9aa6bd">의존성은 항상 바깥 → 안쪽(도메인) 단방향</text>
+      </svg>
+    </div>
   </section>
 
   <!-- 29 SKILLS -->
