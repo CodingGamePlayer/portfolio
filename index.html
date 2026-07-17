@@ -422,10 +422,10 @@
       <div class="pf"><div class="pfh"><span class="lab">SAR 프로세싱 처리 시간</span><span class="val">10분+ → 40초대 <span class="imp">(93%↓)</span></span></div><div class="bar"><i style="--w:93%"></i></div></div>
     </div>
     <div class="pblock" style="margin-top:24px"><div class="h">Deep Dive · 수작업 → 무인 자동화</div><p>사람이 단계마다 명령을 돌리던 수작업 처리를, DAG로 정의한 파이프라인을 시스템이 스스로 순서대로 실행하는 <b>무인 자동화</b>로 전환했습니다. 담당자가 붙어 있지 않아도 수집→처리→후처리가 끝까지 흐르고, 실패 단계는 이벤트 큐에서 재시도됩니다.</p></div>
-    <div class="pblock" style="margin-top:16px"><div class="h">Deep Dive · 처리 구조 재설계</div><p>병목의 실체는 알고리즘이 아니라 <b>NAS 쓰기·읽기 대기</b>였습니다. 단계 간 중간 산출물을 파일로 떨구지 않고 메모리에 올린 채로 넘기도록 실행 모델을 바꿔 I/O를 걷어내고, 그 위에서 영상을 Azimuth 방향 블록으로 잘라 GPU에 병렬 투입해 처리 자체를 스케일아웃했습니다.</p></div>
+    <div class="pblock" style="margin-top:16px"><div class="h">Deep Dive · CPU → GPU 전환 · 처리 구조 재설계</div><p>SAR 연산을 <b>CPU에서 GPU로 전환</b>해 대규모 신호·행렬 처리를 병렬 가속, 처리 시간을 <b>배 단위로 단축</b>했습니다. 또 다른 병목이던 <b>NAS I/O</b>는 중간 산출물을 파일 대신 메모리로 넘겨 걷어내고, 영상을 Azimuth 방향 블록으로 잘라 GPU에 병렬 투입해 스케일아웃했습니다.</p></div>
     <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>PM으로 요구사항·일정·이해관계자를 관리하면서, 아키텍처 설계(MSA 서비스 경계, 이벤트 기반 처리 흐름, DAG 오케스트레이션 모델, 성능 개선 설계)를 직접 담당했습니다. 현재 진행 중인 프로젝트입니다.</p></div>
     <div class="chips">
-      <span class="chip">MSA</span><span class="chip">EDA · Event Queue</span><span class="chip">DAG 오케스트레이션</span><span class="chip">GPU 병렬 처리</span><span class="chip">메모리 로딩 최적화</span><span class="chip">Kubernetes</span><span class="chip">PostgreSQL</span><span class="chip">GitLab CI/CD</span>
+      <span class="chip">MSA</span><span class="chip">EDA · Event Queue</span><span class="chip">DAG 오케스트레이션</span><span class="chip">CPU → GPU 가속</span><span class="chip">Azimuth 블록 병렬</span><span class="chip">메모리 로딩 최적화</span><span class="chip">Kubernetes</span><span class="chip">GitLab CI/CD</span>
     </div>
   </section>
 
