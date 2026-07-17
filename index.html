@@ -23,6 +23,14 @@
   }
   .deck{position:fixed;top:0;right:0;bottom:0;left:280px;background:var(--bg)}
 
+  /* scrollbars — match dark theme */
+  *{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.13);border-radius:10px;border:3px solid transparent;background-clip:content-box}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(91,141,239,.55);border:3px solid transparent;background-clip:content-box}
+  ::-webkit-scrollbar-corner{background:transparent}
+
   /* table of contents sidebar */
   .toc{position:fixed;top:0;left:0;bottom:0;width:280px;background:#0b0f18;border-right:1px solid var(--line2);
     padding:44px 0 24px;overflow-y:auto;z-index:120;display:flex;flex-direction:column}
