@@ -595,14 +595,74 @@
     </div>
   </section>
 
-  <!-- 23 SKILLS -->
+  <!-- 23 INFRA overview -->
+  <section class="slide">
+    <div class="eyebrow">Infrastructure &amp; DevOps</div>
+    <div class="ptop"><h2 class="stitle">온프레미스 + 클라우드 하이브리드 인프라</h2><span class="pill">설계·구축 주도</span></div>
+    <p class="ssub">워크로드 성격에 맞춰 사내 온프레미스 · 클라우드 · 공공존을 분리 구성</p>
+    <div class="arch">
+      <div class="archcap">하이브리드 구성</div>
+      <svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arI" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker></defs>
+        <style>
+          .Ib{fill:#161b27;stroke:#27406b;stroke-width:1.4}.Izone{fill:#0e1421;stroke:#3a5a92;stroke-width:1.3}
+          .Ip{fill:#10231c;stroke:#2dd4a7;stroke-width:1.5}.Ia{fill:#13203a;stroke:#3182f6;stroke-width:1.5}
+          .Ipub{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.5}
+          .It{fill:#e8edf5;font-size:11px;font-weight:700}.Is{fill:#9aa6bd;font-size:8.5px}
+          .Izt{font-size:10px;font-weight:800}.Icap{fill:#6b7689;font-size:9px;font-weight:700}
+          .Iln{stroke:#5ea0ff;stroke-width:1.4;fill:none;marker-end:url(#arI)}.Ilbl{fill:#7e8aa0;font-size:8.5px}
+        </style>
+        <rect class="Ib" x="270" y="16" width="140" height="40" rx="9"/><text class="It" x="340" y="34" text-anchor="middle">Git · CI/CD</text><text class="Is" x="340" y="48" text-anchor="middle">push → 자동 빌드·배포</text>
+        <rect class="Izone" x="20" y="96" width="200" height="138" rx="12"/><text class="Izt" x="36" y="118" fill="#2dd4a7">온프레미스 · 사내 PaaS</text>
+        <rect class="Ip" x="38" y="132" width="164" height="40" rx="8"/><text class="It" x="120" y="150" text-anchor="middle">Kubernetes 7노드 HA</text><text class="Is" x="120" y="164" text-anchor="middle">사내망 보안 서비스</text>
+        <rect class="Ip" x="38" y="182" width="164" height="40" rx="8"/><text class="It" x="120" y="200" text-anchor="middle">공유 NAS · GitLab CI</text><text class="Is" x="120" y="214" text-anchor="middle">SDPE 등 실서비스</text>
+        <rect class="Izone" x="240" y="96" width="200" height="138" rx="12"/><text class="Izt" x="256" y="118" fill="#8fb4f5">클라우드 · AWS</text>
+        <rect class="Ia" x="258" y="132" width="164" height="40" rx="8"/><text class="It" x="340" y="150" text-anchor="middle">EC2 컨테이너 · Harbor</text><text class="Is" x="340" y="164" text-anchor="middle">사내 ERP 업무 시스템</text>
+        <rect class="Ia" x="258" y="182" width="164" height="40" rx="8"/><text class="It" x="340" y="200" text-anchor="middle">SSM · Secrets Manager</text><text class="Is" x="340" y="214" text-anchor="middle">무SSH · 시크릿 중앙관리</text>
+        <rect class="Izone" x="460" y="96" width="200" height="138" rx="12"/><text class="Izt" x="476" y="118" fill="#bda4f2">공공존 · 분리 운영</text>
+        <rect class="Ipub" x="478" y="132" width="164" height="40" rx="8"/><text class="It" x="560" y="150" text-anchor="middle">공공기관 납품 SaaS</text><text class="Is" x="560" y="164" text-anchor="middle">CSAP 인증 대응</text>
+        <rect class="Ipub" x="478" y="182" width="164" height="40" rx="8"/><text class="Is" x="560" y="200" text-anchor="middle">이미지·코드·네트워크</text><text class="Is" x="560" y="214" text-anchor="middle">완전 분리 (인증 경계)</text>
+        <path class="Iln" d="M320,56 V80 H120 V128"/>
+        <path class="Iln" d="M340,56 V128"/>
+        <path class="Iln" d="M360,56 V80 H560 V128"/>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">사내망 전용 서비스는 <b>온프레미스 k8s</b>, 사내 ERP는 <b>AWS 클라우드</b>, 공공기관 납품은 <b>CSAP 인증 경계로 완전 분리</b> — 워크로드마다 맞는 환경에 배치하는 하이브리드 전략입니다.</p>
+  </section>
+
+  <!-- 24 INFRA on-prem -->
+  <section class="slide">
+    <div class="eyebrow">Infrastructure · On-premise</div>
+    <h2 class="stitle">사내 PaaS · Kubernetes 플랫폼 (구축·운영)</h2>
+    <div class="pblock"><div class="h">플랫폼</div><p><b>7노드 Kubernetes HA 클러스터</b>(control-plane 3 + worker 4)를 직접 구축해 사내망 서비스를 올리는 PaaS로 운영합니다. <code>git push</code> 한 번으로 빌드→레지스트리 푸시→배포→도메인·신뢰 HTTPS 노출까지 자동으로 이어지는 E2E 파이프라인을 만들었습니다.</p></div>
+    <div class="pblock" style="margin-top:14px"><div class="h">CI/CD · 노출 · 스토리지</div><p><b>GitLab CI</b> 러너를 k8s 위에서 돌려 이미지 빌드를 병렬·캐시로 가속하고, <b>MetalLB + ingress + 와일드카드 TLS</b>로 도메인 노출을 자동화. 앱 공유 데이터는 <b>SMB CSI 기반 공유 NAS(RWX)</b>로, DB·상태는 노드 로컬 스토리지로 분리했습니다.</p></div>
+    <div class="pblock" style="margin-top:14px"><div class="h">실서비스</div><p>SDPE 백엔드 파이프라인(다중 서비스)이 이 플랫폼 위에서 공유 NAS·CI 자동배포로 실제 가동 중입니다.</p></div>
+    <div class="chips">
+      <span class="chip">Kubernetes HA</span><span class="chip">GitLab CI/CD</span><span class="chip">MetalLB · ingress</span><span class="chip">와일드카드 TLS</span><span class="chip">SMB CSI · 공유 NAS</span><span class="chip">containerd · Calico</span>
+    </div>
+  </section>
+
+  <!-- 25 INFRA cloud -->
+  <section class="slide">
+    <div class="eyebrow">Infrastructure · Cloud</div>
+    <h2 class="stitle">클라우드 인프라 · AWS 컨테이너 플랫폼 (설계·전환)</h2>
+    <div class="pblock"><div class="h">컨테이너화 · 레지스트리</div><p>PM2로 흩어져 있던 사내 ERP 서비스들을 <b>컨테이너화</b>하고, <b>Harbor</b> 이미지 레지스트리를 도입해 롤백·재배포를 표준화하는 아키텍처를 설계했습니다. 기존 EC2를 유지하며 점진 전환하는 전략입니다.</p></div>
+    <div class="pblock" style="margin-top:14px"><div class="h">CI/CD · 시크릿 · 접근</div><p><b>GitHub Actions + OIDC</b>로 액세스 키 없이 배포하고, <b>Trivy</b> 취약점 스캔을 파이프라인에 넣었습니다. 환경변수는 <b>Parameter Store / Secrets Manager</b>로 중앙화하고, 접근은 <b>SSM Session Manager</b>로 전환해 SSH(22) 포트를 닫아 감사 이력을 남깁니다.</p></div>
+    <div class="pblock" style="margin-top:14px"><div class="h">Role</div><p>인프라 아키텍처 설계(컨테이너화·레지스트리·CI/CD·시크릿·접근·모니터링)를 주도하고 전환을 진행 중입니다.</p></div>
+    <div class="chips">
+      <span class="chip">AWS EC2</span><span class="chip">Harbor</span><span class="chip">GitHub Actions · OIDC</span><span class="chip">SSM Session Manager</span><span class="chip">Secrets Manager</span><span class="chip">Trivy · CloudWatch</span>
+    </div>
+  </section>
+
+  <!-- 26 SKILLS -->
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
     <p class="ssub">실제 프로덕션에서 설계·운영한 기술 중심</p>
     <div class="skillgrid">
       <div class="skillcat"><div class="sh">Backend</div><div class="sk"><span>NestJS</span><span>Node.js</span><span>TypeScript</span><span>MSA</span><span>DDD</span><span>TDD</span><span>REST API</span><span>Bull</span></div></div>
-      <div class="skillcat"><div class="sh">Data & Infra</div><div class="sk"><span>PostgreSQL</span><span>PostGIS</span><span>MySQL</span><span>MongoDB</span><span>Redis</span><span>Docker</span><span>GitLab CI/CD</span><span>AWS</span></div></div>
+      <div class="skillcat"><div class="sh">Data</div><div class="sk"><span>PostgreSQL</span><span>PostGIS</span><span>MySQL</span><span>MongoDB</span><span>Redis</span></div></div>
+      <div class="skillcat"><div class="sh">Infra & DevOps</div><div class="sk"><span>Kubernetes</span><span>Docker</span><span>GitLab CI/CD</span><span>GitHub Actions</span><span>AWS · SSM</span><span>Harbor</span><span>온프레미스 · 하이브리드</span></div></div>
       <div class="skillcat"><div class="sh">Frontend & Tools</div><div class="sk"><span>Next.js</span><span>React</span><span>Figma</span><span>Cursor</span><span>JIRA</span></div></div>
       <div class="skillcat"><div class="sh">Leadership</div><div class="sk"><span>조직 빌딩</span><span>채용·평가 설계</span><span>프로그램 관리</span><span>이해관계자 협상</span></div></div>
       <div class="skillcat"><div class="sh">Certifications</div><div class="sk"><span>SQLD</span><span>네트워크관리사 2급</span><span>컴활 1급</span></div></div>
@@ -610,7 +670,7 @@
     </div>
   </section>
 
-  <!-- 24 CAREER -->
+  <!-- 27 CAREER -->
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -631,7 +691,7 @@
     </div>
   </section>
 
-  <!-- 25 GITHUB GRASS -->
+  <!-- 28 GITHUB GRASS -->
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -644,7 +704,7 @@
     </div>
   </section>
 
-  <!-- 26 CLOSING -->
+  <!-- 29 CLOSING -->
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
