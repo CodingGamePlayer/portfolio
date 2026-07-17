@@ -158,6 +158,7 @@
 <div class="deck" id="deck">
 
   <!-- 1 TITLE -->
+
   <section class="slide active">
     <div class="eyebrow">Backend Engineer · Tech Lead</div>
     <h1 class="big">0에서 1을 만들고,<br>1을 <span class="hl">조직</span>으로 키운<br>기술 기반 빌더</h1>
@@ -166,6 +167,7 @@
   </section>
 
   <!-- 2 ABOUT + STATS -->
+
   <section class="slide">
     <div class="eyebrow">About</div>
     <h2 class="stitle">스펙이 아니라 실행으로 증명합니다</h2>
@@ -179,6 +181,7 @@
   </section>
 
   <!-- 3 CORE COMPETENCY (full-cycle 4-track) -->
+
   <section class="slide">
     <div class="eyebrow">Core Competency</div>
     <h2 class="stitle">기획부터 인프라까지, 풀사이클로</h2>
@@ -232,6 +235,7 @@
   </section>
 
   <!-- 4 PLANNING deep dive -->
+
   <section class="slide">
     <div class="eyebrow">Planning · Product Design</div>
     <h2 class="stitle">기획: 요구사항에서 데이터 구조까지</h2>
@@ -246,7 +250,101 @@
     </div>
   </section>
 
-  <!-- 5 LIID overview -->
+  <!-- 5 PLANNING CASE overview -->
+
+  <section class="slide">
+    <div class="eyebrow">Planning Case · 사내 업무 관리 시스템</div>
+    <div class="ptop"><h2 class="stitle">업무 보고·승인 &amp; 업무 분장 시스템</h2><span class="pill">메인 기획 · 파트장</span></div>
+    <p class="ssub">배경·목적부터 화면·데이터 모델까지 기획서로 직접 설계 — 파트 단위 업무 가시성 확보</p>
+    <div class="pblock problem" style="max-width:1120px"><div class="h">Problem · As-Is</div><p>파트 업무가 구두·메신저로 흩어져 진행 상황·워크로드·검토 상태가 보이지 않음. 이슈마다 보고 강제 수준이 달라야 하는데 규칙은 획일적이고, 파트장은 검토 대기 보고서를 놓치기 쉬움.</p></div>
+    <div class="pblock solution" style="max-width:1120px"><div class="h">Solution · To-Be</div><p>이슈 기반 정기 보고·승인과 업무 분장을 하나의 시스템으로 통합. 이슈별 <b style="color:var(--fg)">보고 정책(없음/선택/필수)</b>으로 강제 수준을 차등화하고, 검토 대기 큐·Aging 뱃지로 누락을 방지.</p></div>
+    <div class="chips">
+      <span class="chip">요구사항 수립</span><span class="chip">도메인 용어 표준화</span><span class="chip">역할·권한 정의</span><span class="chip">유즈케이스 6종</span><span class="chip">IA 재편</span><span class="chip">승인 워크플로우 설계</span><span class="chip">데이터 모델</span><span class="chip">확장 백로그·의사결정</span>
+    </div>
+  </section>
+
+  <!-- 6 PLANNING CASE usecase-IA -->
+
+  <section class="slide">
+    <div class="eyebrow">Planning · 유즈케이스 &amp; IA</div>
+    <h2 class="stitle">역할·시나리오에서 정보 구조까지</h2>
+    <p class="ssub">액터별 유즈케이스를 도출하고, 평면적 메뉴를 작업·역할 중심 IA로 재편</p>
+    <div class="tracks" style="max-width:1180px">
+      <div class="track">
+        <h3>액터 · 유즈케이스</h3>
+        <p>역할별 핵심 흐름과 예외 시나리오</p>
+        <ul>
+          <li>파트장 — 이슈·정책·템플릿 관리, 검토·승인/반려</li>
+          <li>파트원 — 보고서 작성·요청·재요청</li>
+          <li>관전자 — 조회 (잔디 제외)</li>
+          <li>정상 흐름 · 반려→재요청 루프</li>
+          <li>검토 누락 방지 · 정책 변경 · 모바일</li>
+        </ul>
+      </div>
+      <div class="track">
+        <h3>IA · As-Is</h3>
+        <p>평면적 메뉴 — 한 작업이 분산</p>
+        <ul>
+          <li>대시보드·이슈·내 보고서·승인·검토가 한 층에 평면 나열</li>
+          <li>"내 보고서"가 특정 이슈로 하드코딩 딥링크</li>
+          <li>검토 대기 ↔ 승인이 한 흐름인데 메뉴 2개로 분리</li>
+        </ul>
+      </div>
+      <div class="track">
+        <h3>IA · To-Be</h3>
+        <p>작업·역할 중심 재편 (3안 중 선택)</p>
+        <ul>
+          <li>홈 · 내 작업 · 업무 탐색</li>
+          <li>검토 (대기↔승인 탭 통합)</li>
+          <li>인사이트 · 설정 · 관리(권한·역할)</li>
+          <li>"내 보고서" 흡수·폐기로 개념 명확화</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 PLANNING CASE workflow-data -->
+
+  <section class="slide">
+    <div class="eyebrow">Planning · 화면 흐름 &amp; 데이터 구조</div>
+    <h2 class="stitle">승인 워크플로우와 도메인 데이터 설계</h2>
+    <div class="arch" style="max-width:900px">
+      <div class="archcap">보고서 승인 상태 흐름</div>
+      <svg viewBox="0 0 860 210" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ea0ff"/></marker>
+          <marker id="arPg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2dd4a7"/></marker>
+        </defs>
+        <style>
+          .Pb{fill:#161b27;stroke:#27406b;stroke-width:1.4}
+          .Pok{fill:#10231c;stroke:#2dd4a7;stroke-width:1.5}
+          .Pwarn{fill:#241a12;stroke:#d9883b;stroke-width:1.4}
+          .Pt{fill:#e8edf5;font-size:13px;font-weight:700}
+          .Pln{stroke:#5ea0ff;stroke-width:1.6;fill:none;marker-end:url(#arP)}
+          .Plng{stroke:#2dd4a7;stroke-width:1.7;fill:none;marker-end:url(#arPg)}
+          .Plbl{fill:#7e8aa0;font-size:10px}
+        </style>
+        <rect class="Pb" x="20" y="40" width="120" height="46" rx="9"/><text class="Pt" x="80" y="68" text-anchor="middle">작성 대기</text>
+        <rect class="Pb" x="180" y="40" width="120" height="46" rx="9"/><text class="Pt" x="240" y="68" text-anchor="middle">작성중</text>
+        <rect class="Pb" x="340" y="40" width="130" height="46" rx="9"/><text class="Pt" x="405" y="68" text-anchor="middle">검토 대기</text>
+        <rect class="Pok" x="690" y="40" width="150" height="46" rx="9"/><text class="Pt" x="765" y="68" text-anchor="middle">승인 완료</text>
+        <rect class="Pwarn" x="340" y="140" width="130" height="46" rx="9"/><text class="Pt" x="405" y="168" text-anchor="middle">반려 · 수정</text>
+        <path class="Pln" d="M140,63 H180"/>
+        <path class="Pln" d="M300,63 H340"/>
+        <path class="Plng" d="M470,63 H690"/><text class="Plbl" x="575" y="54" text-anchor="middle">승인</text>
+        <path class="Pln" d="M390,86 V140"/><text class="Plbl" x="360" y="118" text-anchor="end">반려</text>
+        <path class="Pln" d="M420,140 V86"/><text class="Plbl" x="432" y="118">재요청</text>
+      </svg>
+    </div>
+    <div class="grid3" style="max-width:1160px;margin-top:14px">
+      <div class="mini"><h4>보고 정책 3단계</h4><p>이슈별 없음/선택/필수 — 슬롯 생성·알림·준수율 계산을 정책별로 차등</p></div>
+      <div class="mini"><h4>상태 스냅샷·이력</h4><p>보고서에 정책 스냅샷 기록, 정책 변경 이력 보존으로 처리 규칙 일관성 유지</p></div>
+      <div class="mini"><h4>업무 분장 5계층</h4><p>System › Element › Subsystem › CSC › CSU · 멤버×역할·난이도로 부하·공백 분석</p></div>
+    </div>
+  </section>
+
+  <!-- 8 LIID overview -->
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 01</div>
     <div class="ptop"><h2 class="stitle">LIID · 위성영상 플랫폼</h2><span class="pill">PM · Architecture · Backend</span></div>
@@ -255,7 +353,8 @@
     <div class="pblock solution"><div class="h">Solution</div><p>요구사항 분석부터 아키텍처·백엔드까지 주도. 타일맵을 <b>최적화 래스터 직접 렌더링 + 캐시</b>로 전환하고 <b>공간쿼리·파티셔닝</b>으로 검색을 튜닝. SDPE 산출물을 서비스 도메인으로 변환해 <b>LLM·DEM 3D 지형 모니터링 · SAR 검색 · 촬영 요청</b>을 단일 진입점으로 제공하고, LLM은 <b>로컬 모델</b>로, 대용량 3D는 <b>캐시 Hit/Miss</b>로 처리. 위성 제품별 MSA·DDD·TDD로 구성했습니다.</p></div>
   </section>
 
-  <!-- 6 LIID architecture -->
+  <!-- 9 LIID architecture -->
+
   <section class="slide">
     <div class="eyebrow">LIID · Architecture</div>
     <h2 class="stitle">데이터 흐름 & 비동기 처리</h2>
@@ -286,7 +385,8 @@
     </div>
   </section>
 
-  <!-- 7 LIID perf -->
+  <!-- 10 LIID perf -->
+
   <section class="slide">
     <div class="eyebrow">LIID · Impact</div>
     <h2 class="stitle">정량 성과 & 분산 트랜잭션</h2>
@@ -301,7 +401,8 @@
     </div>
   </section>
 
-  <!-- 8 LIID service -->
+  <!-- 11 LIID service -->
+
   <section class="slide">
     <div class="eyebrow">LIID · Service</div>
     <h2 class="stitle">로컬 LLM · 3D 지형 모니터링 · 촬영 요청</h2>
@@ -313,7 +414,8 @@
     </div>
   </section>
 
-  <!-- 9 LIID cache -->
+  <!-- 12 LIID cache -->
+
   <section class="slide">
     <div class="eyebrow">LIID · Design</div>
     <h2 class="stitle">대용량 3D 전달 · 캐시 Hit / Miss 전략</h2>
@@ -341,7 +443,8 @@
     <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
   </section>
 
-  <!-- 10 BACKOFFICE overview -->
+  <!-- 13 BACKOFFICE overview -->
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 02</div>
     <div class="ptop"><h2 class="stitle">백오피스 통합 플랫폼</h2><span class="pill">PM + Tech Lead · 설계·기획·개발 주도</span></div>
@@ -350,7 +453,8 @@
     <div class="pblock solution"><div class="h">Solution</div><p>분산 시스템을 SSO 기반 단일 진입점으로 재설계하고 7개 모듈을 융합. 위성 전용 MES를 직접 구축. 외부 시스템(Amaranth 10·SmartNotes)은 REST API로, 출입 H/W는 DB 레벨로 연동. DDD 전술 패턴으로 도메인을 보호했습니다.</p></div>
   </section>
 
-  <!-- 11 BACKOFFICE system arch -->
+  <!-- 14 BACKOFFICE system arch -->
+
   <section class="slide">
     <div class="eyebrow">백오피스 · Architecture</div>
     <h2 class="stitle">시스템 아키텍처 · MSA 백엔드 + 웹·모바일</h2>
@@ -389,7 +493,8 @@
     <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>NestJS MSA</b> 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리되어 개별 배포·확장이 가능합니다.</p>
   </section>
 
-  <!-- 12 BACKOFFICE integration -->
+  <!-- 15 BACKOFFICE integration -->
+
   <section class="slide">
     <div class="eyebrow">백오피스 · Integration</div>
     <h2 class="stitle">시스템 · H/W 연동 구조</h2>
@@ -433,7 +538,8 @@
     </div>
   </section>
 
-  <!-- 13 SDPE overview -->
+  <!-- 16 SDPE overview -->
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 03</div>
     <div class="ptop"><h2 class="stitle">SAR Data Processing Element</h2><span class="pill">PM · Architecture 설계</span></div>
@@ -442,7 +548,8 @@
     <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
   </section>
 
-  <!-- 14 SDPE architecture -->
+  <!-- 17 SDPE architecture -->
+
   <section class="slide">
     <div class="eyebrow">SDPE · Architecture</div>
     <h2 class="stitle">DAG 오케스트레이션 & 이벤트 기반 처리</h2>
@@ -479,7 +586,8 @@
     </div>
   </section>
 
-  <!-- 15 SDPE impact -->
+  <!-- 18 SDPE impact -->
+
   <section class="slide">
     <div class="eyebrow">SDPE · Impact</div>
     <h2 class="stitle">10분 이상 걸리던 처리를 40초대로</h2>
@@ -494,7 +602,8 @@
     </div>
   </section>
 
-  <!-- 16 FILE-ENGINE overview -->
+  <!-- 19 FILE-ENGINE overview -->
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 04</div>
     <div class="ptop"><h2 class="stitle">대용량 파일 전송 엔진 · 분산 파일 서버</h2><span class="pill">Tech Lead · 설계 주도</span></div>
@@ -503,7 +612,8 @@
     <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 50GB 데이터를 수 분 내에 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
   </section>
 
-  <!-- 17 FILE-ENGINE architecture -->
+  <!-- 20 FILE-ENGINE architecture -->
+
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Architecture</div>
     <h2 class="stitle">전송 엔진 · 큐 · 오토스케일 파일 서버</h2>
@@ -540,7 +650,8 @@
     </div>
   </section>
 
-  <!-- 18 FILE-ENGINE chunk -->
+  <!-- 21 FILE-ENGINE chunk -->
+
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Deep Dive</div>
     <h2 class="stitle">50GB를 수 분 내로 · 청크 병렬 전송</h2>
@@ -569,7 +680,8 @@
     <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 수 분 내에 이동하고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
   </section>
 
-  <!-- 19 FILE-ENGINE resilience -->
+  <!-- 22 FILE-ENGINE resilience -->
+
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Design</div>
     <h2 class="stitle">부하 분산 · 죽어도 이어가는 전송</h2>
@@ -581,7 +693,8 @@
     </div>
   </section>
 
-  <!-- 20 FILE-ENGINE SSO -->
+  <!-- 23 FILE-ENGINE SSO -->
+
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Integration</div>
     <h2 class="stitle">Portal 로그인 · 엔진 자동 로그인 · 공유 폴더 자동 전환</h2>
@@ -612,7 +725,8 @@
     </div>
   </section>
 
-  <!-- 21 OTHER PROJECTS -->
+  <!-- 24 OTHER PROJECTS -->
+
   <section class="slide">
     <div class="eyebrow">Selected Projects</div>
     <h2 class="stitle">시스템을 설계하고, 끝까지 운영합니다</h2>
@@ -626,7 +740,8 @@
     </div>
   </section>
 
-  <!-- 22 INFRA overview -->
+  <!-- 25 INFRA overview -->
+
   <section class="slide">
     <div class="eyebrow">Infrastructure &amp; DevOps</div>
     <div class="ptop"><h2 class="stitle">온프레미스 + 클라우드 하이브리드 인프라</h2><span class="pill">설계·구축 주도</span></div>
@@ -661,7 +776,8 @@
     <p class="ssub" style="margin-top:12px">사내망 전용 서비스는 <b>온프레미스 k8s</b>, 사내 ERP는 <b>AWS 클라우드</b>, 공공기관 납품은 <b>CSAP 인증 경계로 완전 분리</b> — 워크로드마다 맞는 환경에 배치하는 하이브리드 전략입니다.</p>
   </section>
 
-  <!-- 23 INFRA on-prem -->
+  <!-- 26 INFRA on-prem -->
+
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">사내 PaaS · Kubernetes 플랫폼 (구축·운영)</h2>
@@ -673,7 +789,8 @@
     </div>
   </section>
 
-  <!-- 24 INFRA k8s topology -->
+  <!-- 27 INFRA k8s topology -->
+
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">Kubernetes 클러스터 설계 · CI/CD → 배포 → 노출</h2>
@@ -720,7 +837,8 @@
     </div>
   </section>
 
-  <!-- 25 INFRA cloud -->
+  <!-- 28 INFRA cloud -->
+
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">클라우드 인프라 · AWS 컨테이너 플랫폼 (설계·전환)</h2>
@@ -732,7 +850,8 @@
     </div>
   </section>
 
-  <!-- 26 INFRA cloud arch -->
+  <!-- 29 INFRA cloud arch -->
+
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">AWS 클라우드 아키텍처 · Stage / Prod · public·private 분리</h2>
@@ -778,7 +897,8 @@
     <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
   </section>
 
-  <!-- 27 TECH-LEAD DDD -->
+  <!-- 30 TECH-LEAD DDD -->
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 개발 표준</div>
     <h2 class="stitle">DDD 전술 패턴 · Context / Business 계층</h2>
@@ -815,7 +935,8 @@
     </div>
   </section>
 
-  <!-- 28 TECH-LEAD ai-native -->
+  <!-- 31 TECH-LEAD ai-native -->
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 개발 문화</div>
     <h2 class="stitle">AI Native 개발 문화 · 100% Agent 워크플로</h2>
@@ -827,7 +948,8 @@
     </div>
   </section>
 
-  <!-- 29 TECH-LEAD planning-screen -->
+  <!-- 32 TECH-LEAD planning-screen -->
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 프로세스</div>
     <h2 class="stitle">기획 화면 = 실제 화면 · 재작업 제거</h2>
@@ -839,7 +961,8 @@
     </div>
   </section>
 
-  <!-- 30 TECH-LEAD llm-wiki -->
+  <!-- 33 TECH-LEAD llm-wiki -->
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 지식 관리</div>
     <h2 class="stitle">LLM Wiki · Second Brain으로 인수인계·온보딩</h2>
@@ -867,7 +990,8 @@
     <p class="ssub" style="margin-top:12px">프로젝트·인프라 <b>인수인계와 온보딩</b>의 어려움을 줄이려, 작업하며 <b>LLM Wiki에 Second Brain</b>을 남깁니다. md 문서의 <b>메타데이터에 연관 문서 태그</b>를 달아 문서를 <b>그래프로 연결</b>해 제공하므로, 다음 사람이 맥락을 따라 자연스럽게 업무를 이어갑니다.</p>
   </section>
 
-  <!-- 31 TECH-LEAD fe-convention -->
+  <!-- 34 TECH-LEAD fe-convention -->
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 코드 컨벤션</div>
     <h2 class="stitle">프론트 코드 컨벤션 개편 · 컴포넌트 하이라키</h2>
@@ -896,7 +1020,8 @@
     <p class="ssub" style="margin-top:12px">ERP 규모로 조직이 커지며 디자인 코드 복잡도가 올라갔습니다. <b>Atomic·Modular 사이즈만 추상화</b>해 공용화하고, 나머지 디자인 컴포넌트는 <b>페이지 내부에서 구성</b>하도록 <b>Next.js 구조 기반 하이라키 컨벤션</b>을 지정했습니다. <span style="color:var(--accent2)">적용: Lumir Portal</span></p>
   </section>
 
-  <!-- 32 TECH-LEAD testing -->
+  <!-- 35 TECH-LEAD testing -->
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 품질</div>
     <h2 class="stitle">테스트 커버리지 · Domain·Context 100% + Playwright</h2>
@@ -917,7 +1042,8 @@
     <p class="ssub" style="margin-top:12px"><b>Domain은 Unit Test</b>, <b>Context는 컨테이너 기반 실제 DB 연동·트랜잭션 검증</b>으로 <b>커버리지 100%</b>를 보증하고, <b>비즈니스 영역은 프론트 Playwright</b>로 자동 검증합니다. 계층별 검증으로 안정성 높은 시스템을 운영합니다.</p>
   </section>
 
-  <!-- 33 SKILLS -->
+  <!-- 36 SKILLS -->
+
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -933,7 +1059,8 @@
     </div>
   </section>
 
-  <!-- 34 CAREER -->
+  <!-- 37 CAREER -->
+
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -948,7 +1075,8 @@
     </div>
   </section>
 
-  <!-- 35 GITHUB GRASS -->
+  <!-- 38 GITHUB GRASS -->
+
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -961,7 +1089,8 @@
     </div>
   </section>
 
-  <!-- 36 CLOSING -->
+  <!-- 39 CLOSING -->
+
   <section class="slide closing">
     <div class="eyebrow" style="text-align:center">Thank You</div>
     <h1 class="big">함께 0을 1로,<br>1을 <span class="hl">100</span>으로</h1>
@@ -991,17 +1120,18 @@
     {t:'표지', s:0},
     {t:'About', s:1},
     {t:'핵심 역량 · 기획', s:2, e:3},
-    {t:'LIID · 위성영상 플랫폼', s:4, e:8},
-    {t:'백오피스 통합 플랫폼', s:9, e:11},
-    {t:'SDPE', s:12, e:14},
-    {t:'대용량 파일 전송 엔진', s:15, e:19},
-    {t:'Selected Projects', s:20},
-    {t:'Infrastructure & DevOps', s:21, e:25},
-    {t:'기술 리딩 (Technical)', s:26, e:31},
-    {t:'기술 스택', s:32},
-    {t:'경력', s:33},
-    {t:'GitHub 기록', s:34},
-    {t:'Closing', s:35}
+    {t:'기획 사례 · 업무관리', s:4, e:6},
+    {t:'LIID · 위성영상 플랫폼', s:7, e:11},
+    {t:'백오피스 통합 플랫폼', s:12, e:14},
+    {t:'SDPE', s:15, e:17},
+    {t:'대용량 파일 전송 엔진', s:18, e:22},
+    {t:'Selected Projects', s:23},
+    {t:'Infrastructure & DevOps', s:24, e:28},
+    {t:'기술 리딩 (Technical)', s:29, e:34},
+    {t:'기술 스택', s:35},
+    {t:'경력', s:36},
+    {t:'GitHub 기록', s:37},
+    {t:'Closing', s:38}
   ];
   const tocEl=document.getElementById('toc');
   toc.forEach((item,idx)=>{
