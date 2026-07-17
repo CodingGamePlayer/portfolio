@@ -17,7 +17,23 @@
     font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  .deck{position:fixed;inset:0}
+  .deck{position:fixed;top:0;right:0;bottom:0;left:214px}
+
+  /* table of contents sidebar */
+  .toc{position:fixed;top:0;left:0;bottom:0;width:214px;background:#0d1119;border-right:1px solid var(--line);
+    padding:22px 0 20px;overflow-y:auto;z-index:120;display:flex;flex-direction:column;gap:1px}
+  .toc-brand{padding:0 20px 6px;font-weight:800;font-size:.92rem;color:var(--txt);letter-spacing:-.01em}
+  .toc-sub{padding:0 20px 16px;font-size:.7rem;color:var(--dim)}
+  .toc a{display:flex;align-items:baseline;gap:8px;padding:8px 20px;font-size:.8rem;color:var(--muted);
+    cursor:pointer;border-left:2px solid transparent;transition:.15s;text-decoration:none;word-break:keep-all}
+  .toc a:hover{color:var(--txt);background:rgba(255,255,255,.035)}
+  .toc a.active{color:var(--accent2);border-left-color:var(--accent2);background:rgba(49,130,246,.09)}
+  .toc a .num{color:var(--dim);font-size:.68rem;font-weight:700;flex:none;min-width:16px}
+  .toc a.active .num{color:var(--accent2)}
+  @media(max-width:860px){
+    .toc{transform:translateX(-100%)}
+    .deck{left:0}
+  }
   .slide{
     position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
     padding:6vh 8vw;opacity:0;pointer-events:none;transition:opacity .35s ease;
@@ -122,11 +138,16 @@
   .controls button{background:var(--card);border:1px solid var(--line);color:var(--txt);width:42px;height:42px;border-radius:10px;font-size:1.1rem;cursor:pointer;transition:.15s}
   .controls button:hover{border-color:var(--accent2);color:var(--accent2)}
   #counter{font-size:.85rem;color:var(--muted);min-width:54px;text-align:center}
-  .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--good));width:0;z-index:100;transition:width .35s ease}
-  .hint{position:fixed;bottom:22px;left:24px;font-size:.78rem;color:var(--dim);z-index:100}
+  .progress{position:fixed;top:0;left:214px;height:3px;background:linear-gradient(90deg,var(--accent),var(--good));width:0;z-index:130;transition:width .35s ease}
+  .hint{position:fixed;bottom:22px;left:238px;font-size:.78rem;color:var(--dim);z-index:100}
+  @media(max-width:860px){ .progress{left:0} .hint{left:24px} }
 </style>
 </head>
 <body>
+<nav class="toc" id="toc">
+  <div class="toc-brand">김종식 · Portfolio</div>
+  <div class="toc-sub">개발PM / Web파트장 @루미르</div>
+</nav>
 <div class="progress" id="progress"></div>
 <div class="deck" id="deck">
 
@@ -832,10 +853,43 @@
   const slides=[...document.querySelectorAll('.slide')];
   let i=0;
   const counter=document.getElementById('counter');
+  const progress=document.getElementById('progress');
+
+  // section table of contents (s: start slide index, e: end index for highlight)
+  const toc=[
+    {t:'표지', s:0},
+    {t:'About', s:1},
+    {t:'핵심 역량', s:2},
+    {t:'LIID · 위성영상 플랫폼', s:3, e:7},
+    {t:'백오피스 통합 플랫폼', s:8, e:10},
+    {t:'SDPE', s:11, e:13},
+    {t:'대용량 파일 전송 엔진', s:14, e:18},
+    {t:'Selected Projects', s:19},
+    {t:'Infrastructure & DevOps', s:20, e:24},
+    {t:'Engineering Convention', s:25},
+    {t:'기술 스택', s:26},
+    {t:'경력', s:27},
+    {t:'GitHub 기록', s:28},
+    {t:'Closing', s:29}
+  ];
+  const tocEl=document.getElementById('toc');
+  toc.forEach((item,idx)=>{
+    const a=document.createElement('a');
+    a.innerHTML='<span class="num">'+String(idx+1).padStart(2,'0')+'</span><span>'+item.t+'</span>';
+    a.onclick=()=>show(item.s);
+    item.el=a;
+    tocEl.appendChild(a);
+  });
+
   function show(n){
     i=Math.max(0,Math.min(slides.length-1,n));
     slides.forEach((s,idx)=>s.classList.toggle('active',idx===i));
     counter.textContent=(i+1)+' / '+slides.length;
+    if(progress) progress.style.width=(i/(slides.length-1)*100)+'%';
+    toc.forEach(item=>{
+      const end=item.e!==undefined?item.e:item.s;
+      item.el.classList.toggle('active', i>=item.s && i<=end);
+    });
   }
   document.getElementById('prevBtn').onclick=()=>show(i-1);
   document.getElementById('nextBtn').onclick=()=>show(i+1);
