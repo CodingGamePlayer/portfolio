@@ -1188,11 +1188,12 @@
   const tocEl=document.getElementById('tocNav');
   // one preview card per slide (section-start = top level, rest = sub)
   const items=[];
-  toc.forEach((sec,si)=>{
+  toc.forEach(sec=>{
     const end=sec.e!==undefined?sec.e:sec.s;
     for(let idx=sec.s; idx<=end; idx++){
-      if(idx===sec.s) items.push({idx,label:sec.t,sub:false,no:String(si+1).padStart(2,'0')});
-      else{ const st=slides[idx].querySelector('.stitle'); items.push({idx,label:st?st.textContent:('슬라이드 '+(idx+1)),sub:true,no:'ㄴ'}); }
+      const no=String(idx+1).padStart(2,'0'); // real slide number, 01–39, on every card
+      if(idx===sec.s) items.push({idx,label:sec.t,sub:false,no});
+      else{ const st=slides[idx].querySelector('.stitle'); items.push({idx,label:st?st.textContent:('슬라이드 '+(idx+1)),sub:true,no}); }
     }
   });
   items.forEach(m=>{
