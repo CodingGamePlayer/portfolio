@@ -453,9 +453,10 @@
     <p class="ssub">분산된 사내 시스템을 하나로 묶은 전사 포털 (NestJS MSA)</p>
     <div class="pblock problem"><div class="h">Problem</div><p>근태·채용·KPI·SSO·프로젝트·자원·산출물 관리가 부서별로 분산. 회계·양산 MES·출입 장비 등 성격이 다른 외부 시스템과 H/W를 일관되게 통합하는 것이 난제였습니다.</p></div>
     <div class="pblock solution"><div class="h">Solution</div><p>분산 시스템을 SSO 기반 단일 진입점으로 재설계·융합하고, 위성 전용 MES를 직접 구축. 외부 시스템은 REST API로, 출입 H/W는 DB 레벨로 연동. DDD 전술 패턴으로 도메인을 보호했습니다.</p></div>
-    <div class="stats" style="grid-template-columns:repeat(3,1fr);max-width:760px;margin-top:24px">
+    <div class="stats" style="grid-template-columns:repeat(4,1fr);max-width:1020px;margin-top:24px">
       <div class="stat"><div class="n">12<small>개</small></div><div class="l">백엔드 서비스 · 독립 배포 단위</div></div>
       <div class="stat"><div class="n">9<small>개</small></div><div class="l">저장소 (모노레포 2개 포함)</div></div>
+      <div class="stat"><div class="n">430<small>+</small></div><div class="l">데이터 모델 · 테이블 · 컬렉션</div></div>
       <div class="stat"><div class="n">3<small>대</small></div><div class="l">배포 서버 · Stage / 운영 공개·격리</div></div>
     </div>
   </section>
