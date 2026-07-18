@@ -129,6 +129,14 @@
   .arch svg{display:block;width:100%;height:auto;max-height:50vh}
   .archcap{font-size:.76rem;color:var(--dim);font-weight:700;letter-spacing:.08em;margin-bottom:10px}
 
+  /* diagram reveal animation (one-shot per slide entry; skipped when reduced motion) */
+  @media (prefers-reduced-motion:no-preference){
+    .arch svg.anim .dgIn{opacity:0;animation:dgIn .40s cubic-bezier(.22,.7,.3,1) forwards;animation-delay:calc(var(--d,0)*38ms)}
+    .arch svg.anim .dgDraw{animation:dgDraw .5s cubic-bezier(.35,.6,.3,1) forwards;animation-delay:calc(var(--d,0)*38ms)}
+  }
+  @keyframes dgIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  @keyframes dgDraw{to{stroke-dashoffset:0}}
+
   /* mini project grid */
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px}
   .mini{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
@@ -1430,9 +1438,38 @@
     thumb.appendChild(ifr);
   });
 
+  // Diagram reveal: shapes fade in, then connectors draw along their path.
+  // Skipped entirely under reduced-motion so no inline dash offsets are left behind.
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function animateDiagrams(slide){
+    if(reduceMotion || !slide) return;
+    slide.querySelectorAll('.arch svg').forEach(svg=>{
+      if(!svg.dataset.dgReady){
+        let d=0;
+        svg.querySelectorAll('rect,text,circle,line,polyline,polygon').forEach(el=>{
+          el.classList.add('dgIn'); el.style.setProperty('--d',d++);
+        });
+        svg.querySelectorAll('path').forEach(p=>{
+          if(p.closest('marker')) return;               // arrowheads ride their line
+          let len=0; try{ len=p.getTotalLength(); }catch(e){}
+          if(len>0 && getComputedStyle(p).fill==='none'){ // connector line
+            p.style.strokeDasharray=len; p.style.strokeDashoffset=len;
+            p.classList.add('dgDraw');
+          } else { p.classList.add('dgIn'); }
+          p.style.setProperty('--d',d++);
+        });
+        svg.dataset.dgReady='1';
+      }
+      svg.classList.remove('anim');
+      void svg.getBoundingClientRect();                  // reflow → restart animation
+      svg.classList.add('anim');
+    });
+  }
+
   function show(n){
     i=Math.max(0,Math.min(slides.length-1,n));
     slides.forEach((s,idx)=>s.classList.toggle('active',idx===i));
+    animateDiagrams(slides[i]);
     counter.textContent=(i+1)+' / '+slides.length;
     if(progress) progress.style.width=(i/(slides.length-1)*100)+'%';
     let sec='';
