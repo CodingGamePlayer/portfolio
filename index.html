@@ -1296,17 +1296,32 @@
     <div class="eyebrow">Technical Leadership · 품질</div>
     <h2 class="stitle">테스트 커버리지 · Domain·Context 100% + Playwright</h2>
     <div class="arch">
-      <div class="archcap">계층별 검증 체계</div>
-      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+      <div class="archcap">테스트 피라미드 · 계층별 검증</div>
+      <svg viewBox="0 0 700 296" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arT" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#7e8aa0"/></marker>
+        </defs>
         <style>
-          .Tb{fill:#0e1626;stroke:#27406b;stroke-width:1.4}
-          .Tdom{fill:#10231c;stroke:#3aa0a0;stroke-width:1.7}.Tctx{fill:#13203a;stroke:#5b8def;stroke-width:1.7}.Tbiz{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
-          .Tt{fill:#eef2f8;font-size:12px;font-weight:700}.Ts{fill:#9aa4b6;font-size:9px}
-          .Tg{font-size:10px;font-weight:800}
+          .Tbiz{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.7}.Tctx{fill:#13203a;stroke:#5b8def;stroke-width:1.7}.Tdom{fill:#10231c;stroke:#3aa0a0;stroke-width:1.7}
+          .Tt{fill:#eef2f8;font-size:12.5px;font-weight:800}.Ts{fill:#9aa4b6;font-size:8.5px}
+          .Tann{font-size:9px}.Tconn{stroke:#334156;stroke-width:1;fill:none}
+          .Taxis{stroke:#7e8aa0;stroke-width:1.3;fill:none;marker-start:url(#arT);marker-end:url(#arT)}.Tax{fill:#7e8aa0;font-size:8px;font-weight:700}
         </style>
-        <rect class="Tdom" x="40" y="20" width="600" height="46" rx="10"/><text class="Tt" x="70" y="40" text-anchor="start">Domain · Unit Test</text><text class="Ts" x="70" y="55" text-anchor="start">순수 도메인 로직 검증</text><text class="Tg" x="612" y="47" text-anchor="end" fill="#3aa0a0">커버리지 100%</text>
-        <rect class="Tctx" x="40" y="76" width="600" height="46" rx="10"/><text class="Tt" x="70" y="96" text-anchor="start">Context · 컨테이너 DB · 트랜잭션</text><text class="Ts" x="70" y="111" text-anchor="start">실제 DB 연동 · 트랜잭션 검증</text><text class="Tg" x="612" y="103" text-anchor="end" fill="#5b8def">커버리지 100%</text>
-        <rect class="Tbiz" x="40" y="132" width="600" height="46" rx="10"/><text class="Tt" x="70" y="152" text-anchor="start">Business · Playwright E2E</text><text class="Ts" x="70" y="167" text-anchor="start">프론트에서 비즈니스 흐름 자동 검증</text><text class="Tg" x="612" y="159" text-anchor="end" fill="#bda4f2">자동 검증</text>
+        <!-- pyramid tiers (top = few E2E, bottom = many unit) -->
+        <polygon class="Tbiz" points="350,22 427,99 273,99"/>
+        <polygon class="Tctx" points="273,99 427,99 504,176 196,176"/>
+        <polygon class="Tdom" points="196,176 504,176 580,252 120,252"/>
+        <text class="Tt" x="350" y="80" text-anchor="middle" font-size="11">Business</text><text class="Ts" x="350" y="93" text-anchor="middle">Playwright E2E</text>
+        <text class="Tt" x="350" y="135" text-anchor="middle">Context · Integration</text><text class="Ts" x="350" y="151" text-anchor="middle">컨테이너 실제 DB · 트랜잭션</text>
+        <text class="Tt" x="350" y="211" text-anchor="middle">Domain · Unit</text><text class="Ts" x="350" y="227" text-anchor="middle">순수 도메인 로직 · 격리</text>
+        <!-- right annotations -->
+        <path class="Tconn" d="M388,60 H600"/><text class="Tann" x="608" y="57" fill="#bda4f2" font-weight="700">핵심 사용자 흐름</text><text class="Tann" x="608" y="69" fill="#9aa4b6">자동 검증</text>
+        <path class="Tconn" d="M465,137 H600"/><text class="Tann" x="608" y="134" fill="#5b8def" font-weight="800">커버리지 100%</text><text class="Tann" x="608" y="146" fill="#9aa4b6">실제 DB·트랜잭션</text>
+        <path class="Tconn" d="M542,214 H600"/><text class="Tann" x="608" y="211" fill="#3aa0a0" font-weight="800">커버리지 100%</text><text class="Tann" x="608" y="223" fill="#9aa4b6">빠른 격리 테스트</text>
+        <!-- left axis: tradeoff -->
+        <path class="Taxis" d="M92,70 V232"/>
+        <text class="Tax" x="34" y="74" text-anchor="middle">소수</text><text class="Tax" x="34" y="85" text-anchor="middle">느림</text>
+        <text class="Tax" x="34" y="226" text-anchor="middle">다수</text><text class="Tax" x="34" y="237" text-anchor="middle">빠름</text>
       </svg>
     </div>
     <p class="ssub" style="margin-top:12px"><b>Domain은 Unit Test</b>, <b>Context는 컨테이너 기반 실제 DB 연동·트랜잭션 검증</b>으로 <b>커버리지 100%</b>를 보증하고, <b>비즈니스 영역은 프론트 Playwright</b>로 자동 검증합니다. 계층별 검증으로 안정성 높은 시스템을 운영합니다.</p>
