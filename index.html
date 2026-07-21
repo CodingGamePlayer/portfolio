@@ -1245,25 +1245,42 @@
     <div class="eyebrow">Technical Leadership · 코드 컨벤션</div>
     <h2 class="stitle">프론트 코드 컨벤션 개편 · 컴포넌트 하이라키</h2>
     <div class="arch">
-      <div class="archcap">컴포넌트 구성 컨벤션</div>
-      <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="arN" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker></defs>
+      <div class="archcap">Next.js 라우트 세그먼트 하이라키</div>
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arN" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c9a24b"/></marker></defs>
         <style>
-          .Nb{fill:#10231c;stroke:#3aa0a0;stroke-width:1.5}.Ngrp{fill:#0e1421;stroke:#3a5a92;stroke-width:1.4}
-          .Npage{fill:#13203a;stroke:#5b8def;stroke-width:1.6}
-          .Nt{fill:#eef2f8;font-size:11px;font-weight:700}.Ns{fill:#9aa4b6;font-size:8.5px}
-          .Nzt{font-size:10px;font-weight:800}.Ng{fill:#3aa0a0;font-size:9px;font-weight:700}
-          .Nln{stroke:#5b8def;stroke-width:1.4;fill:none;marker-end:url(#arN)}.Nlbl{fill:#7e8aa0;font-size:8.5px}
+          .Nname{fill:#eef2f8;font-size:11.5px;font-weight:700;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+          .Ndesc{fill:#9aa4b6;font-size:9px}
+          .Ntree{stroke:#2c3547;stroke-width:1;fill:none}
+          .Nftd{fill:#3aa0a0}.Nfa{fill:#5b8def}.Nfp{fill:#c9a24b}.Nfs{fill:#556170}
+          .Nln{stroke:#c9a24b;stroke-width:1.5;fill:none;marker-end:url(#arN)}
+          .Ncap{font-size:9px;font-weight:700}
         </style>
-        <text class="Nzt" x="40" y="26" fill="#8fd9bf">공용 추상화 (디자인 시스템)</text>
-        <rect class="Nb" x="40" y="38" width="180" height="46" rx="9"/><text class="Nt" x="130" y="60" text-anchor="middle">Atomic</text><text class="Ns" x="130" y="74" text-anchor="middle">최소 단위 컴포넌트</text>
-        <rect class="Nb" x="40" y="102" width="180" height="46" rx="9"/><text class="Nt" x="130" y="124" text-anchor="middle">Modular</text><text class="Ns" x="130" y="138" text-anchor="middle">조합 단위 컴포넌트</text>
-        <rect class="Ngrp" x="300" y="30" width="340" height="150" rx="12"/><text class="Nzt" x="316" y="50" fill="#8fb4f5">Page · Next.js 라우트 구조</text>
-        <rect class="Npage" x="320" y="66" width="300" height="44" rx="9"/><text class="Nt" x="470" y="88" text-anchor="middle">페이지 스코프 디자인 컴포넌트</text><text class="Ns" x="470" y="102" text-anchor="middle">페이지 내부에서 구성</text>
-        <rect class="Npage" x="320" y="120" width="300" height="44" rx="9"/><text class="Ng" x="470" y="142" text-anchor="middle">공용 컴포넌트 조합</text><text class="Ns" x="470" y="156" text-anchor="middle">Atomic · Modular 주입</text>
-        <path class="Nln" d="M220,61 H278 V88 H316"/>
-        <path class="Nln" d="M220,125 H278 V142 H316"/>
-        <text class="Nlbl" x="260" y="55" text-anchor="middle">주입</text>
+        <!-- tree connector spines (V/H only) -->
+        <path class="Ntree" d="M24,40 V134 M24,60 H40 M24,134 H40"/>
+        <path class="Ntree" d="M48,66 V108 M48,86 H64 M48,108 H64"/>
+        <path class="Ntree" d="M48,140 V186 M48,160 H64 M48,186 H64"/>
+        <path class="Ntree" d="M72,192 V212 M72,212 H88"/>
+        <path class="Ntree" d="M96,218 V264 M96,238 H112 M96,264 H112"/>
+        <!-- rows: glyph + name + desc -->
+        <rect class="Nfs" x="18" y="26" width="13" height="9" rx="1.5"/><text class="Nname" x="38" y="34">src/</text>
+        <rect class="Nftd" x="42" y="52" width="13" height="9" rx="1.5"/><text class="Nname" x="62" y="60">components/</text><text class="Ndesc" x="300" y="60">공용 추상화 · 디자인 시스템</text>
+        <rect class="Nftd" x="66" y="78" width="13" height="9" rx="1.5"/><text class="Nname" x="86" y="86">atomic/</text><text class="Ndesc" x="300" y="86">최소 단위 — Button · Input</text>
+        <rect class="Nftd" x="66" y="104" width="13" height="9" rx="1.5"/><text class="Nname" x="86" y="112">modular/</text><text class="Ndesc" x="300" y="112">조합 단위 — Card · Form</text>
+        <rect class="Nfa" x="42" y="126" width="13" height="9" rx="1.5"/><text class="Nname" x="62" y="134">app/</text><text class="Ndesc" x="300" y="134">Next.js App Router</text>
+        <rect class="Nfa" x="68" y="152" width="9" height="11" rx="1"/><text class="Nname" x="86" y="160">layout.tsx</text><text class="Ndesc" x="300" y="160">세그먼트 공통 레이아웃</text>
+        <rect class="Nfa" x="66" y="178" width="13" height="9" rx="1.5"/><text class="Nname" x="86" y="186">(dashboard)/</text><text class="Ndesc" x="300" y="186">라우트 그룹 (URL 미노출)</text>
+        <rect class="Nfa" x="90" y="204" width="13" height="9" rx="1.5"/><text class="Nname" x="110" y="212">orders/</text><text class="Ndesc" x="300" y="212">라우트 세그먼트</text>
+        <rect class="Nfa" x="116" y="230" width="9" height="11" rx="1"/><text class="Nname" x="134" y="238">page.tsx</text><text class="Ndesc" x="300" y="238">세그먼트 진입 화면</text>
+        <rect class="Nfp" x="114" y="256" width="13" height="9" rx="1.5"/><text class="Nname" x="134" y="264" fill="#f0d9a8">_components/</text><text class="Ndesc" x="300" y="264" fill="#e7c98a">페이지 스코프 컴포넌트</text>
+        <!-- callout brackets -->
+        <path class="Ncap" d="M494,50 H486 V116 H494" stroke="#3aa0a0" fill="none" stroke-width="1.4"/>
+        <text class="Ncap" x="502" y="78" fill="#3aa0a0">공용 추상화</text><text class="Ncap" x="502" y="91" fill="#3aa0a0">(디자인 시스템)</text>
+        <path class="Ncap" d="M494,204 H486 V266 H494" stroke="#c9a24b" fill="none" stroke-width="1.4"/>
+        <text class="Ncap" x="502" y="231" fill="#c9a24b">페이지 내부에서</text><text class="Ncap" x="502" y="244" fill="#c9a24b">직접 구성</text>
+        <!-- page-scope injects shared atomic/modular -->
+        <path class="Nln" d="M662,238 V86"/>
+        <text transform="rotate(-90 650 165)" x="650" y="165" text-anchor="middle" font-size="9" font-weight="700" fill="#c9a24b">atomic·modular 주입</text>
       </svg>
     </div>
     <p class="ssub" style="margin-top:12px">ERP 규모로 조직이 커지며 디자인 코드 복잡도가 올라갔습니다. <b>Atomic·Modular 사이즈만 추상화</b>해 공용화하고, 나머지 디자인 컴포넌트는 <b>페이지 내부에서 구성</b>하도록 <b>Next.js 구조 기반 하이라키 컨벤션</b>을 지정했습니다. <span style="color:var(--accent2)">적용: Lumir Portal</span></p>
