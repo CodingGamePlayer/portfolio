@@ -1138,27 +1138,43 @@
     <div class="eyebrow">Technical Leadership · 아키텍처 표준</div>
     <h2 class="stitle">비즈니스는 백엔드로, 프론트는 경험에 집중</h2>
     <div class="arch" style="max-width:940px">
-      <div class="archcap">레이어 책임 분리</div>
-      <svg viewBox="0 0 680 264" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="arY" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker></defs>
+      <div class="archcap">책임 경계 · 프론트(경험) ↔ 백엔드(비즈니스)</div>
+      <svg viewBox="0 0 700 264" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arYr" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#7e8aa0"/></marker>
+        </defs>
         <style>
-          .Yfg{fill:#0e1421;stroke:#3a5a92;stroke-width:1.4}.Ybg{fill:#0e1421;stroke:#2a6b54;stroke-width:1.4}
-          .Yb{fill:#0e1626;stroke:#27406b;stroke-width:1.3}.Ybff{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.6}
-          .Yt{fill:#eef2f8;font-size:12px;font-weight:700}.Ys{fill:#9aa4b6;font-size:8.5px}
-          .Yh{font-size:10px;font-weight:800}
-          .Yln{stroke:#5b8def;stroke-width:1.6;fill:none;marker-end:url(#arY)}
+          .Yfg{fill:#0d1420;stroke:#3a5a92;stroke-width:1.3}.Ybg{fill:#0d1420;stroke:#2a6b54;stroke-width:1.3}
+          .Yfi{fill:#13203a;stroke:#5b8def;stroke-width:1.3}.Ybi{fill:#10231c;stroke:#3aa0a0;stroke-width:1.3}
+          .Ybff{fill:#1a1430;stroke:#8f6fd6;stroke-width:1.8}
+          .Yt{fill:#eef2f8;font-size:11.5px;font-weight:700}.Ys{fill:#9aa4b6;font-size:8px}
+          .Yzt{font-size:10px;font-weight:800}
+          .Yln{stroke:#7e8aa0;stroke-width:1.4;fill:none;marker-end:url(#arYr)}
+          .Ylbl{fill:#7e8aa0;font-size:8px}.Ybound{stroke:#3a4658;stroke-width:1;stroke-dasharray:4 4}
         </style>
-        <rect class="Yfg" x="40" y="10" width="600" height="76" rx="11"/>
-        <text class="Yh" x="56" y="28" fill="#5b8def">프론트엔드</text>
-        <rect class="Yb" x="58" y="36" width="272" height="42" rx="8"/><text class="Yt" x="194" y="53" text-anchor="middle">UI 레이어</text><text class="Ys" x="194" y="68" text-anchor="middle">디자인 · 사용자 경험 · 시나리오</text>
-        <rect class="Yb" x="350" y="36" width="272" height="42" rx="8"/><text class="Yt" x="486" y="53" text-anchor="middle">데이터 처리 레이어</text><text class="Ys" x="486" y="68" text-anchor="middle">조회 · 상태 · 캐싱 (비즈니스 로직 없음)</text>
-        <path class="Yln" d="M340,86 V106"/>
-        <rect class="Ybff" x="190" y="108" width="300" height="46" rx="10"/><text class="Yt" x="340" y="128" text-anchor="middle">BFF · 데이터 어댑팅</text><text class="Ys" x="340" y="143" text-anchor="middle">화면 요구에 맞춰 응답 조합 · 변환</text>
-        <path class="Yln" d="M340,154 V174"/>
-        <rect class="Ybg" x="40" y="176" width="600" height="78" rx="11"/>
-        <text class="Yh" x="56" y="194" fill="#3aa0a0">백엔드 · 비즈니스 레이어</text>
-        <rect class="Yb" x="58" y="202" width="272" height="42" rx="8"/><text class="Yt" x="194" y="219" text-anchor="middle">애그리거트</text><text class="Ys" x="194" y="234" text-anchor="middle">불변식 · 트랜잭션 경계</text>
-        <rect class="Yb" x="350" y="202" width="272" height="42" rx="8"/><text class="Yt" x="486" y="219" text-anchor="middle">리치 도메인 모델</text><text class="Ys" x="486" y="234" text-anchor="middle">규칙 · 행위를 도메인 안에</text>
+        <!-- responsibility boundary -->
+        <line class="Ybound" x1="350" y1="40" x2="350" y2="238"/>
+        <text class="Yzt" x="150" y="26" text-anchor="middle" fill="#5b8def">경험 담당 · 화면만</text>
+        <text class="Yzt" x="552" y="26" text-anchor="middle" fill="#3aa0a0">비즈니스 로직 집중</text>
+        <!-- frontend zone -->
+        <rect class="Yfg" x="20" y="40" width="232" height="184" rx="12"/>
+        <text class="Yzt" x="36" y="60" fill="#8fb4f5" font-size="9.5">프론트엔드</text>
+        <rect class="Yfi" x="36" y="70" width="200" height="46" rx="8"/><text class="Yt" x="136" y="90" text-anchor="middle">UI 레이어</text><text class="Ys" x="136" y="104" text-anchor="middle">디자인 · UX · 시나리오</text>
+        <rect class="Yfi" x="36" y="122" width="200" height="46" rx="8"/><text class="Yt" x="136" y="142" text-anchor="middle">데이터 처리</text><text class="Ys" x="136" y="156" text-anchor="middle">조회 · 상태 · 캐싱</text>
+        <text class="Ys" x="136" y="200" text-anchor="middle" fill="#c9a24b">비즈니스 로직 없음</text>
+        <!-- BFF straddling the boundary -->
+        <rect class="Ybff" x="292" y="106" width="116" height="52" rx="10"/><text class="Yt" x="350" y="128" text-anchor="middle" font-size="11">BFF</text><text class="Ys" x="350" y="142" text-anchor="middle">응답 조합 · 변환</text>
+        <!-- backend zone -->
+        <rect class="Ybg" x="448" y="40" width="232" height="184" rx="12"/>
+        <text class="Yzt" x="464" y="60" fill="#7fd6c0" font-size="9.5">백엔드 · 비즈니스</text>
+        <rect class="Ybi" x="464" y="70" width="200" height="46" rx="8"/><text class="Yt" x="564" y="90" text-anchor="middle">애그리거트</text><text class="Ys" x="564" y="104" text-anchor="middle">불변식 · 트랜잭션 경계</text>
+        <rect class="Ybi" x="464" y="122" width="200" height="46" rx="8"/><text class="Yt" x="564" y="142" text-anchor="middle">리치 도메인 모델</text><text class="Ys" x="564" y="156" text-anchor="middle">규칙 · 행위를 도메인 안에</text>
+        <text class="Ys" x="564" y="200" text-anchor="middle" fill="#7fd6c0" font-weight="700">★ 비즈니스 로직은 여기 한 곳</text>
+        <!-- request / response flow -->
+        <path class="Yln" d="M252,118 H292"/><text class="Ylbl" x="272" y="112" text-anchor="middle">요청</text>
+        <path class="Yln" d="M292,146 H252"/><text class="Ylbl" x="272" y="160" text-anchor="middle">응답</text>
+        <path class="Yln" d="M408,118 H448"/><text class="Ylbl" x="428" y="112" text-anchor="middle">요청</text>
+        <path class="Yln" d="M448,146 H408"/><text class="Ylbl" x="428" y="160" text-anchor="middle">응답</text>
       </svg>
     </div>
     <div class="grid3" style="max-width:1160px;margin-top:14px">
