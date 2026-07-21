@@ -243,7 +243,7 @@
     <div class="stats">
       <div class="stat"><div class="n">3<small>년</small></div><div class="l">개발 경력 (2023.06~)</div></div>
       <div class="stat"><div class="n">0→11<small>명</small></div><div class="l">기술 조직 구축·리드</div></div>
-      <div class="stat"><div class="n">93~97<small>%</small></div><div class="l">핵심 성능 개선폭</div></div>
+      <div class="stat"><div class="n">15<small>×</small></div><div class="l">핵심 처리 성능 (SAR 10분+→40초)</div></div>
       <div class="stat"><div class="n">11,036</div><div class="l">GitHub 누적 contributions (2023~)</div></div>
     </div>
   </section>
@@ -710,9 +710,9 @@
     <div class="eyebrow">LIID · Impact</div>
     <h2 class="stitle">정량 성과 & 분산 트랜잭션</h2>
     <div class="perf">
-      <div class="pf"><div class="pfh"><span class="lab">영상 렌더링 속도</span><span class="val">3s → 0.2s <span class="imp">(93%↓)</span></span></div><div class="bar"><i style="--w:93%"></i></div></div>
-      <div class="pf"><div class="pfh"><span class="lab">1,000만 건 검색</span><span class="val">10s → 0.3s <span class="imp">(97%↓)</span></span></div><div class="bar"><i style="--w:97%"></i></div></div>
-      <div class="pf"><div class="pfh"><span class="lab">지도 First Loading</span><span class="val">4s → 0.1s <span class="imp">(97.5%↓)</span></span></div><div class="bar"><i style="--w:97%"></i></div></div>
+      <div class="pf"><div class="pfh"><span class="lab">영상 렌더링 속도</span><span class="val">약 3초 → 0.2초 <span class="imp">(약 93%↓)</span></span></div><div class="bar"><i style="--w:93%"></i></div></div>
+      <div class="pf"><div class="pfh"><span class="lab">1,000만 건 공간검색</span><span class="val">약 10초 → 0.3초 <span class="imp">(약 97%↓)</span></span></div><div class="bar"><i style="--w:97%"></i></div></div>
+      <div class="pf"><div class="pfh"><span class="lab">지도 First Loading</span><span class="val">약 4초 → 0.1초 <span class="imp">(약 98%↓)</span></span></div><div class="bar"><i style="--w:97%"></i></div></div>
     </div>
     <div class="pblock" style="margin-top:24px"><div class="h">Deep Dive · Saga</div><p>위성 제품별 연계 이벤트를 Saga 패턴으로 구성. 단계마다 보상 트랜잭션을 정의하고, 인박스 패턴으로 멱등성을 보장해 재시도 시 중복을 차단. 상태는 DB에 기록, Bull의 지수적 backoff로 일시 장애를 흡수하고 최종 실패는 알림 발송.</p></div>
     <div class="chips">
@@ -781,7 +781,7 @@
     <div class="ptop"><h2 class="stitle">대용량 파일 전송 엔진 · 분산 파일 서버</h2><span class="pill">Tech Lead · 설계 주도</span></div>
     <p class="ssub">OneDrive식 Windows API 전송 엔진 · 청크 병렬 전송 · k8s 오토스케일 · 큐 기반 부하 분산</p>
     <div class="pblock problem"><div class="h">Problem</div><p>기존에는 NAS에 <b>권한을 부여하는 방식</b>으로 파일을 다뤄, 대용량 전송이 느리고 서버 한 대에 부하가 몰렸습니다. 50GB급 데이터를 한 번에 밀어 넣으면 전송이 길어지고, 중간에 서버가 죽으면 처음부터 다시 올려야 했습니다. 트래픽이 몰릴 때 서버를 늘리거나 부하를 나눌 방법도 없었습니다.</p></div>
-    <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 50GB 데이터를 수 분 내에 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
+    <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 <b>1GbE 단일 전송이면 약 20분</b> 걸리던 50GB를 수 분 내로 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
   </section>
 
   <!-- 21 FILE-ENGINE architecture -->
@@ -834,7 +834,7 @@
 
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Deep Dive</div>
-    <h2 class="stitle">50GB를 수 분 내로 · 청크 병렬 전송</h2>
+    <h2 class="stitle">50GB 약 20분 → 수 분 · 청크 병렬 전송</h2>
     <div class="arch">
       <div class="archcap">청크 병렬 전송</div>
       <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
@@ -857,7 +857,7 @@
         <text class="Glbl" x="478" y="64" text-anchor="middle">병렬 전송</text>
       </svg>
     </div>
-    <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 수 분 내에 이동하고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
+    <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 <b>1GbE 단일 전송 기준 약 20분 → 수 분</b>으로 줄이고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
   </section>
 
   <!-- 23 FILE-ENGINE resilience -->
@@ -873,7 +873,7 @@
     <div class="pblock" style="margin-top:16px"><div class="h">Redis 캐시 · 전송 재개</div><p>전송 진행 상태를 <b>Redis 캐시</b>에 보관해, 처리 중이던 <b>중간 서버가 죽어도</b> 다른 서버가 마지막 지점부터 이어서 전송을 마칩니다. 대용량 전송 도중의 단일 장애가 전체 실패로 번지지 않습니다.</p></div>
     <div class="pblock" style="margin-top:16px"><div class="h">Role</div><p>Tech Lead로 전송 엔진·분산 아키텍처 설계를 주도했습니다(Windows API 전송 엔진, 청크 병렬 전송, k8s 오토스케일, 큐 기반 부하 분산, Redis 기반 재개 구조).</p></div>
     <div class="chips">
-      <span class="chip">Windows API</span><span class="chip">청크 병렬 전송</span><span class="chip">Kubernetes · HPA</span><span class="chip">큐 · 부하 분산</span><span class="chip">Redis 캐시</span><span class="chip">Portal SSO</span><span class="chip">50GB / 수 분</span>
+      <span class="chip">Windows API</span><span class="chip">청크 병렬 전송</span><span class="chip">Kubernetes · HPA</span><span class="chip">큐 · 부하 분산</span><span class="chip">Redis 캐시</span><span class="chip">Portal SSO</span><span class="chip">50GB 약 20분→수 분</span>
     </div>
   </section>
 
