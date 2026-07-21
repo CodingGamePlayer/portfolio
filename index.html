@@ -223,6 +223,7 @@
 
 
 
+
   <section class="slide active">
     <div class="eyebrow">Backend Engineer · Tech Lead</div>
     <h1 class="big">0에서 1을 만들고,<br>1을 <span class="hl">조직</span>으로 키운<br>기술 기반 빌더</h1>
@@ -231,6 +232,7 @@
   </section>
 
   <!-- 2 ABOUT + STATS -->
+
 
 
 
@@ -249,6 +251,7 @@
   </section>
 
   <!-- 3 CORE COMPETENCY (full-cycle 4-track) -->
+
 
 
 
@@ -312,6 +315,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Planning · Product Design</div>
     <h2 class="stitle">기획: 요구사항에서 데이터 구조까지</h2>
@@ -331,6 +335,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Planning Case · 사내 통합 ERP</div>
     <div class="ptop"><h2 class="stitle">사내 통합 ERP 기획 — 문서 기반 의사결정 파이프라인</h2><span class="pill">메인 기획 · 설계 리딩</span></div>
@@ -346,6 +351,7 @@
   </section>
 
   <!-- 6 PLANNING CASE ux -->
+
 
 
 
@@ -386,6 +392,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Planning · 기획 흐름</div>
     <h2 class="stitle">화면 설계 → 결정 기록 → 위키 컴파일 → 개발 계획</h2>
@@ -418,6 +425,7 @@
   </section>
 
   <!-- 8 PLANNING CASE ADR -->
+
 
 
 
@@ -467,6 +475,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 01</div>
     <div class="ptop"><h2 class="stitle">백오피스 통합 플랫폼</h2><span class="pill">PM + Tech Lead · 설계·기획·개발 주도</span></div>
@@ -482,6 +491,7 @@
   </section>
 
   <!-- 10 BACKOFFICE system arch -->
+
 
 
 
@@ -525,7 +535,54 @@
     <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>12개 서비스</b>의 NestJS MSA 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리해 개별 배포·확장이 가능하며, <b>9개 저장소</b>(모노레포 2개 포함)를 <b>Stage · 운영 공개 · 운영 격리</b> 3개 서버에 배포합니다.</p>
   </section>
 
-  <!-- 11 BACKOFFICE integration -->
+  <!-- 11 BACKOFFICE msa hierarchy -->
+
+  <section class="slide">
+    <div class="eyebrow">백오피스 · MSA</div>
+    <h2 class="stitle">MSA 서비스 구성 · 도메인별 하이라키</h2>
+    <div class="arch">
+      <div class="archcap">12개 서비스 · 도메인 그룹</div>
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .Hroot{fill:#13203a;stroke:#5b8def;stroke-width:2}
+          .HgA{fill:#0d1420;stroke:#3a5a92;stroke-width:1.4}.HgB{fill:#0d1420;stroke:#2a6b54;stroke-width:1.4}.HgC{fill:#0d1420;stroke:#8a6d3b;stroke-width:1.4}
+          .Hc{fill:#0e1626;stroke:#27406b;stroke-width:1.2}.Hmes{fill:#10231c;stroke:#3aa0a0;stroke-width:1.5}
+          .Ht{fill:#eef2f8;font-size:11px;font-weight:700}.Hs{fill:#9aa4b6;font-size:8px}
+          .Hgt{font-size:10px;font-weight:800}.Hci{fill:#c2cad8;font-size:9.5px;font-weight:600}
+          .Htree{stroke:#33415a;stroke-width:1.3;fill:none}
+        </style>
+        <!-- root -->
+        <rect class="Hroot" x="286" y="12" width="128" height="42" rx="10"/><text class="Ht" x="350" y="32" text-anchor="middle">백오피스 통합 플랫폼</text><text class="Hs" x="350" y="46" text-anchor="middle">NestJS MSA · SSO</text>
+        <!-- tree trunk to 3 groups -->
+        <path class="Htree" d="M350,54 V70 M116,70 H600 M116,70 V84 M350,70 V84 M600,70 V84"/>
+        <!-- group boxes -->
+        <rect class="HgA" x="18" y="84" width="196" height="200" rx="12"/><text class="Hgt" x="36" y="104" fill="#8fb4f5">공통 플랫폼 · 4</text>
+        <rect class="HgB" x="234" y="84" width="268" height="200" rx="12"/><text class="Hgt" x="252" y="104" fill="#7fd6c0">업무 · 8</text>
+        <rect class="HgC" x="522" y="84" width="160" height="200" rx="12"/><text class="Hgt" x="540" y="104" fill="#d8b46a">제조 · 자체 구축</text>
+        <!-- group A: 4 services -->
+        <rect class="Hc" x="30" y="116" width="172" height="30" rx="7"/><text class="Hci" x="116" y="135" text-anchor="middle">인증 (SSO)</text>
+        <rect class="Hc" x="30" y="152" width="172" height="30" rx="7"/><text class="Hci" x="116" y="171" text-anchor="middle">알림</text>
+        <rect class="Hc" x="30" y="188" width="172" height="30" rx="7"/><text class="Hci" x="116" y="207" text-anchor="middle">파일 · 문서</text>
+        <rect class="Hc" x="30" y="224" width="172" height="30" rx="7"/><text class="Hci" x="116" y="243" text-anchor="middle">콘텐츠</text>
+        <!-- group B: 8 services (2 cols) -->
+        <rect class="Hc" x="246" y="116" width="120" height="30" rx="7"/><text class="Hci" x="306" y="135" text-anchor="middle">전자결재</text>
+        <rect class="Hc" x="246" y="152" width="120" height="30" rx="7"/><text class="Hci" x="306" y="171" text-anchor="middle">근태</text>
+        <rect class="Hc" x="246" y="188" width="120" height="30" rx="7"/><text class="Hci" x="306" y="207" text-anchor="middle">일정 · 자원</text>
+        <rect class="Hc" x="246" y="224" width="120" height="30" rx="7"/><text class="Hci" x="306" y="243" text-anchor="middle">평가</text>
+        <rect class="Hc" x="374" y="116" width="120" height="30" rx="7"/><text class="Hci" x="434" y="135" text-anchor="middle">채용</text>
+        <rect class="Hc" x="374" y="152" width="120" height="30" rx="7"/><text class="Hci" x="434" y="171" text-anchor="middle">프로젝트</text>
+        <rect class="Hc" x="374" y="188" width="120" height="30" rx="7"/><text class="Hci" x="434" y="207" text-anchor="middle">업무</text>
+        <rect class="Hc" x="374" y="224" width="120" height="30" rx="7"/><text class="Hci" x="434" y="243" text-anchor="middle">품질</text>
+        <!-- group C: MES -->
+        <rect class="Hmes" x="534" y="116" width="136" height="44" rx="8"/><text class="Ht" x="602" y="135" text-anchor="middle" font-size="10.5">위성 전용 MES</text><text class="Hs" x="602" y="150" text-anchor="middle" fill="#7fd6c0">자체 구축</text>
+        <text class="Hs" x="602" y="196" text-anchor="middle">사내 부재 시스템을</text><text class="Hs" x="602" y="210" text-anchor="middle">직접 설계·구축해</text><text class="Hs" x="602" y="224" text-anchor="middle">플랫폼에 융합</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">각 도메인을 <b>독립 배포되는 서비스</b>로 분리하고 SSO 단일 진입점 아래 묶었습니다. 공통 플랫폼·업무·제조 <b>3개 도메인 그룹, 12개 서비스</b>로 구성하며, 사내에 없던 <b>위성 전용 MES는 직접 구축</b>해 융합했습니다.</p>
+  </section>
+
+  <!-- 12 BACKOFFICE integration -->
+
 
 
 
@@ -553,10 +610,9 @@
         <text class="Acap" x="102" y="26" text-anchor="middle" fill="#5b8def">외부 시스템 · 애플리케이션 연동</text>
         <text class="Acap" x="598" y="26" text-anchor="middle" fill="#c9a24b">출입 H/W · 데이터 레벨 연동</text>
         <!-- hub -->
-        <rect class="Acore" x="284" y="90" width="150" height="110" rx="13"/>
-        <text class="AAt" x="359" y="116" text-anchor="middle" font-size="12">백오피스 통합 플랫폼</text>
-        <text class="AAs" x="359" y="132" text-anchor="middle">12개 서비스 · NestJS MSA · SSO</text>
-        <rect class="Ames" x="296" y="158" width="126" height="30" rx="7"/><text class="Amt" x="359" y="177" text-anchor="middle">위성 전용 MES 자체 구축</text>
+        <rect class="Acore" x="284" y="104" width="150" height="82" rx="13"/>
+        <text class="AAt" x="359" y="140" text-anchor="middle" font-size="12">백오피스 통합 플랫폼</text>
+        <text class="AAs" x="359" y="157" text-anchor="middle">MSA 백엔드 · 단일 진입점</text>
         <!-- external SW (REST) -->
         <rect class="Aext" x="28" y="98" width="150" height="46" rx="10"/><text class="AAt" x="103" y="118" text-anchor="middle">회계 시스템</text><text class="AAs" x="103" y="133" text-anchor="middle">외부 SW</text>
         <rect class="Aext" x="28" y="166" width="150" height="46" rx="10"/><text class="AAt" x="103" y="186" text-anchor="middle">양산 MES</text><text class="AAs" x="103" y="201" text-anchor="middle">외부 SW</text>
@@ -570,10 +626,11 @@
         <path class="Adb" d="M494,145 H434"/><text class="Albl" x="464" y="138" text-anchor="middle" fill="#c9a24b">DB 직접</text>
       </svg>
     </div>
-    <p class="ssub" style="margin-top:12px">성격이 다른 이기종 시스템을 <b>각각 맞는 방식으로 통합</b>했습니다. 회계·양산 MES 등 외부 SW는 <b style="color:var(--accent)">REST API</b>로, 출입 지문·QR·차량 H/W는 <b style="color:var(--warn)">DB에 직접 연동</b>합니다. 사내 부재하던 <b>위성 전용 MES는 직접 구축</b>해 플랫폼에 융합했습니다.</p>
+    <p class="ssub" style="margin-top:12px">성격이 다른 이기종 시스템을 <b>각각 맞는 방식으로 통합</b>했습니다. 회계·양산 MES 등 외부 SW는 <b style="color:var(--accent)">REST API</b>로, 출입 지문·QR·차량 H/W는 <b style="color:var(--warn)">DB에 직접 연동</b>해 하나의 플랫폼에서 일관되게 다룹니다.</p>
   </section>
 
-  <!-- 12 SDPE overview -->
+  <!-- 13 SDPE overview -->
+
 
 
 
@@ -587,7 +644,8 @@
     <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
   </section>
 
-  <!-- 13 SDPE architecture -->
+  <!-- 14 SDPE architecture -->
+
 
 
 
@@ -629,7 +687,8 @@
     </div>
   </section>
 
-  <!-- 14 SDPE impact -->
+  <!-- 15 SDPE impact -->
+
 
 
 
@@ -649,7 +708,8 @@
     </div>
   </section>
 
-  <!-- 15 LIID overview -->
+  <!-- 16 LIID overview -->
+
 
 
 
@@ -663,7 +723,8 @@
     <div class="pblock solution"><div class="h">Solution</div><p>요구사항 분석부터 아키텍처·백엔드까지 주도. 타일맵을 <b>최적화 래스터 직접 렌더링 + 캐시</b>로 전환하고 <b>공간쿼리·파티셔닝</b>으로 검색을 튜닝. SDPE 산출물을 서비스 도메인으로 변환해 <b>LLM·DEM 3D 지형 모니터링 · SAR 검색 · 촬영 요청</b>을 단일 진입점으로 제공하고, LLM은 <b>로컬 모델</b>로, 대용량 3D는 <b>캐시 Hit/Miss</b>로 처리. 위성 제품별 MSA·DDD·TDD로 구성했습니다.</p></div>
   </section>
 
-  <!-- 16 LIID architecture -->
+  <!-- 17 LIID architecture -->
+
 
 
 
@@ -699,7 +760,8 @@
     </div>
   </section>
 
-  <!-- 17 LIID perf -->
+  <!-- 18 LIID perf -->
+
 
 
 
@@ -719,7 +781,8 @@
     </div>
   </section>
 
-  <!-- 18 LIID service -->
+  <!-- 19 LIID service -->
+
 
 
 
@@ -736,7 +799,8 @@
     </div>
   </section>
 
-  <!-- 19 LIID cache -->
+  <!-- 20 LIID cache -->
+
 
 
 
@@ -769,7 +833,8 @@
     <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
   </section>
 
-  <!-- 20 FILE-ENGINE overview -->
+  <!-- 21 FILE-ENGINE overview -->
+
 
 
 
@@ -783,7 +848,8 @@
     <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 <b>1GbE 단일 전송이면 약 20분</b> 걸리던 50GB를 수 분 내로 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
   </section>
 
-  <!-- 21 FILE-ENGINE architecture -->
+  <!-- 22 FILE-ENGINE architecture -->
+
 
 
 
@@ -825,7 +891,8 @@
     </div>
   </section>
 
-  <!-- 22 FILE-ENGINE chunk -->
+  <!-- 23 FILE-ENGINE chunk -->
+
 
 
 
@@ -859,7 +926,8 @@
     <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 <b>1GbE 단일 전송 기준 약 20분 → 수 분</b>으로 줄이고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
   </section>
 
-  <!-- 23 FILE-ENGINE resilience -->
+  <!-- 24 FILE-ENGINE resilience -->
+
 
 
 
@@ -876,7 +944,8 @@
     </div>
   </section>
 
-  <!-- 24 FILE-ENGINE SSO -->
+  <!-- 25 FILE-ENGINE SSO -->
+
 
 
 
@@ -912,7 +981,8 @@
     </div>
   </section>
 
-  <!-- 25 INFRA overview -->
+  <!-- 26 INFRA overview -->
+
 
 
 
@@ -952,7 +1022,8 @@
     <p class="ssub" style="margin-top:12px">사내망 전용 서비스는 <b>온프레미스 k8s</b>, 사내 ERP는 <b>AWS 클라우드</b>, 공공기관 납품은 <b>CSAP 인증 경계로 완전 분리</b> — 워크로드마다 맞는 환경에 배치하는 하이브리드 전략입니다.</p>
   </section>
 
-  <!-- 26 INFRA on-prem -->
+  <!-- 27 INFRA on-prem -->
+
 
 
 
@@ -969,7 +1040,8 @@
     </div>
   </section>
 
-  <!-- 27 INFRA k8s topology -->
+  <!-- 28 INFRA k8s topology -->
+
 
 
 
@@ -1021,7 +1093,8 @@
     </div>
   </section>
 
-  <!-- 28 INFRA cloud -->
+  <!-- 29 INFRA cloud -->
+
 
 
 
@@ -1038,7 +1111,8 @@
     </div>
   </section>
 
-  <!-- 29 INFRA cloud arch -->
+  <!-- 30 INFRA cloud arch -->
+
 
 
 
@@ -1089,7 +1163,8 @@
     <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
   </section>
 
-  <!-- 30 TECH-LEAD DDD -->
+  <!-- 31 TECH-LEAD DDD -->
+
 
 
 
@@ -1131,7 +1206,8 @@
     </div>
   </section>
 
-  <!-- 31 TECH-LEAD layering -->
+  <!-- 32 TECH-LEAD layering -->
+
 
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 아키텍처 표준</div>
@@ -1183,7 +1259,8 @@
     </div>
   </section>
 
-  <!-- 32 TECH-LEAD ai-native -->
+  <!-- 33 TECH-LEAD ai-native -->
+
 
 
 
@@ -1200,7 +1277,8 @@
     </div>
   </section>
 
-  <!-- 33 TECH-LEAD planning-screen -->
+  <!-- 34 TECH-LEAD planning-screen -->
+
 
 
 
@@ -1217,7 +1295,8 @@
     </div>
   </section>
 
-  <!-- 34 TECH-LEAD llm-wiki -->
+  <!-- 35 TECH-LEAD llm-wiki -->
+
 
 
 
@@ -1265,7 +1344,8 @@
     <p class="ssub" style="margin-top:12px">프로젝트·인프라 <b>인수인계와 온보딩</b>의 어려움을 줄이려, 작업하며 <b>LLM Wiki에 Second Brain</b>을 남깁니다. md 문서의 <b>메타데이터에 연관 문서 태그</b>를 달아 문서를 <b>그래프로 연결</b>해 제공하므로, 다음 사람이 맥락을 따라 자연스럽게 업무를 이어갑니다.</p>
   </section>
 
-  <!-- 35 TECH-LEAD fe-convention -->
+  <!-- 36 TECH-LEAD fe-convention -->
+
 
 
 
@@ -1316,7 +1396,8 @@
     <p class="ssub" style="margin-top:12px">ERP 규모로 조직이 커지며 디자인 코드 복잡도가 올라갔습니다. <b>Atomic·Modular 사이즈만 추상화</b>해 공용화하고, 나머지 디자인 컴포넌트는 <b>페이지 내부에서 구성</b>하도록 <b>Next.js 구조 기반 하이라키 컨벤션</b>을 지정했습니다. <span style="color:var(--accent2)">적용: Lumir Portal</span></p>
   </section>
 
-  <!-- 36 TECH-LEAD testing -->
+  <!-- 37 TECH-LEAD testing -->
+
 
 
 
@@ -1357,7 +1438,8 @@
     <p class="ssub" style="margin-top:12px"><b>Domain은 Unit Test</b>, <b>Context는 컨테이너 기반 실제 DB 연동·트랜잭션 검증</b>으로 <b>커버리지 100%</b>를 보증하고, <b>비즈니스 영역은 프론트 Playwright</b>로 자동 검증합니다. 계층별 검증으로 안정성 높은 시스템을 운영합니다.</p>
   </section>
 
-  <!-- 37 SKILLS -->
+  <!-- 38 SKILLS -->
+
 
 
 
@@ -1378,7 +1460,8 @@
     </div>
   </section>
 
-  <!-- 38 CAREER -->
+  <!-- 39 CAREER -->
+
 
 
 
@@ -1398,7 +1481,8 @@
     </div>
   </section>
 
-  <!-- 39 GITHUB GRASS -->
+  <!-- 40 GITHUB GRASS -->
+
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -1406,7 +1490,8 @@
     <div class="grassbox" id="grassbox"></div>
   </section>
 
-  <!-- 40 CLOSING -->
+  <!-- 41 CLOSING -->
+
 
 
 
@@ -1450,16 +1535,16 @@
     {t:'핵심 역량', s:2},
     {t:'기획 역량', s:3},
     {t:'기획 사례 · 사내 ERP', s:4, e:7},
-    {t:'백오피스 통합 플랫폼', s:8, e:10},
-    {t:'SDPE', s:11, e:13},
-    {t:'LIID · 위성영상 플랫폼', s:14, e:18},
-    {t:'대용량 파일 전송 엔진', s:19, e:23},
-    {t:'Infrastructure & DevOps', s:24, e:28},
-    {t:'기술 리딩 (Technical)', s:29, e:35},
-    {t:'기술 스택', s:36},
-    {t:'경력', s:37},
-    {t:'GitHub 기록', s:38},
-    {t:'Closing', s:39}
+    {t:'백오피스 통합 플랫폼', s:8, e:11},
+    {t:'SDPE', s:12, e:14},
+    {t:'LIID · 위성영상 플랫폼', s:15, e:19},
+    {t:'대용량 파일 전송 엔진', s:20, e:24},
+    {t:'Infrastructure & DevOps', s:25, e:29},
+    {t:'기술 리딩 (Technical)', s:30, e:36},
+    {t:'기술 스택', s:37},
+    {t:'경력', s:38},
+    {t:'GitHub 기록', s:39},
+    {t:'Closing', s:40}
   ];
   // Preview render mode: loaded as ?p=N inside a sidebar thumbnail iframe →
   // render only slide N, no chrome, and stop (no sidebar ⇒ no nested iframes).
