@@ -535,43 +535,42 @@
     <div class="eyebrow">백오피스 · Integration</div>
     <h2 class="stitle">시스템 · H/W 연동 구조</h2>
     <div class="arch">
-      <div class="archcap">연동 허브</div>
-      <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="arA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker></defs>
+      <div class="archcap">이기종 시스템 통합 · 방식을 나눠서</div>
+      <svg viewBox="0 0 700 268" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker>
+          <marker id="arG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c9a24b"/></marker>
+        </defs>
         <style>
-          .Abox{fill:#0e1626;stroke:#27406b;stroke-width:1.4}.Acore{fill:#13203a;stroke:#5b8def;stroke-width:1.8}
-          .Amod{fill:#10231c;stroke:#2a6b54;stroke-width:1.2}.AAt{fill:#eef2f8;font-size:12px;font-weight:700}
-          .AAs{fill:#9aa4b6;font-size:10px}.Am{fill:#3aa0a0;font-size:9.5px;font-weight:700}
-          .Aln{stroke:#5b8def;stroke-width:1.5;fill:none;marker-end:url(#arA)}.Aln0{stroke:#5b8def;stroke-width:1.5;fill:none}
-          .Acap{fill:#6b7689;font-size:9px;font-weight:700}.Albl{fill:#7e8aa0;font-size:8.5px}
+          .Acore{fill:#13203a;stroke:#5b8def;stroke-width:2}.Ames{fill:#10231c;stroke:#3aa0a0;stroke-width:1.3}
+          .Aext{fill:#0e1626;stroke:#3a5a92;stroke-width:1.3}.Ahw{fill:#1a1611;stroke:#8a6d3b;stroke-width:1.3}
+          .AAt{fill:#eef2f8;font-size:11.5px;font-weight:700}.AAs{fill:#9aa4b6;font-size:8px}
+          .Amt{fill:#7fd6c0;font-size:9px;font-weight:700}
+          .Arest{stroke:#5b8def;stroke-width:1.6;fill:none;marker-end:url(#arB)}.Arest0{stroke:#5b8def;stroke-width:1.6;fill:none}
+          .Adb{stroke:#c9a24b;stroke-width:1.6;fill:none;marker-end:url(#arG)}.Adb0{stroke:#c9a24b;stroke-width:1.6;fill:none}
+          .Acap{font-size:9.5px;font-weight:800}.Albl{font-size:8.5px;font-weight:700}
         </style>
-        <text class="Acap" x="100" y="54" text-anchor="middle">외부 시스템 · REST API</text>
-        <text class="Acap" x="580" y="54" text-anchor="middle">출입 H/W · DB 직접 연동</text>
-        <rect class="Acore" x="222" y="86" width="236" height="166" rx="13"/>
-        <text class="AAt" x="340" y="108" text-anchor="middle">백오피스 통합 플랫폼</text>
-        <text class="AAs" x="340" y="124" text-anchor="middle">NestJS · MSA · DDD · SSO</text>
-        <rect class="Amod" x="234" y="138" width="48" height="24" rx="6"/><text class="Am" x="258" y="154" text-anchor="middle">근태</text>
-        <rect class="Amod" x="288" y="138" width="48" height="24" rx="6"/><text class="Am" x="312" y="154" text-anchor="middle">채용</text>
-        <rect class="Amod" x="342" y="138" width="48" height="24" rx="6"/><text class="Am" x="366" y="154" text-anchor="middle">KPI</text>
-        <rect class="Amod" x="396" y="138" width="48" height="24" rx="6"/><text class="Am" x="420" y="154" text-anchor="middle">SSO</text>
-        <rect class="Amod" x="234" y="168" width="62" height="24" rx="6"/><text class="Am" x="265" y="184" text-anchor="middle">프로젝트</text>
-        <rect class="Amod" x="302" y="168" width="62" height="24" rx="6"/><text class="Am" x="333" y="184" text-anchor="middle">자원관리</text>
-        <rect class="Amod" x="370" y="168" width="74" height="24" rx="6"/><text class="Am" x="407" y="184" text-anchor="middle">산출물관리</text>
-        <rect class="Amod" x="280" y="198" width="120" height="24" rx="6"/><text class="Am" x="340" y="214" text-anchor="middle">위성 전용 MES (자체 구축)</text>
-        <rect class="Abox" x="30" y="92" width="142" height="46" rx="10"/><text class="AAt" x="101" y="112" text-anchor="middle">Amaranth 10</text><text class="AAs" x="101" y="127" text-anchor="middle">회계 시스템</text>
-        <rect class="Abox" x="30" y="200" width="142" height="46" rx="10"/><text class="AAt" x="101" y="220" text-anchor="middle">SmartNotes</text><text class="AAs" x="101" y="235" text-anchor="middle">양산 MES</text>
-        <rect class="Abox" x="508" y="72" width="142" height="44" rx="10"/><text class="AAt" x="579" y="94" text-anchor="middle">S-One 지문인식기</text><text class="AAs" x="579" y="109" text-anchor="middle">출입·근태</text>
-        <rect class="Abox" x="508" y="150" width="142" height="44" rx="10"/><text class="AAt" x="579" y="172" text-anchor="middle">출입 QR 리더</text><text class="AAs" x="579" y="187" text-anchor="middle">출입 인증</text>
-        <rect class="Abox" x="508" y="228" width="142" height="44" rx="10"/><text class="AAt" x="579" y="250" text-anchor="middle">차량 출입 관리</text><text class="AAs" x="579" y="265" text-anchor="middle">번호판 인식(LPR)</text>
-        <path class="Aln" d="M172,115 H220"/><text class="Albl" x="196" y="108" text-anchor="middle">REST API</text>
-        <path class="Aln" d="M172,223 H220"/>
-        <path class="Aln0" d="M508,94 H480"/>
-        <path class="Aln0" d="M508,172 H480"/>
-        <path class="Aln0" d="M508,250 H480"/>
-        <path class="Aln0" d="M480,94 V250"/>
-        <path class="Aln" d="M480,172 H460"/><text class="Albl" x="470" y="165" text-anchor="middle">DB Injection</text>
+        <text class="Acap" x="102" y="26" text-anchor="middle" fill="#5b8def">외부 시스템 · 애플리케이션 연동</text>
+        <text class="Acap" x="598" y="26" text-anchor="middle" fill="#c9a24b">출입 H/W · 데이터 레벨 연동</text>
+        <!-- hub -->
+        <rect class="Acore" x="284" y="90" width="150" height="110" rx="13"/>
+        <text class="AAt" x="359" y="116" text-anchor="middle" font-size="12">백오피스 통합 플랫폼</text>
+        <text class="AAs" x="359" y="132" text-anchor="middle">12개 서비스 · NestJS MSA · SSO</text>
+        <rect class="Ames" x="296" y="158" width="126" height="30" rx="7"/><text class="Amt" x="359" y="177" text-anchor="middle">위성 전용 MES 자체 구축</text>
+        <!-- external SW (REST) -->
+        <rect class="Aext" x="28" y="98" width="150" height="46" rx="10"/><text class="AAt" x="103" y="118" text-anchor="middle">회계 시스템</text><text class="AAs" x="103" y="133" text-anchor="middle">외부 SW</text>
+        <rect class="Aext" x="28" y="166" width="150" height="46" rx="10"/><text class="AAt" x="103" y="186" text-anchor="middle">양산 MES</text><text class="AAs" x="103" y="201" text-anchor="middle">외부 SW</text>
+        <path class="Arest0" d="M178,121 H250"/><path class="Arest0" d="M178,189 H250"/><path class="Arest0" d="M250,121 V189"/>
+        <path class="Arest" d="M250,145 H284"/><text class="Albl" x="222" y="138" text-anchor="middle" fill="#5b8def">REST API</text>
+        <!-- access H/W (DB direct) -->
+        <rect class="Ahw" x="524" y="94" width="150" height="42" rx="10"/><text class="AAt" x="599" y="113" text-anchor="middle">지문 인식기</text><text class="AAs" x="599" y="127" text-anchor="middle">출입 · 근태</text>
+        <rect class="Ahw" x="524" y="146" width="150" height="42" rx="10"/><text class="AAt" x="599" y="165" text-anchor="middle">QR 리더</text><text class="AAs" x="599" y="179" text-anchor="middle">출입 인증</text>
+        <rect class="Ahw" x="524" y="198" width="150" height="42" rx="10"/><text class="AAt" x="599" y="217" text-anchor="middle">차량 번호판(LPR)</text><text class="AAs" x="599" y="231" text-anchor="middle">차량 출입</text>
+        <path class="Adb0" d="M524,115 H494"/><path class="Adb0" d="M524,167 H494"/><path class="Adb0" d="M524,219 H494"/><path class="Adb0" d="M494,115 V219"/>
+        <path class="Adb" d="M494,145 H434"/><text class="Albl" x="464" y="138" text-anchor="middle" fill="#c9a24b">DB 직접</text>
       </svg>
     </div>
+    <p class="ssub" style="margin-top:12px">성격이 다른 이기종 시스템을 <b>각각 맞는 방식으로 통합</b>했습니다. 회계·양산 MES 등 외부 SW는 <b style="color:var(--accent)">REST API</b>로, 출입 지문·QR·차량 H/W는 <b style="color:var(--warn)">DB에 직접 연동</b>합니다. 사내 부재하던 <b>위성 전용 MES는 직접 구축</b>해 플랫폼에 융합했습니다.</p>
   </section>
 
   <!-- 12 SDPE overview -->
