@@ -224,6 +224,7 @@
 
 
 
+
   <section class="slide active">
     <div class="eyebrow">Backend Engineer · Tech Lead</div>
     <h1 class="big">0에서 1을 만들고,<br>1을 <span class="hl">조직</span>으로 키운<br>기술 기반 빌더</h1>
@@ -232,6 +233,7 @@
   </section>
 
   <!-- 2 ABOUT + STATS -->
+
 
 
 
@@ -251,6 +253,7 @@
   </section>
 
   <!-- 3 CORE COMPETENCY (full-cycle 4-track) -->
+
 
 
 
@@ -316,6 +319,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Planning · Product Design</div>
     <h2 class="stitle">기획: 요구사항에서 데이터 구조까지</h2>
@@ -336,6 +340,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Planning Case · 사내 통합 ERP</div>
     <div class="ptop"><h2 class="stitle">사내 통합 ERP 기획 — 문서 기반 의사결정 파이프라인</h2><span class="pill">메인 기획 · 설계 리딩</span></div>
@@ -351,6 +356,7 @@
   </section>
 
   <!-- 6 PLANNING CASE ux -->
+
 
 
 
@@ -393,6 +399,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Planning · 기획 흐름</div>
     <h2 class="stitle">화면 설계 → 결정 기록 → 위키 컴파일 → 개발 계획</h2>
@@ -425,6 +432,7 @@
   </section>
 
   <!-- 8 PLANNING CASE ADR -->
+
 
 
 
@@ -476,6 +484,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 01</div>
     <div class="ptop"><h2 class="stitle">백오피스 통합 플랫폼</h2><span class="pill">PM + Tech Lead · 설계·기획·개발 주도</span></div>
@@ -490,98 +499,8 @@
     </div>
   </section>
 
-  <!-- 10 BACKOFFICE system arch -->
+  <!-- 10 BACKOFFICE integration -->
 
-
-
-
-
-
-  <section class="slide">
-    <div class="eyebrow">백오피스 · Architecture</div>
-    <h2 class="stitle">시스템 아키텍처 · MSA 백엔드 + 웹·모바일</h2>
-    <div class="arch">
-      <div class="archcap">서비스 구성</div>
-      <svg viewBox="0 0 680 316" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="arL" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker></defs>
-        <style>
-          .Lb{fill:#0e1626;stroke:#27406b;stroke-width:1.4}.Lfront{fill:#13203a;stroke:#5b8def;stroke-width:1.6}
-          .Lgw{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.7}.Lgrp{fill:#0e1421;stroke:#2a6b54;stroke-width:1.4}
-          .Lsvc{fill:#10231c;stroke:#3aa0a0;stroke-width:1.3}.Ldb{fill:#0e1626;stroke:#3a5a92;stroke-width:1.4}
-          .Lt{fill:#eef2f8;font-size:12px;font-weight:700}.Ls{fill:#9aa4b6;font-size:8.5px}
-          .Lzt{font-size:10px;font-weight:800}.Lsc{fill:#3aa0a0;font-size:9.5px;font-weight:700}
-          .Lln{stroke:#5b8def;stroke-width:1.5;fill:none;marker-end:url(#arL)}.Lln0{stroke:#5b8def;stroke-width:1.5;fill:none}.Llbl{fill:#7e8aa0;font-size:8.5px}
-        </style>
-        <!-- frontend -->
-        <rect class="Lfront" x="104" y="14" width="180" height="50" rx="10"/><text class="Lt" x="194" y="36" text-anchor="middle">웹 클라이언트</text><text class="Ls" x="194" y="52" text-anchor="middle">Next.js · React</text>
-        <rect class="Lfront" x="396" y="14" width="180" height="50" rx="10"/><text class="Lt" x="486" y="36" text-anchor="middle">모바일 앱</text><text class="Ls" x="486" y="52" text-anchor="middle">iOS · Android</text>
-        <!-- gateway -->
-        <rect class="Lgw" x="230" y="98" width="220" height="48" rx="10"/><text class="Lt" x="340" y="120" text-anchor="middle">API Gateway · SSO</text><text class="Ls" x="340" y="136" text-anchor="middle">단일 진입점 · 인증</text>
-        <!-- MSA group -->
-        <rect class="Lgrp" x="36" y="176" width="608" height="60" rx="12"/>
-        <text class="Lt" x="340" y="202" text-anchor="middle">백엔드 · NestJS MSA · 12개 서비스</text>
-        <text class="Ls" x="340" y="221" text-anchor="middle">서비스별 독립 배포 · DDD · 도메인 분리</text>
-        <!-- data -->
-        <rect class="Ldb" x="36" y="270" width="608" height="40" rx="9"/><text class="Lt" x="340" y="294" text-anchor="middle">서비스별 데이터베이스 · 도메인 이벤트</text>
-        <!-- orthogonal arrows -->
-        <path class="Lln0" d="M194,64 V82"/>
-        <path class="Lln0" d="M486,64 V82"/>
-        <path class="Lln0" d="M194,82 H486"/>
-        <path class="Lln" d="M340,82 V96"/><text class="Llbl" x="340" y="76" text-anchor="middle">HTTPS</text>
-        <path class="Lln" d="M340,146 V174"/><text class="Llbl" x="348" y="164">라우팅</text>
-        <path class="Lln" d="M340,236 V268"/><text class="Llbl" x="348" y="256">영속화</text>
-      </svg>
-    </div>
-    <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>12개 서비스</b>의 NestJS MSA 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리해 개별 배포·확장이 가능하며, <b>9개 저장소</b>(모노레포 2개 포함)를 <b>Stage · 운영 공개 · 운영 격리</b> 3개 서버에 배포합니다.</p>
-  </section>
-
-  <!-- 11 BACKOFFICE msa hierarchy -->
-
-  <section class="slide">
-    <div class="eyebrow">백오피스 · MSA</div>
-    <h2 class="stitle">MSA 서비스 구성 · 도메인별 하이라키</h2>
-    <div class="arch">
-      <div class="archcap">12개 서비스 · 도메인 그룹</div>
-      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
-        <style>
-          .Hroot{fill:#13203a;stroke:#5b8def;stroke-width:2}
-          .HgA{fill:#0d1420;stroke:#3a5a92;stroke-width:1.4}.HgB{fill:#0d1420;stroke:#2a6b54;stroke-width:1.4}.HgC{fill:#0d1420;stroke:#8a6d3b;stroke-width:1.4}
-          .Hc{fill:#0e1626;stroke:#27406b;stroke-width:1.2}.Hmes{fill:#10231c;stroke:#3aa0a0;stroke-width:1.5}
-          .Ht{fill:#eef2f8;font-size:11px;font-weight:700}.Hs{fill:#9aa4b6;font-size:8px}
-          .Hgt{font-size:10px;font-weight:800}.Hci{fill:#c2cad8;font-size:9.5px;font-weight:600}
-          .Htree{stroke:#33415a;stroke-width:1.3;fill:none}
-        </style>
-        <!-- root -->
-        <rect class="Hroot" x="286" y="12" width="128" height="42" rx="10"/><text class="Ht" x="350" y="32" text-anchor="middle">백오피스 통합 플랫폼</text><text class="Hs" x="350" y="46" text-anchor="middle">NestJS MSA · SSO</text>
-        <!-- tree trunk to 3 groups -->
-        <path class="Htree" d="M350,54 V70 M116,70 H600 M116,70 V84 M350,70 V84 M600,70 V84"/>
-        <!-- group boxes -->
-        <rect class="HgA" x="18" y="84" width="196" height="200" rx="12"/><text class="Hgt" x="36" y="104" fill="#8fb4f5">공통 플랫폼 · 4</text>
-        <rect class="HgB" x="234" y="84" width="268" height="200" rx="12"/><text class="Hgt" x="252" y="104" fill="#7fd6c0">업무 · 8</text>
-        <rect class="HgC" x="522" y="84" width="160" height="200" rx="12"/><text class="Hgt" x="540" y="104" fill="#d8b46a">제조 · 자체 구축</text>
-        <!-- group A: 4 services -->
-        <rect class="Hc" x="30" y="116" width="172" height="30" rx="7"/><text class="Hci" x="116" y="135" text-anchor="middle">인증 (SSO)</text>
-        <rect class="Hc" x="30" y="152" width="172" height="30" rx="7"/><text class="Hci" x="116" y="171" text-anchor="middle">알림</text>
-        <rect class="Hc" x="30" y="188" width="172" height="30" rx="7"/><text class="Hci" x="116" y="207" text-anchor="middle">파일 · 문서</text>
-        <rect class="Hc" x="30" y="224" width="172" height="30" rx="7"/><text class="Hci" x="116" y="243" text-anchor="middle">콘텐츠</text>
-        <!-- group B: 8 services (2 cols) -->
-        <rect class="Hc" x="246" y="116" width="120" height="30" rx="7"/><text class="Hci" x="306" y="135" text-anchor="middle">전자결재</text>
-        <rect class="Hc" x="246" y="152" width="120" height="30" rx="7"/><text class="Hci" x="306" y="171" text-anchor="middle">근태</text>
-        <rect class="Hc" x="246" y="188" width="120" height="30" rx="7"/><text class="Hci" x="306" y="207" text-anchor="middle">일정 · 자원</text>
-        <rect class="Hc" x="246" y="224" width="120" height="30" rx="7"/><text class="Hci" x="306" y="243" text-anchor="middle">평가</text>
-        <rect class="Hc" x="374" y="116" width="120" height="30" rx="7"/><text class="Hci" x="434" y="135" text-anchor="middle">채용</text>
-        <rect class="Hc" x="374" y="152" width="120" height="30" rx="7"/><text class="Hci" x="434" y="171" text-anchor="middle">프로젝트</text>
-        <rect class="Hc" x="374" y="188" width="120" height="30" rx="7"/><text class="Hci" x="434" y="207" text-anchor="middle">업무</text>
-        <rect class="Hc" x="374" y="224" width="120" height="30" rx="7"/><text class="Hci" x="434" y="243" text-anchor="middle">품질</text>
-        <!-- group C: MES -->
-        <rect class="Hmes" x="534" y="116" width="136" height="44" rx="8"/><text class="Ht" x="602" y="135" text-anchor="middle" font-size="10.5">위성 전용 MES</text><text class="Hs" x="602" y="150" text-anchor="middle" fill="#7fd6c0">자체 구축</text>
-        <text class="Hs" x="602" y="196" text-anchor="middle">사내 부재 시스템을</text><text class="Hs" x="602" y="210" text-anchor="middle">직접 설계·구축해</text><text class="Hs" x="602" y="224" text-anchor="middle">플랫폼에 융합</text>
-      </svg>
-    </div>
-    <p class="ssub" style="margin-top:12px">각 도메인을 <b>독립 배포되는 서비스</b>로 분리하고 SSO 단일 진입점 아래 묶었습니다. 공통 플랫폼·업무·제조 <b>3개 도메인 그룹, 12개 서비스</b>로 구성하며, 사내에 없던 <b>위성 전용 MES는 직접 구축</b>해 융합했습니다.</p>
-  </section>
-
-  <!-- 12 BACKOFFICE integration -->
 
 
 
@@ -629,7 +548,101 @@
     <p class="ssub" style="margin-top:12px">성격이 다른 이기종 시스템을 <b>각각 맞는 방식으로 통합</b>했습니다. 회계·양산 MES 등 외부 SW는 <b style="color:var(--accent)">REST API</b>로, 출입 지문·QR·차량 H/W는 <b style="color:var(--warn)">DB에 직접 연동</b>해 하나의 플랫폼에서 일관되게 다룹니다.</p>
   </section>
 
+  <!-- 11 BACKOFFICE system arch -->
+
+
+
+
+
+
+
+  <section class="slide">
+    <div class="eyebrow">백오피스 · Architecture</div>
+    <h2 class="stitle">시스템 아키텍처 · MSA 백엔드 + 웹·모바일</h2>
+    <div class="arch">
+      <div class="archcap">서비스 구성</div>
+      <svg viewBox="0 0 680 316" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arL" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker></defs>
+        <style>
+          .Lb{fill:#0e1626;stroke:#27406b;stroke-width:1.4}.Lfront{fill:#13203a;stroke:#5b8def;stroke-width:1.6}
+          .Lgw{fill:#1a1430;stroke:#7a5cc4;stroke-width:1.7}.Lgrp{fill:#0e1421;stroke:#2a6b54;stroke-width:1.4}
+          .Lsvc{fill:#10231c;stroke:#3aa0a0;stroke-width:1.3}.Ldb{fill:#0e1626;stroke:#3a5a92;stroke-width:1.4}
+          .Lt{fill:#eef2f8;font-size:12px;font-weight:700}.Ls{fill:#9aa4b6;font-size:8.5px}
+          .Lzt{font-size:10px;font-weight:800}.Lsc{fill:#3aa0a0;font-size:9.5px;font-weight:700}
+          .Lln{stroke:#5b8def;stroke-width:1.5;fill:none;marker-end:url(#arL)}.Lln0{stroke:#5b8def;stroke-width:1.5;fill:none}.Llbl{fill:#7e8aa0;font-size:8.5px}
+        </style>
+        <!-- frontend -->
+        <rect class="Lfront" x="104" y="14" width="180" height="50" rx="10"/><text class="Lt" x="194" y="36" text-anchor="middle">웹 클라이언트</text><text class="Ls" x="194" y="52" text-anchor="middle">Next.js · React</text>
+        <rect class="Lfront" x="396" y="14" width="180" height="50" rx="10"/><text class="Lt" x="486" y="36" text-anchor="middle">모바일 앱</text><text class="Ls" x="486" y="52" text-anchor="middle">iOS · Android</text>
+        <!-- gateway -->
+        <rect class="Lgw" x="230" y="98" width="220" height="48" rx="10"/><text class="Lt" x="340" y="120" text-anchor="middle">API Gateway · SSO</text><text class="Ls" x="340" y="136" text-anchor="middle">단일 진입점 · 인증</text>
+        <!-- MSA group -->
+        <rect class="Lgrp" x="36" y="176" width="608" height="60" rx="12"/>
+        <text class="Lt" x="340" y="202" text-anchor="middle">백엔드 · NestJS MSA · 12개 서비스</text>
+        <text class="Ls" x="340" y="221" text-anchor="middle">서비스별 독립 배포 · DDD · 도메인 분리</text>
+        <!-- data -->
+        <rect class="Ldb" x="36" y="270" width="608" height="40" rx="9"/><text class="Lt" x="340" y="294" text-anchor="middle">서비스별 데이터베이스 · 도메인 이벤트</text>
+        <!-- orthogonal arrows -->
+        <path class="Lln0" d="M194,64 V82"/>
+        <path class="Lln0" d="M486,64 V82"/>
+        <path class="Lln0" d="M194,82 H486"/>
+        <path class="Lln" d="M340,82 V96"/><text class="Llbl" x="340" y="76" text-anchor="middle">HTTPS</text>
+        <path class="Lln" d="M340,146 V174"/><text class="Llbl" x="348" y="164">라우팅</text>
+        <path class="Lln" d="M340,236 V268"/><text class="Llbl" x="348" y="256">영속화</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>12개 서비스</b>의 NestJS MSA 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리해 개별 배포·확장이 가능하며, <b>9개 저장소</b>(모노레포 2개 포함)를 <b>Stage · 운영 공개 · 운영 격리</b> 3개 서버에 배포합니다.</p>
+  </section>
+
+  <!-- 12 BACKOFFICE msa hierarchy -->
+
+
+  <section class="slide">
+    <div class="eyebrow">백오피스 · MSA</div>
+    <h2 class="stitle">MSA 서비스 구성 · 도메인별 하이라키</h2>
+    <div class="arch">
+      <div class="archcap">12개 서비스 · 도메인 그룹</div>
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .Hroot{fill:#13203a;stroke:#5b8def;stroke-width:2}
+          .HgA{fill:#0d1420;stroke:#3a5a92;stroke-width:1.4}.HgB{fill:#0d1420;stroke:#2a6b54;stroke-width:1.4}.HgC{fill:#0d1420;stroke:#8a6d3b;stroke-width:1.4}
+          .Hc{fill:#0e1626;stroke:#27406b;stroke-width:1.2}.Hmes{fill:#10231c;stroke:#3aa0a0;stroke-width:1.5}
+          .Ht{fill:#eef2f8;font-size:11px;font-weight:700}.Hs{fill:#9aa4b6;font-size:8px}
+          .Hgt{font-size:10px;font-weight:800}.Hci{fill:#c2cad8;font-size:9.5px;font-weight:600}
+          .Htree{stroke:#33415a;stroke-width:1.3;fill:none}
+        </style>
+        <!-- root -->
+        <rect class="Hroot" x="286" y="12" width="128" height="42" rx="10"/><text class="Ht" x="350" y="32" text-anchor="middle">백오피스 통합 플랫폼</text><text class="Hs" x="350" y="46" text-anchor="middle">NestJS MSA · SSO</text>
+        <!-- tree trunk to 3 groups -->
+        <path class="Htree" d="M350,54 V70 M116,70 H600 M116,70 V84 M350,70 V84 M600,70 V84"/>
+        <!-- group boxes -->
+        <rect class="HgA" x="18" y="84" width="196" height="200" rx="12"/><text class="Hgt" x="36" y="104" fill="#8fb4f5">공통 플랫폼 · 4</text>
+        <rect class="HgB" x="234" y="84" width="268" height="200" rx="12"/><text class="Hgt" x="252" y="104" fill="#7fd6c0">업무 · 8</text>
+        <rect class="HgC" x="522" y="84" width="160" height="200" rx="12"/><text class="Hgt" x="540" y="104" fill="#d8b46a">제조 · 자체 구축</text>
+        <!-- group A: 4 services -->
+        <rect class="Hc" x="30" y="116" width="172" height="30" rx="7"/><text class="Hci" x="116" y="135" text-anchor="middle">인증 (SSO)</text>
+        <rect class="Hc" x="30" y="152" width="172" height="30" rx="7"/><text class="Hci" x="116" y="171" text-anchor="middle">알림</text>
+        <rect class="Hc" x="30" y="188" width="172" height="30" rx="7"/><text class="Hci" x="116" y="207" text-anchor="middle">파일 · 문서</text>
+        <rect class="Hc" x="30" y="224" width="172" height="30" rx="7"/><text class="Hci" x="116" y="243" text-anchor="middle">콘텐츠</text>
+        <!-- group B: 8 services (2 cols) -->
+        <rect class="Hc" x="246" y="116" width="120" height="30" rx="7"/><text class="Hci" x="306" y="135" text-anchor="middle">전자결재</text>
+        <rect class="Hc" x="246" y="152" width="120" height="30" rx="7"/><text class="Hci" x="306" y="171" text-anchor="middle">근태</text>
+        <rect class="Hc" x="246" y="188" width="120" height="30" rx="7"/><text class="Hci" x="306" y="207" text-anchor="middle">일정 · 자원</text>
+        <rect class="Hc" x="246" y="224" width="120" height="30" rx="7"/><text class="Hci" x="306" y="243" text-anchor="middle">평가</text>
+        <rect class="Hc" x="374" y="116" width="120" height="30" rx="7"/><text class="Hci" x="434" y="135" text-anchor="middle">채용</text>
+        <rect class="Hc" x="374" y="152" width="120" height="30" rx="7"/><text class="Hci" x="434" y="171" text-anchor="middle">프로젝트</text>
+        <rect class="Hc" x="374" y="188" width="120" height="30" rx="7"/><text class="Hci" x="434" y="207" text-anchor="middle">업무</text>
+        <rect class="Hc" x="374" y="224" width="120" height="30" rx="7"/><text class="Hci" x="434" y="243" text-anchor="middle">품질</text>
+        <!-- group C: MES -->
+        <rect class="Hmes" x="534" y="116" width="136" height="44" rx="8"/><text class="Ht" x="602" y="135" text-anchor="middle" font-size="10.5">위성 전용 MES</text><text class="Hs" x="602" y="150" text-anchor="middle" fill="#7fd6c0">자체 구축</text>
+        <text class="Hs" x="602" y="196" text-anchor="middle">사내 부재 시스템을</text><text class="Hs" x="602" y="210" text-anchor="middle">직접 설계·구축해</text><text class="Hs" x="602" y="224" text-anchor="middle">플랫폼에 융합</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">각 도메인을 <b>독립 배포되는 서비스</b>로 분리하고 SSO 단일 진입점 아래 묶었습니다. 공통 플랫폼·업무·제조 <b>3개 도메인 그룹, 12개 서비스</b>로 구성하며, 사내에 없던 <b>위성 전용 MES는 직접 구축</b>해 융합했습니다.</p>
+  </section>
+
   <!-- 13 SDPE overview -->
+
 
 
 
@@ -645,6 +658,7 @@
   </section>
 
   <!-- 14 SDPE architecture -->
+
 
 
 
@@ -694,6 +708,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">SDPE · Impact</div>
     <h2 class="stitle">10분 이상 걸리던 처리를 40초대로</h2>
@@ -715,6 +730,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 03</div>
     <div class="ptop"><h2 class="stitle">LIID · 위성영상 플랫폼</h2><span class="pill">PM · Architecture · Backend</span></div>
@@ -724,6 +740,7 @@
   </section>
 
   <!-- 17 LIID architecture -->
+
 
 
 
@@ -767,6 +784,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">LIID · Impact</div>
     <h2 class="stitle">정량 성과 & 분산 트랜잭션</h2>
@@ -788,6 +806,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">LIID · Service</div>
     <h2 class="stitle">로컬 LLM · 3D 지형 모니터링 · 촬영 요청</h2>
@@ -800,6 +819,7 @@
   </section>
 
   <!-- 20 LIID cache -->
+
 
 
 
@@ -840,6 +860,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Flagship Project 04</div>
     <div class="ptop"><h2 class="stitle">대용량 파일 전송 엔진 · 분산 파일 서버</h2><span class="pill">Tech Lead · 설계 주도</span></div>
@@ -849,6 +870,7 @@
   </section>
 
   <!-- 22 FILE-ENGINE architecture -->
+
 
 
 
@@ -898,6 +920,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Deep Dive</div>
     <h2 class="stitle">50GB 약 20분 → 수 분 · 청크 병렬 전송</h2>
@@ -933,6 +956,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">파일 엔진 · Design</div>
     <h2 class="stitle">부하 분산 · 죽어도 이어가는 전송</h2>
@@ -945,6 +969,7 @@
   </section>
 
   <!-- 25 FILE-ENGINE SSO -->
+
 
 
 
@@ -982,6 +1007,7 @@
   </section>
 
   <!-- 26 INFRA overview -->
+
 
 
 
@@ -1029,6 +1055,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Infrastructure · On-premise</div>
     <h2 class="stitle">사내 PaaS · Kubernetes 플랫폼 (구축·운영)</h2>
@@ -1041,6 +1068,7 @@
   </section>
 
   <!-- 28 INFRA k8s topology -->
+
 
 
 
@@ -1100,6 +1128,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Infrastructure · Cloud</div>
     <h2 class="stitle">클라우드 인프라 · AWS 컨테이너 플랫폼 (설계·전환)</h2>
@@ -1112,6 +1141,7 @@
   </section>
 
   <!-- 30 INFRA cloud arch -->
+
 
 
 
@@ -1170,6 +1200,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 개발 표준</div>
     <h2 class="stitle">DDD 전술 패턴 · Context / Business 계층</h2>
@@ -1207,6 +1238,7 @@
   </section>
 
   <!-- 32 TECH-LEAD layering -->
+
 
 
   <section class="slide">
@@ -1266,6 +1298,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 개발 문화</div>
     <h2 class="stitle">AI Native 개발 문화 · 100% Agent 워크플로</h2>
@@ -1284,6 +1317,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 프로세스</div>
     <h2 class="stitle">기획 화면 = 실제 화면 · 재작업 제거</h2>
@@ -1296,6 +1330,7 @@
   </section>
 
   <!-- 35 TECH-LEAD llm-wiki -->
+
 
 
 
@@ -1345,6 +1380,7 @@
   </section>
 
   <!-- 36 TECH-LEAD fe-convention -->
+
 
 
 
@@ -1403,6 +1439,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Technical Leadership · 품질</div>
     <h2 class="stitle">테스트 커버리지 · Domain·Context 100% + Playwright</h2>
@@ -1445,6 +1482,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Tech Stack</div>
     <h2 class="stitle">기술 스택</h2>
@@ -1467,6 +1505,7 @@
 
 
 
+
   <section class="slide">
     <div class="eyebrow">Career</div>
     <h2 class="stitle">경력</h2>
@@ -1483,6 +1522,7 @@
 
   <!-- 40 GITHUB GRASS -->
 
+
   <section class="slide">
     <div class="eyebrow">Proof of Execution</div>
     <h2 class="stitle">몰입은 기록으로 증명됩니다</h2>
@@ -1491,6 +1531,7 @@
   </section>
 
   <!-- 41 CLOSING -->
+
 
 
 
