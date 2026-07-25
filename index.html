@@ -225,6 +225,8 @@
 
 
 
+
+
   <section class="slide active">
     <div class="eyebrow">Backend Engineer · Tech Lead</div>
     <h1 class="big">0에서 1을 만들고,<br>1을 <span class="hl">조직</span>으로 키운<br>기술 기반 빌더</h1>
@@ -233,6 +235,8 @@
   </section>
 
   <!-- 2 ABOUT + STATS -->
+
+
 
 
 
@@ -253,6 +257,8 @@
   </section>
 
   <!-- 3 CORE COMPETENCY (full-cycle 4-track) -->
+
+
 
 
 
@@ -320,6 +326,8 @@
 
 
 
+
+
   <section class="slide">
     <div class="eyebrow">Planning · Product Design</div>
     <h2 class="stitle">기획: 요구사항에서 데이터 구조까지</h2>
@@ -341,6 +349,8 @@
 
 
 
+
+
   <section class="slide">
     <div class="eyebrow">Planning Case · 사내 통합 ERP</div>
     <div class="ptop"><h2 class="stitle">사내 통합 ERP 기획 — 문서 기반 의사결정 파이프라인</h2><span class="pill">메인 기획 · 설계 리딩</span></div>
@@ -355,7 +365,84 @@
     </div>
   </section>
 
-  <!-- 6 PLANNING CASE ux -->
+  <!-- 6 PLANNING CASE qms -->
+
+
+  <section class="slide">
+    <div class="eyebrow">Planning · QMS</div>
+    <h2 class="stitle">QMS · 품질 문서를 중앙에서, 100% 웹문서화</h2>
+    <div class="arch" style="max-width:940px">
+      <div class="archcap">품질 문서 단일 출처 → 타 시스템 적용</div>
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arQm" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3aa0a0"/></marker></defs>
+        <style>
+          .Qcore{fill:#10231c;stroke:#3aa0a0;stroke-width:2}.Qc{fill:#0e1626;stroke:#3a5a92;stroke-width:1.3}
+          .Qt{fill:#eef2f8;font-size:12px;font-weight:700}.Qs{fill:#9aa4b6;font-size:8.5px}
+          .Qln{stroke:#3aa0a0;stroke-width:1.6;fill:none;marker-end:url(#arQm)}.Qln0{stroke:#3aa0a0;stroke-width:1.6;fill:none}
+          .Qlbl{fill:#7fd6c0;font-size:8.5px;font-weight:700}
+        </style>
+        <!-- QMS hub -->
+        <rect class="Qcore" x="40" y="88" width="196" height="84" rx="13"/>
+        <text class="Qt" x="138" y="118" text-anchor="middle" font-size="13">QMS</text>
+        <text class="Qs" x="138" y="135" text-anchor="middle">품질 문서 중앙 저장소</text>
+        <text class="Qs" x="138" y="150" text-anchor="middle" fill="#7fd6c0">100% 웹문서화 · 단일 출처</text>
+        <!-- consumer systems -->
+        <rect class="Qc" x="470" y="30" width="190" height="40" rx="9"/><text class="Qt" x="565" y="55" text-anchor="middle">PMS · 프로젝트</text>
+        <rect class="Qc" x="470" y="90" width="190" height="40" rx="9"/><text class="Qt" x="565" y="115" text-anchor="middle">MES · 제조</text>
+        <rect class="Qc" x="470" y="150" width="190" height="40" rx="9"/><text class="Qt" x="565" y="175" text-anchor="middle">전자결재 · 산출물</text>
+        <rect class="Qc" x="470" y="210" width="190" height="40" rx="9"/><text class="Qt" x="565" y="235" text-anchor="middle">수입검사 · 부품</text>
+        <!-- distribution: hub -> trunk -> systems -->
+        <path class="Qln0" d="M236,130 H360"/>
+        <path class="Qln0" d="M360,50 V230"/>
+        <path class="Qln" d="M360,50 H466"/>
+        <path class="Qln" d="M360,110 H466"/>
+        <path class="Qln" d="M360,170 H466"/>
+        <path class="Qln" d="M360,230 H466"/>
+        <text class="Qlbl" x="405" y="122" text-anchor="middle">표준 문서 적용 · 참조</text>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">회사 품질 문서를 <b style="color:var(--good)">100% 웹문서화</b>해 QMS에 중앙 저장하고, 그 <b>표준 문서를 다른 시스템이 참조·적용</b>하도록 기획했습니다. 품질 기준이 문서마다 흩어지지 않고 <b>단일 출처</b>에서 전사로 전파됩니다.</p>
+  </section>
+
+  <!-- 7 PLANNING CASE pms-mes -->
+
+
+  <section class="slide">
+    <div class="eyebrow">Planning · PMS · MES</div>
+    <h2 class="stitle">설계부터 제조까지, 하나의 플랫폼에서</h2>
+    <div class="arch" style="max-width:960px">
+      <div class="archcap">위성 도메인 프로젝트 관리 · 제조 라이프사이클</div>
+      <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arPm" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b8def"/></marker></defs>
+        <style>
+          .Pg{fill:#0d1420;stroke:#5b8def;stroke-width:1.5}
+          .Ps{fill:#13203a;stroke:#5b8def;stroke-width:1.5}
+          .Pt{fill:#eef2f8;font-size:12.5px;font-weight:800}.Pss{fill:#9aa4b6;font-size:8px}
+          .Pln{stroke:#5b8def;stroke-width:1.8;fill:none;marker-end:url(#arPm)}
+          .Pgt{font-size:10px;font-weight:800}
+        </style>
+        <!-- umbrella -->
+        <rect class="Pg" x="16" y="70" width="668" height="118" rx="14"/>
+        <text class="Pgt" x="34" y="60" fill="#8fb4f5">위성 도메인 프로젝트 관리 플랫폼 · PMS · MES</text>
+        <!-- pipeline stages -->
+
+        <rect class="Ps" x="34" y="100" width="112" height="58" rx="10"/><text class="Pt" x="90" y="126" text-anchor="middle">설계</text><text class="Pss" x="90" y="142" text-anchor="middle">BOM · 부품</text>
+        <rect class="Ps" x="170" y="100" width="112" height="58" rx="10"/><text class="Pt" x="226" y="126" text-anchor="middle">구매</text><text class="Pss" x="226" y="142" text-anchor="middle">소싱 · 견적</text>
+        <rect class="Ps" x="306" y="100" width="112" height="58" rx="10"/><text class="Pt" x="362" y="126" text-anchor="middle">발주</text><text class="Pss" x="362" y="142" text-anchor="middle">PO · 승인</text>
+        <rect class="Ps" x="442" y="100" width="112" height="58" rx="10"/><text class="Pt" x="498" y="126" text-anchor="middle">입고</text><text class="Pss" x="498" y="142" text-anchor="middle">수입검사</text>
+        <rect class="Ps" x="578" y="100" width="90" height="58" rx="10"/><text class="Pt" x="623" y="126" text-anchor="middle">제조</text><text class="Pss" x="623" y="142" text-anchor="middle">공정 · MES</text>
+        <path class="Pln" d="M146,129 H168"/>
+        <path class="Pln" d="M282,129 H304"/>
+        <path class="Pln" d="M418,129 H440"/>
+        <path class="Pln" d="M554,129 H576"/>
+      </svg>
+    </div>
+    <p class="ssub" style="margin-top:12px">위성 도메인에 맞춘 프로젝트 관리 시스템을 구축해 <b>설계 · 구매 · 발주 · 입고 · 제조</b>를 <b style="color:var(--accent)">하나의 플랫폼에서 유기적으로 연결</b>했습니다. 앞 단계의 데이터(BOM·부품·PO)가 다음 단계로 끊김 없이 이어져 제조 라이프사이클 전체가 한 흐름이 됩니다.</p>
+  </section>
+
+  <!-- 8 PLANNING CASE ux -->
+
+
 
 
 
@@ -393,7 +480,9 @@
     <div class="pblock solution" style="max-width:1080px;margin-top:22px"><div class="h">Result</div><p>실무자가 시스템 구조를 학습하지 않아도 <b style="color:var(--txt)">자기 업무 흐름 그대로</b> 처리할 수 있게 되어, 현업의 <b style="color:var(--txt)">사용 편의성과 만족도</b>가 높아졌습니다.</p></div>
   </section>
 
-  <!-- 7 PLANNING CASE flow -->
+  <!-- 9 PLANNING CASE flow -->
+
+
 
 
 
@@ -431,7 +520,9 @@
     </div>
   </section>
 
-  <!-- 8 PLANNING CASE ADR -->
+  <!-- 10 PLANNING CASE ADR -->
+
+
 
 
 
@@ -477,7 +568,9 @@
     </div>
   </section>
 
-  <!-- 9 BACKOFFICE overview -->
+  <!-- 11 BACKOFFICE overview -->
+
+
 
 
 
@@ -499,7 +592,9 @@
     </div>
   </section>
 
-  <!-- 10 BACKOFFICE integration -->
+  <!-- 12 BACKOFFICE integration -->
+
+
 
 
 
@@ -548,7 +643,9 @@
     <p class="ssub" style="margin-top:12px">성격이 다른 이기종 시스템을 <b>각각 맞는 방식으로 통합</b>했습니다. 회계·양산 MES 등 외부 SW는 <b style="color:var(--accent)">REST API</b>로, 출입 지문·QR·차량 H/W는 <b style="color:var(--warn)">DB에 직접 연동</b>해 하나의 플랫폼에서 일관되게 다룹니다.</p>
   </section>
 
-  <!-- 11 BACKOFFICE system arch -->
+  <!-- 13 BACKOFFICE system arch -->
+
+
 
 
 
@@ -594,7 +691,9 @@
     <p class="ssub" style="margin-top:12px">웹·모바일 클라이언트가 <b>SSO 단일 진입점</b>을 거쳐 <b>12개 서비스</b>의 NestJS MSA 백엔드에 접근합니다. 각 도메인은 독립 서비스·DB로 분리해 개별 배포·확장이 가능하며, <b>9개 저장소</b>(모노레포 2개 포함)를 <b>Stage · 운영 공개 · 운영 격리</b> 3개 서버에 배포합니다.</p>
   </section>
 
-  <!-- 12 BACKOFFICE msa hierarchy -->
+  <!-- 14 BACKOFFICE msa hierarchy -->
+
+
 
 
   <section class="slide">
@@ -641,7 +740,9 @@
     <p class="ssub" style="margin-top:12px">각 도메인을 <b>독립 배포되는 서비스</b>로 분리하고 SSO 단일 진입점 아래 묶었습니다. 공통 플랫폼·업무·제조 <b>3개 도메인 그룹, 12개 서비스</b>로 구성하며, 사내에 없던 <b>위성 전용 MES는 직접 구축</b>해 융합했습니다.</p>
   </section>
 
-  <!-- 13 SDPE overview -->
+  <!-- 15 SDPE overview -->
+
+
 
 
 
@@ -657,7 +758,9 @@
     <div class="pblock solution"><div class="h">Solution</div><p>사용자가 DAG 화면에서 처리 단계를 직접 구성하면 전 과정이 자동 실행되도록 설계. 단계 간 데이터를 NAS 왕복 대신 <b>메모리 로딩</b>으로 전달해 I/O 병목을 제거하고, 영상을 <b>Azimuth 방향 블록으로 분할해 GPU 병렬 처리</b>하도록 알고리즘 실행 구조를 재설계했습니다. 처리 단계를 독립 서비스로 나눈 MSA와 이벤트 큐 기반 EDA로 확장·재시도가 가능한 구조를 확립했습니다.</p></div>
   </section>
 
-  <!-- 14 SDPE architecture -->
+  <!-- 16 SDPE architecture -->
+
+
 
 
 
@@ -701,7 +804,9 @@
     </div>
   </section>
 
-  <!-- 15 SDPE impact -->
+  <!-- 17 SDPE impact -->
+
+
 
 
 
@@ -723,7 +828,9 @@
     </div>
   </section>
 
-  <!-- 16 LIID overview -->
+  <!-- 18 LIID overview -->
+
+
 
 
 
@@ -739,7 +846,9 @@
     <div class="pblock solution"><div class="h">Solution</div><p>요구사항 분석부터 아키텍처·백엔드까지 주도. 타일맵을 <b>최적화 래스터 직접 렌더링 + 캐시</b>로 전환하고 <b>공간쿼리·파티셔닝</b>으로 검색을 튜닝. SDPE 산출물을 서비스 도메인으로 변환해 <b>LLM·DEM 3D 지형 모니터링 · SAR 검색 · 촬영 요청</b>을 단일 진입점으로 제공하고, LLM은 <b>로컬 모델</b>로, 대용량 3D는 <b>캐시 Hit/Miss</b>로 처리. 위성 제품별 MSA·DDD·TDD로 구성했습니다.</p></div>
   </section>
 
-  <!-- 17 LIID architecture -->
+  <!-- 19 LIID architecture -->
+
+
 
 
 
@@ -777,7 +886,9 @@
     </div>
   </section>
 
-  <!-- 18 LIID perf -->
+  <!-- 20 LIID perf -->
+
+
 
 
 
@@ -799,7 +910,9 @@
     </div>
   </section>
 
-  <!-- 19 LIID service -->
+  <!-- 21 LIID service -->
+
+
 
 
 
@@ -818,7 +931,9 @@
     </div>
   </section>
 
-  <!-- 20 LIID cache -->
+  <!-- 22 LIID cache -->
+
+
 
 
 
@@ -853,7 +968,9 @@
     <p class="ssub" style="margin-top:14px">첫 요청(Miss)만 원본까지 내려가고, 이후 동일 영역 요청은 캐시에서 끝납니다. 관심 지역이 반복 조회되는 모니터링 특성상 히트율이 올라가는 구조입니다.</p>
   </section>
 
-  <!-- 21 FILE-ENGINE overview -->
+  <!-- 23 FILE-ENGINE overview -->
+
+
 
 
 
@@ -869,7 +986,9 @@
     <div class="pblock solution"><div class="h">Solution</div><p>NAS 권한 부여 대신 <b>OneDrive처럼 Windows API 기반 전송 엔진</b>을 직접 구축하고, 큰 파일은 <b>청크로 나눠 병렬 전송</b>해 <b>1GbE 단일 전송이면 약 20분</b> 걸리던 50GB를 수 분 내로 옮기도록 설계했습니다. 파일 서버는 <b>k8s 오토스케일업</b>으로 부하에 따라 늘어나고, <b>큐 시스템</b>으로 물리 서버 병렬 처리와 부하 분산을 구성. <b>Redis 캐시</b>로 전송 상태를 보관해 중간 서버가 죽어도 이어서 진행되게 했습니다.</p></div>
   </section>
 
-  <!-- 22 FILE-ENGINE architecture -->
+  <!-- 24 FILE-ENGINE architecture -->
+
+
 
 
 
@@ -913,7 +1032,9 @@
     </div>
   </section>
 
-  <!-- 23 FILE-ENGINE chunk -->
+  <!-- 25 FILE-ENGINE chunk -->
+
+
 
 
 
@@ -949,7 +1070,9 @@
     <p class="ssub" style="margin-top:14px">50GB 파일을 한 스트림으로 밀지 않고 여러 청크로 쪼개 <b>동시에 병렬 전송</b>합니다. 대역폭을 최대로 활용해 <b>1GbE 단일 전송 기준 약 20분 → 수 분</b>으로 줄이고, 실패한 청크만 다시 보내면 되므로 재전송 비용도 최소화됩니다.</p>
   </section>
 
-  <!-- 24 FILE-ENGINE resilience -->
+  <!-- 26 FILE-ENGINE resilience -->
+
+
 
 
 
@@ -968,7 +1091,9 @@
     </div>
   </section>
 
-  <!-- 25 FILE-ENGINE SSO -->
+  <!-- 27 FILE-ENGINE SSO -->
+
+
 
 
 
@@ -1006,7 +1131,9 @@
     </div>
   </section>
 
-  <!-- 26 INFRA overview -->
+  <!-- 28 INFRA overview -->
+
+
 
 
 
@@ -1048,7 +1175,9 @@
     <p class="ssub" style="margin-top:12px">사내망 전용 서비스는 <b>온프레미스 k8s</b>, 사내 ERP는 <b>AWS 클라우드</b>, 공공기관 납품은 <b>CSAP 인증 경계로 완전 분리</b> — 워크로드마다 맞는 환경에 배치하는 하이브리드 전략입니다.</p>
   </section>
 
-  <!-- 27 INFRA on-prem -->
+  <!-- 29 INFRA on-prem -->
+
+
 
 
 
@@ -1067,7 +1196,9 @@
     </div>
   </section>
 
-  <!-- 28 INFRA k8s topology -->
+  <!-- 30 INFRA k8s topology -->
+
+
 
 
 
@@ -1121,7 +1252,9 @@
     </div>
   </section>
 
-  <!-- 29 INFRA cloud -->
+  <!-- 31 INFRA cloud -->
+
+
 
 
 
@@ -1140,7 +1273,9 @@
     </div>
   </section>
 
-  <!-- 30 INFRA cloud arch -->
+  <!-- 32 INFRA cloud arch -->
+
+
 
 
 
@@ -1193,7 +1328,9 @@
     <p class="ssub" style="margin-top:12px">서비스 성격에 따라 <b>외부 공개(public)와 내부 전용(private)을 자동 분리</b>해 외부 노출면을 최소화하고 내부 시스템을 보호합니다. Stage DB는 <b>Supabase 관리형 PostgreSQL</b>로 운영 부담을 낮췄습니다.</p>
   </section>
 
-  <!-- 31 TECH-LEAD DDD -->
+  <!-- 33 TECH-LEAD DDD -->
+
+
 
 
 
@@ -1237,7 +1374,9 @@
     </div>
   </section>
 
-  <!-- 32 TECH-LEAD layering -->
+  <!-- 34 TECH-LEAD layering -->
+
+
 
 
 
@@ -1291,7 +1430,9 @@
     </div>
   </section>
 
-  <!-- 33 TECH-LEAD ai-native -->
+  <!-- 35 TECH-LEAD ai-native -->
+
+
 
 
 
@@ -1310,7 +1451,9 @@
     </div>
   </section>
 
-  <!-- 34 TECH-LEAD planning-screen -->
+  <!-- 36 TECH-LEAD planning-screen -->
+
+
 
 
 
@@ -1329,7 +1472,9 @@
     </div>
   </section>
 
-  <!-- 35 TECH-LEAD llm-wiki -->
+  <!-- 37 TECH-LEAD llm-wiki -->
+
+
 
 
 
@@ -1379,7 +1524,9 @@
     <p class="ssub" style="margin-top:12px">프로젝트·인프라 <b>인수인계와 온보딩</b>의 어려움을 줄이려, 작업하며 <b>LLM Wiki에 Second Brain</b>을 남깁니다. md 문서의 <b>메타데이터에 연관 문서 태그</b>를 달아 문서를 <b>그래프로 연결</b>해 제공하므로, 다음 사람이 맥락을 따라 자연스럽게 업무를 이어갑니다.</p>
   </section>
 
-  <!-- 36 TECH-LEAD fe-convention -->
+  <!-- 38 TECH-LEAD fe-convention -->
+
+
 
 
 
@@ -1432,7 +1579,9 @@
     <p class="ssub" style="margin-top:12px">ERP 규모로 조직이 커지며 디자인 코드 복잡도가 올라갔습니다. <b>Atomic·Modular 사이즈만 추상화</b>해 공용화하고, 나머지 디자인 컴포넌트는 <b>페이지 내부에서 구성</b>하도록 <b>Next.js 구조 기반 하이라키 컨벤션</b>을 지정했습니다. <span style="color:var(--accent2)">적용: Lumir Portal</span></p>
   </section>
 
-  <!-- 37 TECH-LEAD testing -->
+  <!-- 39 TECH-LEAD testing -->
+
+
 
 
 
@@ -1475,7 +1624,9 @@
     <p class="ssub" style="margin-top:12px"><b>Domain은 Unit Test</b>, <b>Context는 컨테이너 기반 실제 DB 연동·트랜잭션 검증</b>으로 <b>커버리지 100%</b>를 보증하고, <b>비즈니스 영역은 프론트 Playwright</b>로 자동 검증합니다. 계층별 검증으로 안정성 높은 시스템을 운영합니다.</p>
   </section>
 
-  <!-- 38 SKILLS -->
+  <!-- 40 SKILLS -->
+
+
 
 
 
@@ -1498,7 +1649,9 @@
     </div>
   </section>
 
-  <!-- 39 CAREER -->
+  <!-- 41 CAREER -->
+
+
 
 
 
@@ -1520,7 +1673,9 @@
     </div>
   </section>
 
-  <!-- 40 GITHUB GRASS -->
+  <!-- 42 GITHUB GRASS -->
+
+
 
 
   <section class="slide">
@@ -1530,7 +1685,9 @@
     <div class="grassbox" id="grassbox"></div>
   </section>
 
-  <!-- 41 CLOSING -->
+  <!-- 43 CLOSING -->
+
+
 
 
 
@@ -1575,17 +1732,17 @@
     {t:'About', s:1},
     {t:'핵심 역량', s:2},
     {t:'기획 역량', s:3},
-    {t:'기획 사례 · 사내 ERP', s:4, e:7},
-    {t:'백오피스 통합 플랫폼', s:8, e:11},
-    {t:'SDPE', s:12, e:14},
-    {t:'LIID · 위성영상 플랫폼', s:15, e:19},
-    {t:'대용량 파일 전송 엔진', s:20, e:24},
-    {t:'Infrastructure & DevOps', s:25, e:29},
-    {t:'기술 리딩 (Technical)', s:30, e:36},
-    {t:'기술 스택', s:37},
-    {t:'경력', s:38},
-    {t:'GitHub 기록', s:39},
-    {t:'Closing', s:40}
+    {t:'기획 사례 · 사내 ERP', s:4, e:9},
+    {t:'백오피스 통합 플랫폼', s:10, e:13},
+    {t:'SDPE', s:14, e:16},
+    {t:'LIID · 위성영상 플랫폼', s:17, e:21},
+    {t:'대용량 파일 전송 엔진', s:22, e:26},
+    {t:'Infrastructure & DevOps', s:27, e:31},
+    {t:'기술 리딩 (Technical)', s:32, e:38},
+    {t:'기술 스택', s:39},
+    {t:'경력', s:40},
+    {t:'GitHub 기록', s:41},
+    {t:'Closing', s:42}
   ];
   // Preview render mode: loaded as ?p=N inside a sidebar thumbnail iframe →
   // render only slide N, no chrome, and stop (no sidebar ⇒ no nested iframes).
